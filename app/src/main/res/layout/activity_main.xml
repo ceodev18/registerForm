@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kelly.registerform.view.MainActivity">
+    <LinearLayout
+        android:background="@color/colorBackgroundView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:orientation="vertical">
+        <TextView
+            android:textAlignment="center"
+            android:text="Recomendaciones antes de registrarse como socio(a)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+        <TextView
+            android:textAlignment="center"
+            android:text="Leer detenidamente las instrucciones a continuación:"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:background="@color/colorList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_margin="16dp"
+                android:background="@color/colorList"
+                android:id="@+id/tv_list_recomendation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@color/colorBackgroudDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_margin="16dp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorDetails"
+                android:id="@+id/tv_list_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+            <Button
+                android:layout_margin="5dp"
+                android:background="@color/colorBlueLightButton"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center"
+                android:id="@+id/b_continuar"
+                android:text="@string/b_continuar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</ScrollView>
