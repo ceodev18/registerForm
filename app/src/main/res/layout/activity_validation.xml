@@ -5,17 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.kelly.registerform.view.partner.ValidationActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="61."
-        android:textSize="30sp"
-        android:background="@drawable/circle_textview"
-        android:textColor="@android:color/white"
-        android:gravity="center"
-        android:id="@+id/mark" />
 
+<
 </android.support.constraint.ConstraintLayout>
