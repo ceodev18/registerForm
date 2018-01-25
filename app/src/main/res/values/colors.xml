@@ -7,6 +7,8 @@
     <color name="colorDetails">#0088CC</color>
     <color name="colorBackgroudDetails">#D9EDF7</color>
     <color name="colorBlueLightButton">#5BC0DE</color>
+    <color name="colorGreenButton">#47A447</color>
+    <color name="colorOrangeButton">#ED9C28</color>
     <color name="colorList">#F6F6F6</color>
     <color name="colorBackgroundView">#ECEDF0</color>
 
