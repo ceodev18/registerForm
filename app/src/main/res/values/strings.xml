@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">RegisterForm</string>
-    <string name="b_continuar">Continuar</string>
+    <string name="b_next">Continuar</string>
+    <string name="b_next_register">Continuar con el Registro</string>
+    <string name="b_back">Volver</string>
     <string-array name="regions_array">
         <item>Elija</item>
         <item>Amazonas</item>
@@ -29,4 +31,10 @@
         <item>Tumbes</item>
         <item>Ucayali</item>
     </string-array>
+    <string name="s_wPartner_small">A continuación se le solicitará nos indique qué actividades realiza, según esta información se le mostrarán los formularios adecuados.</string>
+    <string name="s_wPartner_big">"Bienvenidos al registro de socios(as</string>
+    <string name="s_prod_agroecologica">Producción Agroecológica</string>
+    <string name="s_prod_pecuaria">Producción Agroecológica</string>
+    <string name="s_tranformation">Producción Agroecológica</string>
+    <string name="s_commerce">Producción Agroecológica</string>
 </resources>

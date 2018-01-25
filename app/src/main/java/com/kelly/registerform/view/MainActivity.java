@@ -12,8 +12,7 @@ import android.widget.TextView;
 import com.kelly.registerform.R;
 import com.kelly.registerform.utils.UlTagHandler;
 import com.kelly.registerform.utils.Utils;
-
-import java.io.InputStream;
+import com.kelly.registerform.view.partner.RegistrationPartnerActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Button b_continuar;

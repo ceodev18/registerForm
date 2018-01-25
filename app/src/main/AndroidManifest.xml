@@ -16,7 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.RegistrationPartnerActivity"></activity>
+        <activity android:name=".view.partner.RegistrationPartnerActivity" />
+        <activity android:name=".view.partner.RegistrationPartnerPartBActivity" />
+        <activity android:name=".view.partner.WelcomePartnerActivity" />
+        <activity android:name=".view.farming.ProductionActivity" />
+        <activity android:name=".view.partner.ValidationActivity"></activity>
     </application>
 
 </manifest>
