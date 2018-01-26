@@ -10,17 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.MainActivity">
+
+        </activity>
+        <activity android:name=".view.partner.RegistrationPartnerActivity" />
+        <activity android:name=".view.partner.RegistrationPartnerPartBActivity" />
+        <activity android:name=".view.partner.WelcomePartnerActivity" />
+        <activity android:name=".view.farming.ProductionActivity" />
+        <activity android:name=".view.partner.ValidationActivity" />
+        <activity android:name=".view.commerce.InformationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.partner.RegistrationPartnerActivity" />
-        <activity android:name=".view.partner.RegistrationPartnerPartBActivity" />
-        <activity android:name=".view.partner.WelcomePartnerActivity" />
-        <activity android:name=".view.farming.ProductionActivity" />
-        <activity android:name=".view.partner.ValidationActivity"></activity>
     </application>
 
 </manifest>

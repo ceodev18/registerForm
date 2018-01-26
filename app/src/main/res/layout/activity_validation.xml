@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
             <TextView
+                android:layout_gravity="center_horizontal"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
                 android:text="Vigencia de ser Socio(a)"
