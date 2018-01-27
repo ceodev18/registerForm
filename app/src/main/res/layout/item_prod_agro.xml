@@ -202,6 +202,12 @@
                 android:layout_height="wrap_content"
                 android:hint="RUC"/>
         </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="¿Cuenta con Boleta/Factura?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>

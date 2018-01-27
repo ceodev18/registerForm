@@ -32,9 +32,30 @@
         <item>Ucayali</item>
     </string-array>
     <string name="s_wPartner_small">A continuación se le solicitará nos indique qué actividades realiza, según esta información se le mostrarán los formularios adecuados.</string>
-    <string name="s_wPartner_big">"Bienvenidos al registro de socios(as</string>
+    <string name="s_wPartner_big">"Bienvenidos al registro de socios(as)</string>
     <string name="s_prod_agroecologica">Producción Agroecológica</string>
-    <string name="s_prod_pecuaria">Producción Agroecológica</string>
-    <string name="s_tranformation">Producción Agroecológica</string>
-    <string name="s_commerce">Producción Agroecológica</string>
+    <string name="s_prod_pecuaria">Producción Pecuaria (crianza de animales) </string>
+    <string name="s_tranformation">Transformación </string>
+    <string name="s_commerce">Comercialización</string>
+    <string-array name="sa_numberList">
+        <item>Elija</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
+    <string-array name="sa_techn">
+        <item>Técnica #1</item>
+        <item>Técnica #2</item>
+        <item>Técnica #3</item>
+    </string-array>
 </resources>

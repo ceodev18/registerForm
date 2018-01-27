@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.kelly.registerform.R;
 import com.kelly.registerform.view.MainActivity;
+import com.kelly.registerform.view.farming.ProductionActivity;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class WelcomePartnerActivity extends AppCompatActivity {
                 if(cb_3.isChecked())list.add(3);
                 if(cb_4.isChecked())list.add(4);
                 if(list.size()>0){
-                    Intent i = new Intent(context,MainActivity.class);
+                    Intent i = new Intent(context,ProductionActivity.class);
                     startActivity(i);
                 }else{
                     Toast.makeText(context, "Debe seleccionar al menos un opción", Toast.LENGTH_SHORT).show();

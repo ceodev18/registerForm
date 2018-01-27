@@ -10,12 +10,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:text="Información del Socio(a) 1.1"
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="6">
+            <TextView
+                android:gravity="center"
+                android:text="1.1"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/circle_textview"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textAlignment="center"
+                android:text="Información del Socio(a)"
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

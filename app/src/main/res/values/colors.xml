@@ -11,6 +11,7 @@
     <color name="colorOrangeButton">#ED9C28</color>
     <color name="colorList">#F6F6F6</color>
     <color name="colorBackgroundView">#ECEDF0</color>
+    <color name="colorTextView">#E6E6E6</color>
 
 
 </resources>

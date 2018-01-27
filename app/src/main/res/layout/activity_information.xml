@@ -35,18 +35,21 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <TextView
+            android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
             android:text="Estos son los productos agroecológicos que comercializas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textStyle="bold"
             android:text="(Esto solo aparece si se ha ingresado previamente la sección de producción agroecológica)Indícanos como los comercializas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:background="@color/colorTextView"
             android:id="@+id/tv_show1"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
@@ -54,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:layout_margin="5dp"
             android:id="@+id/ll_1"
             android:visibility="gone"
             android:orientation="vertical"
@@ -62,6 +66,7 @@
             <include layout="@layout/item_prod_agro"/>
         </LinearLayout>
         <TextView
+            android:background="@color/colorTextView"
             android:id="@+id/tv_show2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
@@ -69,6 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:layout_margin="5dp"
             android:id="@+id/ll_2"
             android:visibility="gone"
             android:orientation="vertical"
@@ -77,6 +83,7 @@
             <include layout="@layout/item_prod_agro"/>
         </LinearLayout>
         <TextView
+            android:background="@color/colorTextView"
             android:id="@+id/tv_show3"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
@@ -84,6 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:layout_margin="5dp"
             android:id="@+id/ll_3"
             android:visibility="gone"
             android:orientation="vertical"
@@ -91,7 +99,231 @@
             android:layout_height="wrap_content">
             <include layout="@layout/item_prod_agro"/>
         </LinearLayout>
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:text="Estos son los productos pecuarios (animales de crianza) que comercializas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textStyle="bold"
+            android:text="(Esto solo aparece si se ha ingresado previamente la sección de producción pecuaria)Indícanos como los comercializas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show4"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para completar la información sobre el producto pecuario #1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_4"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_prod_agro"/>
+        </LinearLayout>
+        <TextView
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show5"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para completar la información sobre el producto pecuario #2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_5"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_prod_agro"/>
+        </LinearLayout>
+        <TextView
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show6"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para completar la información sobre el producto pecuario #3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_6"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_prod_agro"/>
+        </LinearLayout>
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:text="Estos son los productos que transformas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textStyle="bold"
+            android:text="(Esto solo aparece si se ha ingresado previamente la sección de transformación)Indícanos como los comercializas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show7"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para completar la información sobre el producto transformado #1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_7"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_prod_trans"/>
+        </LinearLayout>
+        <TextView
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show8"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para completar la información sobre el producto transformado #2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_8"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_prod_trans"/>
+        </LinearLayout>
+        <TextView
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show9"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para completar la información sobre el producto transformado #3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_9"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_prod_trans"/>
+        </LinearLayout>
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:text="Si eres un comprador y luego comercializas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textStyle="bold"
+            android:text="Indícanos como los comercializas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show10"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para completar la información sobre el producto comprado #1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_10"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_prod_comp"/>
+        </LinearLayout>
+        <TextView
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show11"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para completar la información sobre el producto comprado #2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_11"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_prod_comp"/>
+        </LinearLayout>
+        <TextView
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show12"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para completar la información sobre el producto comprado #3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_12"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_prod_comp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+            <Button
+                android:layout_margin="5dp"
+                android:background="@color/colorBlueLightButton"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center"
+                android:id="@+id/b_next"
+                android:text="@string/b_next"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+            <Button
+                android:layout_margin="5dp"
+                android:background="@color/colorWhite"
+                android:textColor="#000000"
+                android:layout_gravity="center"
+                android:id="@+id/b_back"
+                android:text="@string/b_back"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
 
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

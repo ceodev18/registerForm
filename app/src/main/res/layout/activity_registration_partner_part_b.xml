@@ -10,12 +10,30 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:text="Información del Socio(a) 1.2"
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="6">
+            <TextView
+                android:gravity="center"
+                android:text="1.2"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/circle_textview"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textAlignment="center"
+                android:text="Información Familiar del Socio(a)"
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
         <TextView
             android:text="Estado Civil (*)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -50,15 +68,27 @@
                 android:hint="Apellido Materno de la esposa(o)/cónyuge (*)"/>
         </android.support.design.widget.TextInputLayout>
         <TextView
+            android:layout_margin="5dp"
             android:text="Número de Hijos (*)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:layout_margin="5dp"
+            android:entries="@array/sa_numberList"
             android:id="@+id/s_number_children"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+        <include layout="@layout/item_child"/>
+        <include layout="@layout/item_child"/>
         <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/ll_children"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+
+        <!--<LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,7 +123,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
+        </LinearLayout>-->
         <TextView
             android:layout_marginTop="10dp"
             android:text="(*) Campo obligatorio"
