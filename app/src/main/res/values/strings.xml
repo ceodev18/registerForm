@@ -58,4 +58,9 @@
         <item>Técnica #2</item>
         <item>Técnica #3</item>
     </string-array>
+    <string-array name="sa_yes_no">
+        <item>Elija</item>
+        <item>Sí</item>
+        <item>No</item>
+    </string-array>
 </resources>

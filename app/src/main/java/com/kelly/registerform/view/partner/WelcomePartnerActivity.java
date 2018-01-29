@@ -13,7 +13,10 @@ import android.widget.Toast;
 
 import com.kelly.registerform.R;
 import com.kelly.registerform.view.MainActivity;
+import com.kelly.registerform.view.commerce.InformationActivity;
 import com.kelly.registerform.view.farming.ProductionActivity;
+import com.kelly.registerform.view.livestock.LivestockProductionActivity;
+import com.kelly.registerform.view.transformation.ProcessActivity;
 
 import java.util.ArrayList;
 
@@ -47,13 +50,45 @@ public class WelcomePartnerActivity extends AppCompatActivity {
                 if(cb_3.isChecked())list.add(3);
                 if(cb_4.isChecked())list.add(4);
                 if(list.size()>0){
-                    Intent i = new Intent(context,ProductionActivity.class);
-                    startActivity(i);
+                    if(list.get(0)==1){
+                        Intent i = new Intent(context,ProductionActivity.class);
+                        i.putExtra("list",listChecks());
+                        startActivity(i);
+                    }
+                    if(list.get(0)==2){
+                        Intent i = new Intent(context,LivestockProductionActivity.class);
+                        i.putExtra("list",listChecks());
+                        startActivity(i);
+                    }
+                    if(list.get(0)==3){
+                        Intent i = new Intent(context,ProcessActivity.class);
+                        i.putExtra("list",listChecks());
+                        startActivity(i);
+                    }
+                    if(list.get(0)==4){
+                        Intent i = new Intent(context,InformationActivity.class);
+                        i.putExtra("list",listChecks());
+                        startActivity(i);
+                    }
+
                 }else{
-                    Toast.makeText(context, "Debe seleccionar al menos un opción", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "Debe seleccionar al menos un opción", Toast.LENGTH_SHORT).show();
+                    //open last form
+                    Intent i = new Intent(context,ValidationActivity.class);
+                    startActivity(i);
                 }
 
             }
         });
+    }
+    private String listChecks(){
+        String listCheck="";
+        if(list.size()>1){
+            for(int i=1;i<list.size();i++){
+                listCheck+=list.get(i)+",";
+            }
+            return listCheck;
+        }
+        return "";
     }
 }

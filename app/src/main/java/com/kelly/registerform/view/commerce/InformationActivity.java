@@ -23,6 +23,7 @@ public class InformationActivity extends AppCompatActivity {
     private ArrayList<TextView>listTextView;
     private ArrayList<LinearLayout>linearLayoutArrayList;
     private Button b_next,b_back;
+    private String list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,7 @@ public class InformationActivity extends AppCompatActivity {
     }
     private void setElements(){
         context = this;
+        list = getIntent().getStringExtra("list");
         listState = new ArrayList<>();
         listTextView = new ArrayList<>();
         linearLayoutArrayList= new ArrayList<>();

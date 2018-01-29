@@ -9,22 +9,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.partner.RegistrationPartnerActivity" />
-        <activity android:name=".view.partner.RegistrationPartnerPartBActivity" />
-        <activity android:name=".view.partner.WelcomePartnerActivity">
-
-        </activity>>
-        <activity android:name=".view.farming.ProductionActivity" />
-        <activity android:name=".view.partner.ValidationActivity" />
-        <activity android:name=".view.commerce.InformationActivity">
-        </activity>
+        <activity android:name=".view.partner.RegistrationPartnerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.partner.RegistrationPartnerPartBActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.partner.WelcomePartnerActivity"
+            android:screenOrientation="portrait"/>
+        >
+        <activity android:name=".view.farming.ProductionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.partner.ValidationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.commerce.InformationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.livestock.LivestockProductionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.transformation.ProcessActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.farming.SystemProductionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.farming.FarmingCertificationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.livestock.LiveStockEcoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.livestock.CertificationLiveStockActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
