@@ -63,4 +63,22 @@
         <item>Sí</item>
         <item>No</item>
     </string-array>
+    <string-array name="sa_civil_state">
+        <item>Elija</item>
+        <item>Soltero(a) con hijos</item>
+        <item>Soltero(a) sin hijos</item>
+        <item>Casado(a)</item>
+        <item>Divorciado(a)</item>
+        <item>Viudo(a)</item>
+    </string-array>
+    <string-array name="sa_type_asoc">
+        <item>Elija</item>
+        <item>Asociación</item>
+        <item>Cooperativa</item>
+        <item>Comunidad</item>
+    </string-array>
+    <string-array name="sa_empty">
+        <item>Elija</item>
+    </string-array>
+
 </resources>
