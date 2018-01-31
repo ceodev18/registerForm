@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kelly.registerform">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -18,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity"
+        <activity
+            android:name=".view.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,31 +28,51 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.partner.RegistrationPartnerActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.partner.RegistrationPartnerPartBActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.partner.WelcomePartnerActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.partner.RegistrationPartnerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.partner.RegistrationPartnerPartBActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.partner.WelcomePartnerActivity"
+            android:screenOrientation="portrait" />
         >
-        <activity android:name=".view.farming.ProductionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.partner.ValidationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.commerce.InformationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.livestock.LivestockProductionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.transformation.ProcessActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.farming.SystemProductionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.farming.FarmingCertificationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.livestock.LiveStockEcoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.livestock.CertificationLiveStockActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".view.farming.ProductionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.partner.ValidationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.commerce.InformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.livestock.LivestockProductionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.transformation.ProcessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.farming.SystemProductionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.farming.FarmingCertificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.livestock.LiveStockEcoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.livestock.CertificationLiveStockActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".view.MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

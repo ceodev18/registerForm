@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kelly.registerform.R;
+import com.kelly.registerform.view.MapsActivity;
 
 public class RegistrationPartnerActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
@@ -75,13 +76,15 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         b_getAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                Intent intent = new Intent(context,MapsActivity.class);
+                startActivity(intent);
+                /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     buildAlertMessageNoGps();
 
                 } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     getLocation();
-                }
+                }*/
             }
         });
         b_dni.setOnClickListener(new View.OnClickListener() {
