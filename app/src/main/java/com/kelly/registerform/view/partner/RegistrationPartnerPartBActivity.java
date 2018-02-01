@@ -31,8 +31,15 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
         s_number_children = (Spinner)findViewById(R.id.s_number_children);
         ll_children =  (LinearLayout)findViewById(R.id.ll_children);
         b_next = (Button)findViewById(R.id.b_next);
+        b_back = (Button)findViewById(R.id.b_back);
     }
     private void setActions(){
+        b_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         s_number_children.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

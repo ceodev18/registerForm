@@ -15,7 +15,8 @@ tools:context="com.kelly.registerform.view.livestock.CertificationLiveStockActiv
         android:layout_height="450dp"
         tools:context="com.kelly.registerform.view.MapsActivity" />
     <Button
-        android:text="Select"
+        android:id="@+id/b_back"
+        android:text="Seleccionar Ubicación"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

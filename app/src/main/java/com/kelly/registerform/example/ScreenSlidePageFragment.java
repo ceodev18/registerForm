@@ -6,6 +6,7 @@ package com.kelly.registerform.example;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,6 +19,9 @@ import android.widget.Toast;
 import com.kelly.registerform.R;
 import com.kelly.registerform.view.MapsActivity;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 public class ScreenSlidePageFragment extends Fragment {
 
     /**
@@ -29,7 +33,7 @@ public class ScreenSlidePageFragment extends Fragment {
      * Key to insert the index page into the mapping of a Bundle.
      */
     private static final String INDEX = "index";
-
+    private int VALOR_RETORNO = 1;
     private int color;
     private int index;
 
@@ -74,7 +78,7 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Button b_getAddress,b_draw;
+        Button b_getAddress,b_draw,b_file;
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.page_farm1, container, false);
 
@@ -83,6 +87,7 @@ public class ScreenSlidePageFragment extends Fragment {
         //tvIndex.setText(String.valueOf(this.index));
         b_getAddress = rootView.findViewById(R.id.b_getAddress);
         b_draw = rootView.findViewById(R.id.b_draw);
+        b_file = rootView.findViewById(R.id.b_file);
         b_draw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,10 +101,30 @@ public class ScreenSlidePageFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        b_file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                startActivityForResult(Intent.createChooser(intent, "Choose File"), VALOR_RETORNO);
+            }
+        });
         // Change the background color
         rootView.setBackgroundColor(this.color);
 
         return rootView;
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_CANCELED) {
+            //Cancelado por el usuario
+        }
+        if ((resultCode == RESULT_OK) && (requestCode == VALOR_RETORNO )) {
+            //Procesar el resultado
+            Uri uri = data.getData(); //obtener el uri content
+
+        }
     }
 }

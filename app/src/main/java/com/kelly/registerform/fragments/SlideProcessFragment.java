@@ -3,6 +3,7 @@ package com.kelly.registerform.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,9 @@ import com.kelly.registerform.R;
 import com.kelly.registerform.view.MapsActivity;
 
 import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by KELLY on 29/01/2018.
@@ -43,6 +47,7 @@ public class SlideProcessFragment extends Fragment {
     private LinearLayout ll_1,ll_2,ll_3,ll_4,ll_5,ll_6;
     private ArrayList<Boolean>listState;
     private ArrayList<LinearLayout>linearLayoutArrayList;
+    private int VALOR_RETORNO = 1;
     /**
      * Instances a new fragment with a background color and an index page.
      *
@@ -84,7 +89,7 @@ public class SlideProcessFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Button b_photo,b_getAddress,b_photo_final;
+        Button b_photo,b_getAddress,b_photo_final,b_file;
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_process, container, false);
 
@@ -149,6 +154,7 @@ public class SlideProcessFragment extends Fragment {
 
 
         b_photo_final=rootView.findViewById(R.id.b_photo_final);
+        b_file=rootView.findViewById(R.id.b_file);
         b_photo=rootView.findViewById(R.id.b_photo);
         b_getAddress=rootView.findViewById(R.id.b_getAddress);
         b_photo_final.setOnClickListener(new View.OnClickListener() {
@@ -172,10 +178,29 @@ public class SlideProcessFragment extends Fragment {
                 startActivityForResult(gallery, PICK_IMAGE);
             }
         });
+        b_file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                startActivityForResult(Intent.createChooser(intent, "Choose File"), VALOR_RETORNO);
+            }
+        });
         // Change the background color
         rootView.setBackgroundColor(this.color);
 
         return rootView;
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_CANCELED) {
+            //Cancelado por el usuario
+        }
+        if ((resultCode == RESULT_OK) && (requestCode == VALOR_RETORNO )) {
+            //Procesar el resultado
+            Uri uri = data.getData(); //obtener el uri content
+        }
     }
 }

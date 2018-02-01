@@ -15,7 +15,7 @@ import com.kelly.registerform.example.MyFragmentPagerAdapter;
 import com.kelly.registerform.example.ScreenSlidePageFragment;
 
 public class ProductionActivity extends AppCompatActivity {
-    private Button b_next;
+    private Button b_next,b_back;
     private String listAcvities = null;
     private ViewPager pager=null;
     private Context context=this;
@@ -41,12 +41,19 @@ public class ProductionActivity extends AppCompatActivity {
     }
     private  void setElements(){
         b_next =findViewById(R.id.b_next);
+        b_back= findViewById(R.id.b_back);
         listAcvities = getIntent().getStringExtra("list");
         s_numberFarm=findViewById(R.id.s_numberFarm);
 
 
     }
     private void setActions(){
+        b_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

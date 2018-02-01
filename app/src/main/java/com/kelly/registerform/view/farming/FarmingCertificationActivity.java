@@ -2,6 +2,8 @@ package com.kelly.registerform.view.farming;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +18,8 @@ import com.kelly.registerform.view.transformation.ProcessActivity;
 public class FarmingCertificationActivity extends AppCompatActivity {
     private String list;
     private Context context;
-    private Button b_next,b_back;
+    private Button b_next,b_back,b_file;
+    private int VALOR_RETORNO = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,7 @@ public class FarmingCertificationActivity extends AppCompatActivity {
         b_next = findViewById(R.id.b_next);
         list= getIntent().getStringExtra("list");
         b_back = findViewById(R.id.b_back);
+        b_file= findViewById(R.id.b_file);
     }
     private void setActions(){
         b_next.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +71,18 @@ public class FarmingCertificationActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        b_file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*Uri path= Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath());
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setDataAndType(path, "resource/folder");
+                startActivity(Intent.createChooser(intent, "Open folder"));*/
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                startActivityForResult(Intent.createChooser(intent, "Choose File"), VALOR_RETORNO);
+            }
+        });
     }
     private String reList(String listSplit){
         String []listCheck =listSplit.split(",");
@@ -81,5 +96,16 @@ public class FarmingCertificationActivity extends AppCompatActivity {
             return out;
         }
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_CANCELED) {
+            //Cancelado por el usuario
+        }
+        if ((resultCode == RESULT_OK) && (requestCode == VALOR_RETORNO )) {
+            //Procesar el resultado
+            Uri uri = data.getData(); //obtener el uri content
+        }
     }
 }

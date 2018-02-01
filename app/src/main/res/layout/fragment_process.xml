@@ -324,6 +324,7 @@
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
         <Button
+            android:id="@+id/b_file"
             android:background="@color/colorBlueLightButton"
             android:textColor="@color/colorWhite"
             android:text="Click aquí para subir un documento relacionado con el certificado"

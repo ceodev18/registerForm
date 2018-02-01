@@ -1,6 +1,7 @@
 package com.kelly.registerform.view.partner;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,7 +30,7 @@ import com.kelly.registerform.view.MapsActivity;
 public class RegistrationPartnerActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
     private static final int PICK_IMAGE = 100;
-    private Button b_next,b_getAddress,b_dni,b_photo;
+    private Button b_next,b_getAddress,b_dni,b_photo,b_back;
     private Context context;
     private Spinner gender_spinner,regions_spinner;
     private String lattitude,longitude;
@@ -47,6 +48,7 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
     private void setElements(){
         context = this;
         b_next = (Button)findViewById(R.id.b_next);
+        b_back = findViewById(R.id.b_back);
         b_dni= (Button)findViewById(R.id.b_dni);
         b_photo= (Button)findViewById(R.id.b_photo);
         b_getAddress= (Button)findViewById(R.id.b_getAddress);
@@ -67,6 +69,12 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         regions_spinner.setAdapter(adapter);
     }
     private void setActions(){
+        b_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +86,9 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,MapsActivity.class);
-                startActivity(intent);
+                //startActivity(intent);
+                //Intent i = new Intent(this, SecondActivity.class);
+                startActivityForResult(intent, 1);
 
                 /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -171,12 +181,25 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
             }
         }
     }
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
             foto_gallery = new ImageView(context);
             foto_gallery.setImageURI(imageUri);
+        }
+    }*/
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result=data.getStringExtra("result");
+                //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
         }
     }
 

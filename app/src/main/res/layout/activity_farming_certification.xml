@@ -89,6 +89,7 @@
                 android:hint="Año Caducidad de la Certificación (*)"/>
         </android.support.design.widget.TextInputLayout>
         <Button
+            android:id="@+id/b_file"
             android:textColor="@color/colorWhite"
             android:background="@color/colorBlueLightButton"
             android:text="Clic aquí para subir un documento relacionado con el certificado"
