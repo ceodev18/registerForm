@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.kelly.registerform.view.farming.FarmingCertificationActivity">
     <LinearLayout
+        android:padding="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
@@ -34,41 +36,43 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="¿Tienes certificado? (*)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:entries="@array/sa_yes_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:text="Tipo certificadora (*)"
+            android:text="Código de certificadora (*)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
-            android:layout_margin="5dp"
-            android:entries="@array/sa_yes_no"
+
+            android:layout_margin="10dp"
+            android:entries="@array/sa_type_cert_agro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Empresa/SGP (depende del Tipo de certificadora) (*)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
-            android:layout_margin="5dp"
-            android:entries="@array/sa_yes_no"
+            android:layout_margin="10dp"
+            android:entries="@array/sa_empty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +80,8 @@
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
             <EditText
                 android:inputType="number"
                 android:layout_width="match_parent"
@@ -87,14 +92,14 @@
             android:textColor="@color/colorWhite"
             android:background="@color/colorBlueLightButton"
             android:text="Clic aquí para subir un documento relacionado con el certificado"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_margin="5dp"
-           android:textStyle="italic"
+            android:layout_margin="10dp"
+            android:textStyle="italic"
             android:text="Se ha registrado el documento correctamente!"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
@@ -123,7 +128,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
         </LinearLayout>
 

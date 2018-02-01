@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kelly.registerform.R;
+import com.kelly.registerform.example.MapaGoogle;
 import com.kelly.registerform.view.MapsActivity;
 
 public class RegistrationPartnerActivity extends AppCompatActivity {
@@ -78,6 +79,7 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(context,MapsActivity.class);
                 startActivity(intent);
+
                 /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     buildAlertMessageNoGps();

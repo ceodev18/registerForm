@@ -131,7 +131,7 @@ public class InformationActivity extends AppCompatActivity {
         b_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                finish();
             }
         });
     }

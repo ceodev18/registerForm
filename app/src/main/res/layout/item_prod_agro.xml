@@ -48,10 +48,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <Spinner
+                android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
@@ -71,10 +73,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <Spinner
+                android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
@@ -94,10 +98,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <Spinner
+                android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
@@ -117,10 +123,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <Spinner
+                android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
@@ -140,10 +148,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <Spinner
+                android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
@@ -163,10 +173,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <Spinner
+                android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
@@ -186,10 +198,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <Spinner
+                android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
@@ -209,6 +223,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:entries="@array/sa_tax"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <android.support.design.widget.TextInputLayout

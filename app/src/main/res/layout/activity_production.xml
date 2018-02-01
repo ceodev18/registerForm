@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.kelly.registerform.view.farming.ProductionActivity">
     <LinearLayout
+        android:padding="16dp"
         android:weightSum="15"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -26,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textAlignment="center"
@@ -80,7 +82,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

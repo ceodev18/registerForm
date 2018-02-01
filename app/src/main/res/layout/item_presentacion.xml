@@ -4,26 +4,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:text="Tipo de presentación"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Spinner
-        android:layout_margin="5dp"
+        android:entries="@array/sa_presentacion"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </Spinner>
-    <TextView
-        android:layout_margin="5dp"
-        android:text="Cantidad producida a la semana"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Spinner
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Spinner>
-
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        <EditText
+            android:inputType="date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cantidad producida a la semana"/>
+    </android.support.design.widget.TextInputLayout>
 </LinearLayout>

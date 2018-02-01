@@ -1,13 +1,18 @@
 package com.kelly.registerform.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 
 import com.kelly.registerform.R;
+import com.kelly.registerform.view.MapsActivity;
+import com.thomashaertel.widget.MultiSpinner;
 
 /**
  * Created by KELLY on 29/01/2018.
@@ -70,18 +75,37 @@ public class SlideLiveStockFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        Button b_getAddress;
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_livestock, container, false);
-
+        MultiSpinner spinner;
+        ArrayAdapter<String> adapter;
+        adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
+        adapter.add("Leche");
+        adapter.add("Huevos");
+        adapter.add("Lana");
+        spinner = (MultiSpinner) rootView.findViewById(R.id.spinnerMulti);
+        spinner.setAdapter(adapter, false,onSelectedListener);
         // Show the current page index in the view
         //TextView tvIndex = (TextView) rootView.findViewById(R.id.tvIndex);
         //tvIndex.setText(String.valueOf(this.index));
-
+        b_getAddress = rootView.findViewById(R.id.b_getAddress);
+        b_getAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
         // Change the background color
         rootView.setBackgroundColor(this.color);
 
         return rootView;
 
     }
+    private MultiSpinner.MultiSpinnerListener onSelectedListener = new MultiSpinner.MultiSpinnerListener() {
+        public void onItemsSelected(boolean[] selected) {
+            // Do something here with the selected items
+        }
+    };
 }

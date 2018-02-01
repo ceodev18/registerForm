@@ -1,16 +1,20 @@
 package com.kelly.registerform.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kelly.registerform.R;
+import com.kelly.registerform.view.MapsActivity;
 
 import java.util.ArrayList;
 
@@ -30,7 +34,7 @@ public class SlideProcessFragment extends Fragment {
      * Key to insert the index page into the mapping of a Bundle.
      */
     private static final String INDEX = "index";
-
+    private static final int PICK_IMAGE = 100;
     private int color;
     private int index;
     private Context context;
@@ -80,7 +84,7 @@ public class SlideProcessFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        Button b_photo,b_getAddress,b_photo_final;
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_process, container, false);
 
@@ -143,6 +147,31 @@ public class SlideProcessFragment extends Fragment {
         }
         //tvIndex.setText(String.valueOf(this.index));
 
+
+        b_photo_final=rootView.findViewById(R.id.b_photo_final);
+        b_photo=rootView.findViewById(R.id.b_photo);
+        b_getAddress=rootView.findViewById(R.id.b_getAddress);
+        b_photo_final.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(gallery, PICK_IMAGE);
+            }
+        });
+        b_getAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+        b_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(gallery, PICK_IMAGE);
+            }
+        });
         // Change the background color
         rootView.setBackgroundColor(this.color);
 

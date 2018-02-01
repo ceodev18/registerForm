@@ -3,41 +3,45 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:layout_margin="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:text="Producto transformado #1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="¿Qué transformas o procesas?"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
-            android:layout_margin="5dp"
+            android:entries="@array/sa_empty"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </Spinner>
         <Button
-            android:layout_margin="5dp"
+            android:id="@+id/b_photo"
+            android:layout_margin="10dp"
             android:text="Click aquí para subir la foto de la planta"
             android:textColor="@color/colorWhite"
             android:background="@color/colorBlueLightButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_margin="5dp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_margin="10dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Se ha registrado la foto correctamente!"
             android:textStyle="italic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/b_getAddress"
             android:layout_margin="5dp"
             android:text="Click aquí para obtener la Ubicación de la planta"
             android:textColor="@color/colorWhite"
@@ -46,7 +50,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:layout_margin="5dp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Se ha registrado la ubicación correctamente!"
             android:textStyle="italic"
             android:layout_width="match_parent"
@@ -60,7 +64,7 @@
         <TextView
             android:layout_margin="5dp"
             android:text="Ahora indícanos los insumos que utilizas, es obligatorio completar los datos de al menos un insumo"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
@@ -126,7 +130,7 @@
         <TextView
             android:layout_margin="5dp"
             android:text="Indícanos como es la presentación de tu producto"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
@@ -184,29 +188,31 @@
             <include layout="@layout/item_presentacion"/>
         </LinearLayout>
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="Producción"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="Mes de producción - Desde (mes)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
-            android:layout_margin="5dp"
+            android:entries="@array/sa_month"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="Mes de producción - Hasta (mes)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
-            android:layout_margin="5dp"
+            android:entries="@array/sa_month"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <android.support.design.widget.TextInputLayout
@@ -246,56 +252,61 @@
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
         <Button
+            android:id="@+id/b_photo_final"
             android:background="@color/colorBlueLightButton"
             android:textColor="@color/colorWhite"
             android:text="Click aquí para subir una foto del producto final"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_margin="10dp"
             android:textStyle="italic"
             android:text="Se ha registrado la foto correctamente!"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="Certificación"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="¿Tienes certificado?"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
-            android:layout_margin="5dp"
+            android:entries="@array/sa_yes_no"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="Tipo certificadora"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
-            android:layout_margin="5dp"
+            android:entries="@array/sa_type_cert_live"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="Empresa/SGP (depende del Tipo de certificadora)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
-            android:layout_margin="5dp"
+            android:entries="@array/sa_empty"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <android.support.design.widget.TextInputLayout
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
@@ -304,7 +315,7 @@
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
@@ -316,13 +327,14 @@
             android:background="@color/colorBlueLightButton"
             android:textColor="@color/colorWhite"
             android:text="Click aquí para subir un documento relacionado con el certificado"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_margin="10dp"
             android:textStyle="italic"
             android:text="Se ha registrado el documento correctamente!"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
@@ -352,7 +364,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

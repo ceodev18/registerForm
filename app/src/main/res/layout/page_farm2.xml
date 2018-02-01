@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textAlignment="center"
                     android:text="Menciona todas las prácticas de agricultura ecológica que utilizas"
                     android:layout_width="match_parent"
@@ -119,7 +119,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_margin="5dp"
                 android:layout_gravity="center_horizontal"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
@@ -38,7 +39,7 @@
         <TextView
             android:layout_margin="5dp"
             android:text="Estado Civil (*)"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
@@ -74,7 +75,7 @@
         <TextView
             android:layout_margin="5dp"
             android:text="Número de Hijos (*)"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
@@ -131,7 +132,7 @@
         <TextView
             android:layout_marginTop="10dp"
             android:text="(*) Campo obligatorio"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
@@ -160,7 +161,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

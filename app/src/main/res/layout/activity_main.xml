@@ -20,7 +20,7 @@
         <TextView
             android:textAlignment="center"
             android:text="Leer detenidamente las instrucciones a continuación:"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <LinearLayout

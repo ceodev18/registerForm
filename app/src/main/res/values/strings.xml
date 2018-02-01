@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RegisterForm</string>
+    <string name="app_name">REGISTRO DE SOCIOS - ANPE</string>
     <string name="b_next">Continuar</string>
     <string name="b_next_register">Continuar con el Registro</string>
     <string name="b_back">Volver</string>
@@ -81,5 +81,101 @@
         <item>Elija</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
-
+    <string-array name="sa_type_house">
+        <item>Elija</item>
+        <item>Propia</item>
+        <item>Alquilada</item>
+        <item>Privada</item>
+    </string-array>
+    <string-array name="sa_type_size">
+        <item>Elija</item>
+        <item>Metros cuadrados</item>
+        <item>Pulgadas</item>
+        <item>Hectáreas</item>
+    </string-array>
+    <string-array name="sa_type_cert_agro">
+        <item>Elija</item>
+        <item>Sistema de  Garantía Participativa</item>
+        <item>Empresa de terceros</item>
+    </string-array>
+    <string-array name="sa_total_animals">
+        <item>Elija</item>
+        <item>De 1 a 20</item>
+        <item>De 21 a 100</item>
+        <item>De 101 a 500</item>
+    </string-array>
+    <string-array name="sa_percentage">
+        <item>Elija</item>
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>80</item>
+        <item>100</item>
+    </string-array>
+    <string-array name="sa_grow_care">
+        <item>Elija</item>
+        <item>Tradicional</item>
+        <item>Tecnificada</item>
+        <item>Semi Tecnificada</item>
+    </string-array>
+    <string-array name="sa_food">
+        <item>Leche</item>
+        <item>Huevos</item>
+        <item>Lana</item>
+    </string-array>
+    <string-array name="sa_type_cert_live">
+        <item>Elija</item>
+        <item>Empresa</item>
+        <item>SGP</item>
+    </string-array>
+    <string-array name="sa_kg_lt">
+        <item>Elija</item>
+        <item>1</item>
+        <item>De 2 a 5</item>
+        <item>De 6 a 10</item>
+        <item>Más de 10</item>
+    </string-array>
+    <string-array name="sa_frecuency">
+        <item>Elija</item>
+        <item>Semanal</item>
+        <item>Mensual</item>
+    </string-array>
+    <string-array name="sa_tax">
+        <item>Elija</item>
+        <item>Boleta</item>
+        <item>Factura</item>
+    </string-array>
+    <string-array name="sa_partner_condition">
+        <item>Elija</item>
+        <item>Directivo</item>
+        <item>Activo</item>
+        <item>Con permiso</item>
+    </string-array>
+    <string-array name="sa_inscrip">
+        <item>Elija</item>
+        <item>Inscripción</item>
+        <item>Renovación</item>
+    </string-array>
+    <string-array name="sa_bougth">
+        <item>Elija</item>
+        <item>Es comprado</item>
+        <item>Es propio</item>
+    </string-array>
+    <string-array name="sa_presentacion">
+        <item>Elija</item>
+        <item>Botella de medio litro</item>
+        <item>Botella de un litro</item>
+        <item>Caja</item>
+    </string-array>
+    <string-array name="sa_month">
+        <item>Elija</item>
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+    </string-array>
 </resources>

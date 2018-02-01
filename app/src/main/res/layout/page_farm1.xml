@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
+            android:id="@+id/b_getAddress"
             android:textColor="@color/colorWhite"
             android:layout_margin="5dp"
             android:background="@color/colorGreenButton"
@@ -19,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/b_draw"
             android:textColor="@color/colorWhite"
             android:layout_margin="5dp"
             android:background="@color/colorOrangeButton"
@@ -59,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:entries="@array/sa_type_house"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
@@ -79,6 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:entries="@array/sa_type_size"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
