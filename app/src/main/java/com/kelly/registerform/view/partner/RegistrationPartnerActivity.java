@@ -30,7 +30,7 @@ import com.kelly.registerform.view.MapsActivity;
 public class RegistrationPartnerActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
     private static final int PICK_IMAGE = 100;
-    private Button b_next,b_getAddress,b_dni,b_photo,b_back;
+    private Button b_next,b_getAddress,b_dni,b_photo;
     private Context context;
     private Spinner gender_spinner,regions_spinner;
     private String lattitude,longitude;
@@ -48,7 +48,6 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
     private void setElements(){
         context = this;
         b_next = (Button)findViewById(R.id.b_next);
-        b_back = findViewById(R.id.b_back);
         b_dni= (Button)findViewById(R.id.b_dni);
         b_photo= (Button)findViewById(R.id.b_photo);
         b_getAddress= (Button)findViewById(R.id.b_getAddress);
@@ -58,9 +57,9 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         tv_photo = findViewById(R.id.tv_photo);
 
 
-        gender_spinner=(Spinner)findViewById(R.id.gender_spinner);
-        String[] arraySpinner = new String[] {"Elija", "Femenino", "Masculino"};
-        gender_spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner));
+        //gender_spinner=(Spinner)findViewById(R.id.gender_spinner);
+        //String[] arraySpinner = new String[] {"Elija", "Femenino", "Masculino"};
+        //gender_spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner));
         regions_spinner=(Spinner)findViewById(R.id.regions_spinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -69,12 +68,6 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         regions_spinner.setAdapter(adapter);
     }
     private void setActions(){
-        b_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

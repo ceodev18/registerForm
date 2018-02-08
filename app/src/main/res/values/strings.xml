@@ -90,7 +90,7 @@
     <string-array name="sa_type_size">
         <item>Elija</item>
         <item>Metros cuadrados</item>
-        <item>Pulgadas</item>
+        <item>Yugadas</item>
         <item>Hectáreas</item>
     </string-array>
     <string-array name="sa_type_cert_agro">
@@ -177,5 +177,10 @@
         <item>Febrero</item>
         <item>Marzo</item>
         <item>Abril</item>
+    </string-array>
+    <string-array name="sa_gender">
+        <item>Elija</item>
+        <item>Femenino</item>
+        <item>Masculino</item>
     </string-array>
 </resources>

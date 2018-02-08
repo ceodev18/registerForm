@@ -38,18 +38,19 @@
         <TextView
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
             android:text="Estos son los productos agroecológicos que comercializas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
             android:text="(Esto solo aparece si se ha ingresado previamente la sección de producción agroecológica)Indícanos como los comercializas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show1"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -67,6 +68,9 @@
             <include layout="@layout/item_prod_agro"/>
         </LinearLayout>
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -84,6 +88,9 @@
             <include layout="@layout/item_prod_agro"/>
         </LinearLayout>
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show3"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -103,18 +110,19 @@
         <TextView
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
             android:text="Estos son los productos pecuarios (animales de crianza) que comercializas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
             android:text="(Esto solo aparece si se ha ingresado previamente la sección de producción pecuaria)Indícanos como los comercializas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show4"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -132,6 +140,9 @@
             <include layout="@layout/item_prod_agro"/>
         </LinearLayout>
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show5"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -149,6 +160,9 @@
             <include layout="@layout/item_prod_agro"/>
         </LinearLayout>
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show6"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -168,18 +182,19 @@
         <TextView
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
             android:text="Estos son los productos que transformas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
             android:text="(Esto solo aparece si se ha ingresado previamente la sección de transformación)Indícanos como los comercializas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show7"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -197,6 +212,9 @@
             <include layout="@layout/item_prod_trans"/>
         </LinearLayout>
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show8"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -214,6 +232,9 @@
             <include layout="@layout/item_prod_trans"/>
         </LinearLayout>
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show9"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -233,18 +254,19 @@
         <TextView
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
             android:text="Si eres un comprador y luego comercializas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
             android:text="Indícanos como los comercializas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show10"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -262,6 +284,9 @@
             <include layout="@layout/item_prod_comp"/>
         </LinearLayout>
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show11"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -279,6 +304,9 @@
             <include layout="@layout/item_prod_comp"/>
         </LinearLayout>
         <TextView
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show12"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"

@@ -8,24 +8,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:text="Producto transformado #1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:text="¿Qué transformas o procesas?"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
+            android:padding="5dp"
             android:entries="@array/sa_empty"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </Spinner>
         <Button
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:padding="5dp"
             android:id="@+id/b_photo"
             android:layout_margin="10dp"
             android:text="Click aquí para subir la foto de la planta"
@@ -34,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Se ha registrado la foto correctamente!"
@@ -41,6 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:padding="5dp"
             android:id="@+id/b_getAddress"
             android:layout_margin="5dp"
             android:text="Click aquí para obtener la Ubicación de la planta"
@@ -49,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Se ha registrado la ubicación correctamente!"
@@ -56,27 +66,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:text="Insumos"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:text="Ahora indícanos los insumos que utilizas, es obligatorio completar los datos de al menos un insumo"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
+            android:textAlignment="center"
             android:layout_margin="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show1"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
             android:text="Clic aquí para ingresar el insumo utilizado #1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:id="@+id/ll_1"
             android:visibility="gone"
@@ -86,10 +101,12 @@
             <include layout="@layout/item_insumo"/>
         </LinearLayout>
         <TextView
+            android:padding="5dp"
+            android:textAlignment="center"
             android:layout_margin="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show2"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
             android:text="Clic aquí para ingresar el insumo utilizado #2"
             android:layout_width="match_parent"
@@ -104,10 +121,12 @@
             <include layout="@layout/item_insumo"/>
         </LinearLayout>
         <TextView
+            android:padding="5dp"
+            android:textAlignment="center"
             android:layout_margin="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show3"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
             android:text="Clic aquí para ingresar el insumo utilizado #3"
             android:layout_width="match_parent"
@@ -124,7 +143,7 @@
         <TextView
             android:layout_margin="5dp"
             android:text="Presentación y producción semanal"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
@@ -134,15 +153,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="12dp"
+            android:textAlignment="center"
             android:layout_margin="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show4"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
             android:text="Clic aquí para agregar la presentación #1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:id="@+id/ll_4"
             android:visibility="gone"
@@ -152,15 +174,18 @@
             <include layout="@layout/item_presentacion"/>
         </LinearLayout>
         <TextView
+            android:padding="12dp"
+            android:textAlignment="center"
             android:layout_margin="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show5"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
             android:text="Clic aquí para agregar la presentación #2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:id="@+id/ll_5"
             android:visibility="gone"
@@ -170,15 +195,18 @@
             <include layout="@layout/item_presentacion"/>
         </LinearLayout>
         <TextView
+            android:padding="12dp"
+            android:textAlignment="center"
             android:layout_margin="5dp"
             android:background="@color/colorTextView"
             android:id="@+id/tv_show6"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
             android:text="Clic aquí para agregar la presentación #3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:id="@+id/ll_6"
             android:visibility="gone"
@@ -188,70 +216,98 @@
             <include layout="@layout/item_presentacion"/>
         </LinearLayout>
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:text="Producción"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:text="Mes de producción - Desde (mes)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
+            android:padding="5dp"
             android:entries="@array/sa_month"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:text="Mes de producción - Hasta (mes)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
+            android:padding="5dp"
             android:entries="@array/sa_month"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:background="@drawable/background_textview"
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:padding="5dp"
+                android:background="#00000000"
                 android:hint="Registro Sanitario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:background="@drawable/background_textview"
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:padding="5dp"
+                android:background="#00000000"
                 android:hint="RUC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:background="@drawable/background_textview"
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:padding="5dp"
+                android:background="#00000000"
                 android:hint="Razón Social/Nombre de la micro empresa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:background="@drawable/background_textview"
+            android:padding="5dp"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:padding="5dp"
+                android:background="#00000000"
                 android:hint="Foto de la etiqueta del producto transformado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
         <Button
+            android:padding="5dp"
             android:id="@+id/b_photo_final"
             android:background="@color/colorBlueLightButton"
             android:textColor="@color/colorWhite"
@@ -260,6 +316,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:textStyle="italic"
             android:text="Se ha registrado la foto correctamente!"
@@ -267,63 +324,84 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:text="Certificación"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:text="¿Tienes certificado?"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
+            android:padding="5dp"
             android:entries="@array/sa_yes_no"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:text="Tipo certificadora"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
+            android:padding="5dp"
             android:entries="@array/sa_type_cert_live"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:text="Empresa/SGP (depende del Tipo de certificadora)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
+            android:padding="5dp"
             android:entries="@array/sa_empty"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:background="@drawable/background_textview"
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:padding="5dp"
+                android:background="#00000000"
                 android:hint="Código de Certificación"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:background="@drawable/background_textview"
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:padding="5dp"
+                android:background="#00000000"
                 android:hint="Año Caducidad de la Certificación"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
         <Button
+            android:padding="5dp"
             android:id="@+id/b_file"
             android:background="@color/colorBlueLightButton"
             android:textColor="@color/colorWhite"
@@ -332,40 +410,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:textStyle="italic"
             android:text="Se ha registrado el documento correctamente!"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <LinearLayout
-            android:layout_margin="5dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2">
-            <Button
-                android:layout_margin="5dp"
-                android:background="@color/colorBlueLightButton"
-                android:textColor="@color/colorWhite"
-                android:layout_gravity="center"
-                android:id="@+id/b_next"
-                android:text="@string/b_next"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-            <Button
-                android:layout_margin="5dp"
-                android:background="@color/colorWhite"
-                android:textColor="#000000"
-                android:layout_gravity="center"
-                android:id="@+id/b_back"
-                android:text="@string/b_back"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>

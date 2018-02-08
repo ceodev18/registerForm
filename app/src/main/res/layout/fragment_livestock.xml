@@ -13,12 +13,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
             android:entries="@array/sa_empty"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </Spinner>
         <Button
+            android:padding="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:id="@+id/b_getAddress"
             android:layout_margin="10dp"
             android:text="Click aquí para la Ubicación del lugar de crianza(*)"
@@ -40,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
             android:entries="@array/sa_total_animals"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
@@ -52,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
             android:entries="@array/sa_empty"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
@@ -64,6 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
             android:entries="@array/sa_percentage"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
@@ -76,6 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
             android:entries="@array/sa_empty"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
@@ -88,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
             android:entries="@array/sa_grow_care"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
@@ -100,6 +108,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <com.thomashaertel.widget.MultiSpinner
+            android:layout_margin="10dp"
+            android:background="@drawable/background_spinner"
             android:id="@+id/spinnerMulti"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

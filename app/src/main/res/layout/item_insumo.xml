@@ -4,10 +4,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <android.support.design.widget.TextInputLayout
+        android:textColorHint="@color/colorPrimary"
+        android:background="@drawable/background_textview"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:padding="5dp"
+            android:background="#00000000"
             android:hint="¿Cuál es el insumo usado?"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -19,11 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Spinner
+        android:background="@drawable/background_spinner"
         android:entries="@array/sa_yes_no"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </Spinner>
     <TextView
         android:layout_margin="10dp"
@@ -32,34 +36,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Spinner
+        android:background="@drawable/background_spinner"
         android:entries="@array/sa_bougth"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </Spinner>
     <android.support.design.widget.TextInputLayout
+        android:textColorHint="@color/colorPrimary"
+        android:background="@drawable/background_textview"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:padding="5dp"
+            android:background="#00000000"
             android:hint="Si el insumo es comprado, a quién le compras?"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
+        android:textColorHint="@color/colorPrimary"
+        android:background="@drawable/background_textview"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:padding="5dp"
+            android:background="#00000000"
             android:hint="Código de certificado agroecológico de quien le compras"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
+        android:textColorHint="@color/colorPrimary"
+        android:background="@drawable/background_textview"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:padding="5dp"
+            android:background="#00000000"
             android:hint="Si el insumo es comprado, dónde lo compras?"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

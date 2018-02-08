@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:id="@+id/b_getAddress"
             android:textColor="@color/colorWhite"
             android:layout_margin="5dp"
@@ -15,11 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:textStyle="italic"
             android:layout_margin="5dp"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:id="@+id/b_draw"
             android:textColor="@color/colorWhite"
             android:layout_margin="5dp"
@@ -28,14 +31,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:id="@+id/b_file"
             android:textColor="@color/colorWhite"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:background="@color/colorBlueLightButton"
             android:text="Click aquí para subir un documento relacionado a la chacra"
             android:layout_width="match_parent"
@@ -46,45 +50,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <android.support.design.widget.TextInputLayout
-            android:layout_margin="10dp"
+            android:textColorHint="@color/colorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_textview"
+            android:layout_margin="5dp">
             <EditText
+                android:padding="5dp"
+                android:background="#00000000"
                 android:inputType="phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombre de la chacra/parcela (*)"/>
         </android.support.design.widget.TextInputLayout>
         <TextView
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:text="Tipo de propiedad (*)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
             android:entries="@array/sa_type_house"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
         <android.support.design.widget.TextInputLayout
-            android:layout_margin="10dp"
+            android:textColorHint="@color/colorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_textview"
+            android:layout_margin="5dp">
             <EditText
+                android:padding="5dp"
+                android:background="#00000000"
                 android:inputType="phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="La chacra/parcela mide en su totalidad (*)"/>
         </android.support.design.widget.TextInputLayout>
         <TextView
-            android:layout_margin="1dp"
+            android:layout_margin="5dp"
             android:text="Elije el tipo de medida de la chacra (*)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:background="@drawable/background_spinner"
             android:entries="@array/sa_type_size"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
 
