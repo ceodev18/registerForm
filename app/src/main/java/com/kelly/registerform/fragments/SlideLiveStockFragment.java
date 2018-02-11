@@ -75,7 +75,7 @@ public class SlideLiveStockFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Button b_getAddress;
+
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_livestock, container, false);
         MultiSpinner spinner;
@@ -89,14 +89,7 @@ public class SlideLiveStockFragment extends Fragment {
         // Show the current page index in the view
         //TextView tvIndex = (TextView) rootView.findViewById(R.id.tvIndex);
         //tvIndex.setText(String.valueOf(this.index));
-        b_getAddress = rootView.findViewById(R.id.b_getAddress);
-        b_getAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+
         // Change the background color
         rootView.setBackgroundColor(this.color);
 

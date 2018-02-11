@@ -30,11 +30,11 @@ import com.kelly.registerform.view.MapsActivity;
 public class RegistrationPartnerActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
     private static final int PICK_IMAGE = 100;
-    private Button b_next,b_getAddress,b_dni,b_photo;
+    private Button b_next,b_dni,b_photo;
     private Context context;
     private Spinner gender_spinner,regions_spinner;
     private String lattitude,longitude;
-    private TextView tv_address,tv_dni,tv_photo;
+    private TextView tv_dni,tv_photo;
     private LocationManager locationManager;
     private Uri imageUri;
     private ImageView foto_gallery;
@@ -50,9 +50,8 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         b_next = (Button)findViewById(R.id.b_next);
         b_dni= (Button)findViewById(R.id.b_dni);
         b_photo= (Button)findViewById(R.id.b_photo);
-        b_getAddress= (Button)findViewById(R.id.b_getAddress);
 
-        tv_address = findViewById(R.id.tv_address);
+
         tv_dni = findViewById(R.id.tv_dni);
         tv_photo = findViewById(R.id.tv_photo);
 
@@ -75,23 +74,7 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        b_getAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context,MapsActivity.class);
-                //startActivity(intent);
-                //Intent i = new Intent(this, SecondActivity.class);
-                startActivityForResult(intent, 1);
 
-                /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    buildAlertMessageNoGps();
-
-                } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    getLocation();
-                }*/
-            }
-        });
         b_dni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,63 +108,6 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         final AlertDialog alert = builder.create();
         alert.show();
     }
-    private void getLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-
-        } else {
-            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-            Location location1 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
-
-            if (location != null) {
-                double latti = location.getLatitude();
-                double longi = location.getLongitude();
-                lattitude = String.valueOf(latti);
-                longitude = String.valueOf(longi);
-
-                tv_address.setText("Your current location is"+ "\n" + "Lattitude = " + lattitude
-                        + "\n" + "Longitude = " + longitude);
-
-            } else  if (location1 != null) {
-                double latti = location1.getLatitude();
-                double longi = location1.getLongitude();
-                lattitude = String.valueOf(latti);
-                longitude = String.valueOf(longi);
-
-                tv_address.setText("Your current location is"+ "\n" + "Lattitude = " + lattitude
-                        + "\n" + "Longitude = " + longitude);
-
-
-            } else  if (location2 != null) {
-                double latti = location2.getLatitude();
-                double longi = location2.getLongitude();
-                lattitude = String.valueOf(latti);
-                longitude = String.valueOf(longi);
-
-                tv_address.setText("Your current location is"+ "\n" + "Lattitude = " + lattitude
-                        + "\n" + "Longitude = " + longitude);
-
-            }else{
-
-                Toast.makeText(this,"Unble to Trace your location", Toast.LENGTH_SHORT).show();
-
-            }
-        }
-    }
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-            imageUri = data.getData();
-            foto_gallery = new ImageView(context);
-            foto_gallery.setImageURI(imageUri);
-        }
-    }*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to

@@ -43,6 +43,13 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_width="match_parent"
             android:layout_height="0dp" />
+        <TextView
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:text="¿Cuántas especies de animales crías para ventas? (*)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <Spinner
             android:layout_margin="10dp"
             android:background="@drawable/background_spinner"
@@ -55,11 +62,11 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/pager"
             android:layout_width="match_parent"
-            android:layout_height="800dp"
+            android:layout_height="950dp"
             />
         <TextView
-            android:layout_margin="5dp"
-            android:text="(*) Campo obligatorio"
+            android:layout_margin="10dp"
+            android:text="(*) Campos obligatorio"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

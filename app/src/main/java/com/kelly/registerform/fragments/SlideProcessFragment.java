@@ -43,11 +43,12 @@ public class SlideProcessFragment extends Fragment {
     private int index;
     private Context context;
     private ArrayList<TextView> listTextView;
-    private TextView tv_show1,tv_show2,tv_show3,tv_show4,tv_show5,tv_show6;
+    private TextView tv_show1,tv_show2,tv_show3,tv_show4,tv_show5,tv_show6,tv_title;
     private LinearLayout ll_1,ll_2,ll_3,ll_4,ll_5,ll_6;
     private ArrayList<Boolean>listState;
     private ArrayList<LinearLayout>linearLayoutArrayList;
     private int VALOR_RETORNO = 1;
+    public int indexPage=1;
     /**
      * Instances a new fragment with a background color and an index page.
      *
@@ -89,7 +90,7 @@ public class SlideProcessFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Button b_photo,b_getAddress,b_photo_final,b_file;
+        Button b_photo,b_photo_final,b_file;
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_process, container, false);
 
@@ -100,6 +101,8 @@ public class SlideProcessFragment extends Fragment {
         tv_show4 = (TextView) rootView.findViewById(R.id.tv_show4);
         tv_show5 = (TextView) rootView.findViewById(R.id.tv_show5);
         tv_show6 = (TextView) rootView.findViewById(R.id.tv_show6);
+        tv_title = rootView.findViewById(R.id.tv_title);
+        tv_title.setText("Producto transformado #"+indexPage);
         listTextView= new ArrayList<>();
         listTextView.add(tv_show1);
         listTextView.add(tv_show2);
@@ -156,7 +159,6 @@ public class SlideProcessFragment extends Fragment {
         b_photo_final=rootView.findViewById(R.id.b_photo_final);
         b_file=rootView.findViewById(R.id.b_file);
         b_photo=rootView.findViewById(R.id.b_photo);
-        b_getAddress=rootView.findViewById(R.id.b_getAddress);
         b_photo_final.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,13 +166,7 @@ public class SlideProcessFragment extends Fragment {
                 startActivityForResult(gallery, PICK_IMAGE);
             }
         });
-        b_getAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+
         b_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

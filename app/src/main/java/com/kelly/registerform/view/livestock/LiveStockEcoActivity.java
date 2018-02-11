@@ -17,7 +17,7 @@ public class LiveStockEcoActivity extends AppCompatActivity {
     private Context context=this;
     private String list;
     private MultiSpinner spinnerMulti1,spinnerMulti2,spinnerMulti3;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter adapter1,adapter2,adapter3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,17 +29,18 @@ public class LiveStockEcoActivity extends AppCompatActivity {
         b_next= findViewById(R.id.b_next);
         list = getIntent().getStringExtra("list");
         b_back= findViewById(R.id.b_back);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        adapter.add("Técnica #1");
-        adapter.add("Técnica #2");
-        adapter.add("Técnica #3");
+
+
+        adapter1 = ArrayAdapter.createFromResource(this, R.array.sa_driving_practice, android.R.layout.simple_spinner_item);
+        adapter2 = ArrayAdapter.createFromResource(this, R.array.sa_feeding_practice, android.R.layout.simple_spinner_item);
+        adapter3 = ArrayAdapter.createFromResource(this, R.array.sa_other_practice, android.R.layout.simple_spinner_item);
 
         spinnerMulti1 =findViewById(R.id.spinnerMulti1);
         spinnerMulti2 =findViewById(R.id.spinnerMulti2);
         spinnerMulti3 =findViewById(R.id.spinnerMulti3);
-        spinnerMulti1.setAdapter(adapter, false, onSelectedListener);
-        spinnerMulti2.setAdapter(adapter, false, onSelectedListener);
-        spinnerMulti3.setAdapter(adapter, false, onSelectedListener);
+        spinnerMulti1.setAdapter(adapter1, false, onSelectedListener);
+        spinnerMulti2.setAdapter(adapter2, false, onSelectedListener);
+        spinnerMulti3.setAdapter(adapter3, false, onSelectedListener);
     }
     private void setActions(){
         b_next.setOnClickListener(new View.OnClickListener() {

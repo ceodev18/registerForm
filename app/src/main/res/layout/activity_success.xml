@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kelly.registerform.view.partner.WelcomePartnerActivity">
+    <RelativeLayout
+        android:background="@color/colorBackgroundView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/ll_body"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:textColor="@color/colorGreenBar"
+                android:textAlignment="center"
+                android:text="Resultado de Registro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:textAlignment="center"
+                android:text="@string/s_date_phone"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@color/colorBackgroudDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorDetails"
+                    android:text="¡Felicitaciones! Su solicitud para ser socio de ANPE se ha guardado correctamente."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:text="@string/s_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:background="@color/colorBackgroudDetails"
+            android:layout_below="@+id/ll_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:padding="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom"
+                android:layout_margin="16dp"
+                android:background="@color/colorBlueLightButton"
+                android:textColor="@color/colorWhite"
+                android:id="@+id/b_next"
+                android:text="Ingresar un nuevo registro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
             <TextView
+                android:textColor="@color/colorGreenBar"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
@@ -36,6 +37,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <TextView
+            android:textStyle="bold"
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Estos son los productos agroecológicos que comercializas"
@@ -45,6 +47,12 @@
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="(Esto solo aparece si se ha ingresado previamente la sección de producción agroecológica)Indícanos como los comercializas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="Indícanos como los comercializas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
@@ -108,6 +116,7 @@
             <include layout="@layout/item_prod_agro"/>
         </LinearLayout>
         <TextView
+            android:textStyle="bold"
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Estos son los productos pecuarios (animales de crianza) que comercializas"
@@ -180,6 +189,7 @@
             <include layout="@layout/item_prod_agro"/>
         </LinearLayout>
         <TextView
+            android:textStyle="bold"
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Estos son los productos que transformas"
@@ -252,6 +262,7 @@
             <include layout="@layout/item_prod_trans"/>
         </LinearLayout>
         <TextView
+            android:textStyle="bold"
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Si eres un comprador y luego comercializas"

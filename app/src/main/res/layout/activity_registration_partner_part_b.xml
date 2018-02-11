@@ -147,8 +147,11 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>-->
         <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="10dp"
-            android:text="(*) Campo obligatorio"
+            android:text="(*) Campos obligatorio"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -12,6 +12,8 @@
     <color name="colorList">#F6F6F6</color>
     <color name="colorBackgroundView">#ECEDF0</color>
     <color name="colorTextView">#E6E6E6</color>
+    <color name="colorGreenBar">#008E52</color>
+    <color name="colorGreenDark">#008000</color>
 
 
 </resources>

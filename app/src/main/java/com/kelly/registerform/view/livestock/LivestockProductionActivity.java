@@ -89,31 +89,7 @@ public class LivestockProductionActivity extends AppCompatActivity {
             }
         });
     }
-    //-----------------------------------------------------------------------------
-    // Here's what the app should do to remove a view from the ViewPager.
-    /*public void removeView (View defunctPage)
-    {
-        int pageIndex = pagerAdapter.removeView (pager, defunctPage);
-        // You might want to choose what page to display, if the current page was "defunctPage".
-        if (pageIndex == pagerAdapter.getCount())
-            pageIndex--;
-        pager.setCurrentItem (pageIndex);
-    }
 
-    //-----------------------------------------------------------------------------
-    // Here's what the app should do to get the currently displayed page.
-    public View getCurrentPage ()
-    {
-        return pagerAdapter.getView (pager.getCurrentItem());
-    }
-
-    //-----------------------------------------------------------------------------
-    // Here's what the app should do to set the currently displayed page.  "pageToShow" must
-    // currently be in the adapter, or this will crash.
-    public void setCurrentPage (View pageToShow)
-    {
-        pager.setCurrentItem (pagerAdapter.getItemPosition (pageToShow), true);
-    }*/
     @Override
     public void onBackPressed() {
 

@@ -17,10 +17,11 @@ import com.kelly.registerform.example.ScreenSlidePageFragment;
 public class ProductionActivity extends AppCompatActivity {
     private Button b_next,b_back;
     private String listAcvities = null;
-    private ViewPager pager=null;
+    public ViewPager pager=null;
     private Context context=this;
     private Spinner s_numberFarm;
     private MyFragmentPagerAdapter adapter=null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,8 +126,10 @@ public class ProductionActivity extends AppCompatActivity {
     public void updateViews(int val){
         System.out.println(adapter.getCount()+"");
         for (int i=0;i<val-1;i++){
-            adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
-                    .getColor(R.color.colorWhite)));
+            ScreenSlidePageFragment screenSlidePageFragment=ScreenSlidePageFragment.newInstance(getResources()
+                    .getColor(R.color.colorWhite));
+            screenSlidePageFragment.indexPage=i+1;
+            adapter.addFragment(screenSlidePageFragment);
             System.out.println("Agregado");
         }
         System.out.println(adapter.getCount()+"");

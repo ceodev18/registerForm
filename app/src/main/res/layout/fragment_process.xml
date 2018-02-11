@@ -8,12 +8,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/tv_title"
             android:padding="5dp"
             android:layout_margin="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:text="Producto transformado #1"
+            android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <TextView
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:text="¿Qué tipo de producto transformas o procesas?"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:background="@drawable/background_spinner"
+            android:padding="5dp"
+            android:entries="@array/sa_type_prod_trans"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
         <TextView
             android:padding="5dp"
             android:layout_margin="10dp"
@@ -24,11 +41,41 @@
         <Spinner
             android:background="@drawable/background_spinner"
             android:padding="5dp"
-            android:entries="@array/sa_empty"
+            android:entries="@array/sa_prod_trans"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </Spinner>
+        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_textview"
+            android:layout_margin="10dp">
+            <EditText
+
+                android:layout_margin="10dp"
+                android:background="#00000000"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ubicación del domicilio - Coordenada de Latitud"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_textview"
+            android:layout_margin="10dp">
+            <EditText
+
+                android:layout_margin="10dp"
+                android:background="#00000000"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ubicación del domicilio - Coordenada de Longitud"/>
+        </android.support.design.widget.TextInputLayout>
         <Button
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:padding="5dp"
@@ -41,27 +88,10 @@
             android:layout_height="wrap_content" />
         <TextView
             android:padding="5dp"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="Se ha registrado la foto correctamente!"
-            android:textStyle="italic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:padding="5dp"
-            android:id="@+id/b_getAddress"
-            android:layout_margin="5dp"
-            android:text="Click aquí para obtener la Ubicación de la planta"
-            android:textColor="@color/colorWhite"
-            android:background="@color/colorGreenButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:padding="5dp"
-            android:layout_margin="5dp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:text="Se ha registrado la ubicación correctamente!"
             android:textStyle="italic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -254,7 +284,7 @@
             android:textColorHint="@color/colorPrimary"
             android:background="@drawable/background_textview"
             android:padding="5dp"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
@@ -268,7 +298,7 @@
             android:textColorHint="@color/colorPrimary"
             android:background="@drawable/background_textview"
             android:padding="5dp"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
@@ -282,7 +312,7 @@
             android:textColorHint="@color/colorPrimary"
             android:background="@drawable/background_textview"
             android:padding="5dp"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
@@ -296,7 +326,7 @@
             android:textColorHint="@color/colorPrimary"
             android:background="@drawable/background_textview"
             android:padding="5dp"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText

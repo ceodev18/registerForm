@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_margin="16dp"
+                android:layout_margin="10dp"
                 android:textColor="@color/colorWhite"
                 android:background="@color/colorDetails"
                 android:id="@+id/tv_list_details"

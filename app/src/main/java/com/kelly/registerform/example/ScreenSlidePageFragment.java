@@ -9,15 +9,21 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kelly.registerform.R;
 import com.kelly.registerform.view.MapsActivity;
+import com.kelly.registerform.view.farming.ProductionActivity;
+
+import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -36,7 +42,12 @@ public class ScreenSlidePageFragment extends Fragment {
     private int VALOR_RETORNO = 1;
     private int color;
     private int index;
-
+    public int indexPage=1;
+    private LinearLayout ll_1,ll_2;
+    private TextView tv_show1,tv_show2;
+    private ArrayList<TextView> textViewArrayList;
+    private ArrayList<LinearLayout>linearLayoutArrayList;
+    private ArrayList<Boolean>listState;
     /**
      * Instances a new fragment with a background color and an index page.
      *
@@ -78,29 +89,55 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Button b_getAddress,b_draw,b_file;
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
+        Button b_file;
+        TextView tv_title;
+        final ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.page_farm1, container, false);
 
         // Show the current page index in the view
         //TextView tvIndex = (TextView) rootView.findViewById(R.id.tvIndex);
         //tvIndex.setText(String.valueOf(this.index));
-        b_getAddress = rootView.findViewById(R.id.b_getAddress);
-        b_draw = rootView.findViewById(R.id.b_draw);
+        textViewArrayList =new ArrayList<>();
+        linearLayoutArrayList=new ArrayList<>();
+        listState = new ArrayList<>();
+
+        tv_show1 = rootView.findViewById(R.id.tv_show1);
+        tv_show2 = rootView.findViewById(R.id.tv_show2);
+        textViewArrayList.add(tv_show1);
+        textViewArrayList.add(tv_show2);
+        listState.add(false);
+        listState.add(false);
+
+        ll_1 = rootView.findViewById(R.id.ll_1);
+        ll_2= rootView.findViewById(R.id.ll_2);
+        linearLayoutArrayList.add(ll_1);
+        linearLayoutArrayList.add(ll_2);
+
         b_file = rootView.findViewById(R.id.b_file);
-        b_draw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "Testing", Toast.LENGTH_SHORT).show();
-            }
-        });
-        b_getAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+        tv_title= rootView.findViewById(R.id.tv_title);
+        tv_title.setText("CHACRA/PARCELA #"+indexPage);
+
+        for (int i=0;i<textViewArrayList.size();i++){
+            final int index=i;
+            textViewArrayList.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listState.get(index)==false){
+
+                        //ViewPager.LayoutParams layoutParams = (ViewPager.LayoutParams) new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1100);//(ViewGroup.MarginLayoutParams) rootView.getLayoutParams();
+                        //RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rootView.getLayoutParams();
+                        //rootView.setLayoutParams(layoutParams);
+
+                        linearLayoutArrayList.get(index).setVisibility(View.VISIBLE);
+                        listState.set(index,true);
+                    }else{
+                        linearLayoutArrayList.get(index).setVisibility(View.GONE);
+                        listState.set(index,false);
+                    }
+                }
+            });
+        }
+
         b_file.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,5 +163,8 @@ public class ScreenSlidePageFragment extends Fragment {
             Uri uri = data.getData(); //obtener el uri content
 
         }
+    }
+    private void setActions(){
+
     }
 }

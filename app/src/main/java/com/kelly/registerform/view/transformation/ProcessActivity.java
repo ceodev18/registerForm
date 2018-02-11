@@ -133,8 +133,10 @@ public class ProcessActivity extends AppCompatActivity {
     public void updateViews(int val){
         System.out.println(adapter.getCount()+"");
         for (int i=0;i<val-1;i++){
-            adapter.addFragment(SlideProcessFragment.newInstance(getResources()
-                    .getColor(R.color.colorWhite)));
+            SlideProcessFragment slideProcessFragment = SlideProcessFragment.newInstance(getResources()
+                    .getColor(R.color.colorWhite));
+            slideProcessFragment.indexPage=i+1;
+            adapter.addFragment(slideProcessFragment);
             System.out.println("Agregado");
         }
         System.out.println(adapter.getCount()+"");

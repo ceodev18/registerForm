@@ -95,7 +95,7 @@
     </string-array>
     <string-array name="sa_type_cert_agro">
         <item>Elija</item>
-        <item>Sistema de  Garantía Participativa</item>
+        <item>Sistema de  Garantía Participativa (SGP)</item>
         <item>Empresa de terceros</item>
     </string-array>
     <string-array name="sa_total_animals">
@@ -183,4 +183,147 @@
         <item>Femenino</item>
         <item>Masculino</item>
     </string-array>
+    <string name="s_date_phone">
+        Fecha de registro de solicitud para ser socio de ANPE: <b>2018-02-09</b>
+    </string>
+    <string name="s_code">
+        Su código de socio sería en caso de ser aceptado: <b>LI1700001</b>
+    </string>
+    <string-array name="sa_type_animal">
+        <item>Elija</item>
+        <item>Vacuno</item>
+        <item>Porcino</item>
+        <item>Ovino</item>
+        <item>Aves</item>
+        <item>Psicicultura</item>
+        <item>Equino</item>
+        <item>Cobayo</item>
+        <item>Cunicultura</item>
+        <item>Apicultura</item>
+    </string-array>
+    <string-array name="sa_animal">
+        <item>Elija</item>
+        <item>Criollo</item>
+        <item>Bronswuis</item>
+        <item>Holstein</item>
+    </string-array>
+    <string-array name="sa_type_food">
+        <item>Elija</item>
+        <item>Pastura natural</item>
+        <item>Alfalfa</item>
+        <item>Concentrado natural</item>
+        <item>Concentrado industrial</item>
+    </string-array>
+    <string-array name="sa_driving_practice">
+        <item>Natural</item>
+        <item>Omeopático</item>
+        <item>Vacunas</item>
+        <item>Cuarentena</item>
+        <item>Uso de cal</item>
+        <item>Desinfección con fuego/candela</item>
+    </string-array>
+    <string-array name="sa_feeding_practice">
+        <item>Compostaje de estiércol</item>
+        <item>Hoyos para desechos inorgánicos</item>
+    </string-array>
+    <string-array name="sa_other_practice">
+        <item>Pastoreo extensivo</item>
+        <item>Rotación de pastoreo</item>
+    </string-array>
+    <string-array name="sa_type_prod_trans">
+        <item>Elija</item>
+        <item>Néctar</item>
+        <item>Mermelada</item>
+        <item>Derivado de la caña de azúcar</item>
+        <item>Panadería y cafetería</item>
+        <item>Bebidas y Licor</item>
+        <item>Aceites</item>
+        <item>Harinas</item>
+        <item>Lácteos</item>
+        <item>Condimentos y especias</item>
+        <item>Dulces y Snaks</item>
+        <item>Suplementos alimenticios</item>
+        <item>Carnes y Pescados</item>
+        <item>Fibra / Lana</item>
+    </string-array>
+    <string-array name="sa_prod_trans">
+        <item>Elija</item>
+        <item>manzana</item>
+        <item>durazno</item>
+        <item>camu camu</item>
+        <item>granadilla</item>
+        <item>aguaymanto</item>
+        <item>Chirimoya</item>
+    </string-array>
+    <string-array name="sa_conserv_pract">
+        <item>Bocashi</item>
+        <item>Compost</item>
+        <item>Humus de lombriz</item>
+        <item>Biol</item>
+        <item>Rotación de cultivos</item>
+        <item>Asociación de cultivos</item>
+        <item>Terrazas</item>
+        <item>Andenes o bancales</item>
+        <item>Siembras en curvas de nivel</item>
+        <item>Cobertura viva; siembra de leguminosas para la fijación biológica de nitrógeno</item>
+        <item>Cobertura Muerta: incorporación de rastrojos, hojarascas</item>
+        <item>Majadeo (Corral de animales en campo para abonamiento directo)</item>
+    </string-array>
+    <string-array name="sa_driv_pract">
+        <item>Bocashi</item>
+        <item>Compost</item>
+        <item>Humus de lombriz</item>
+        <item>Biol</item>
+        <item>Rotación de cultivos</item>
+        <item>Asociación de cultivos</item>
+        <item>Terrazas</item>
+        <item>Andenes o bancales</item>
+        <item>Siembras en curvas de nivel</item>
+        <item>Cobertura viva; siembra de leguminosas para la fijación biológica de nitrógeno</item>
+        <item>Cobertura Muerta: incorporación de rastrojos, hojarascas</item>
+        <item>Majadeo (Corral de animales en campo para abonamiento directo)</item>
+    </string-array>
+    <string-array name="sa_other_pract">
+        <item>Hoyos para desechos inorgánicos</item>
+        <item>Sobre trazo de curvas a nivel y/o desnivel para la construcción de zanjas o acequias, o para la plantación</item>
+        <item>Nivel “A”</item>
+    </string-array>
+    <string-array name="sa_bio">
+        <item>Papas nativas</item>
+        <item>Leguminosas</item>
+        <item>Especies forestales</item>
+        <item>Frutales</item>
+        <item>Granos andinos</item>
+        <item>Plantas medicinales</item>
+        <item>Hortalizas</item>
+        <item>Crianza de animales menores y mayores</item>
+    </string-array>
+    <string-array name="sa_group_farm">
+        <item>Elija</item>
+        <item>Raíces y tuberosas</item>
+        <item>Cereales</item>
+        <item>Granos andinos</item>
+        <item>Leguminosas o legumbres</item>
+        <item>Frutas</item>
+        <item>Hortalizas</item>
+        <item>Nueces y semillas</item>
+        <item>Frutos deshidratados</item>
+        <item>Plantas ornamentales</item>
+        <item>Plantas forestales</item>
+        <item>Flores</item>
+    </string-array>
+    <string-array name="sa_what_farm">
+        <item>Elija</item>
+        <item>Papa nativa </item>
+        <item>Papa comercial</item>
+        <item>Oca</item>
+        <item>Olluco</item>
+        <item>Mashua</item>
+        <item>Maca</item>
+        <item>Yacon</item>
+        <item>Arracacha</item>
+        <item>Yuca</item>
+        <item>Pituca</item>
+        <item>Sacha papa</item>
+    </string-array>>
 </resources>

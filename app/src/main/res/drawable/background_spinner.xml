@@ -3,7 +3,7 @@
     <item><layer-list>
         <item><shape>
             <!--8a8a8a -->
-            <stroke android:width="1dp" android:color="@color/colorPrimary" />
+            <stroke android:width="1dp" android:color="@color/colorGreenBar" />
             <padding android:bottom="5dp" android:left="5dp" android:right="5dp" android:top="5dp" />
         </shape></item>
         <item ><bitmap android:gravity="right|center" android:src="@drawable/ic_arrow_drop_down_black_24dp" />
