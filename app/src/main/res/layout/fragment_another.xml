@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_textview"
+            android:layout_margin="5dp">
+            <EditText
+                android:padding="5dp"
+                android:background="#00000000"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ubicación del domicilio - Coordenada de Latitud"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_textview"
+            android:layout_margin="5dp">
+            <EditText
+                android:padding="5dp"
+                android:background="#00000000"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ubicación del domicilio - Coordenada de Longitud"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:id="@+id/b_file"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="5dp"
+            android:background="@color/colorBlueLightButton"
+            android:text="Click aquí para subir un documento relacionado a la chacra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Se ha registrado el documento correctamente!"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_textview"
+            android:layout_margin="5dp">
+            <EditText
+                android:padding="5dp"
+                android:background="#00000000"
+                android:inputType="phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre de la chacra/parcela (*)"/>
+        </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Tipo de propiedad (*)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:background="@drawable/background_spinner"
+            android:entries="@array/sa_type_house"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+
+        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_textview"
+            android:layout_margin="5dp">
+            <EditText
+                android:padding="5dp"
+                android:background="#00000000"
+                android:inputType="phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="La chacra/parcela mide en su totalidad (*)"/>
+        </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Elije el tipo de medida de la chacra (*)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:background="@drawable/background_spinner"
+            android:entries="@array/sa_type_size"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+        <TextView
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="5dp"
+            android:text="La chacra mide 100 metros cuadrados"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="5dp"
+            android:text="La chacra mide 1 hectárea"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="5dp"
+            android:text="La chacra mide 20 yugadas"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para ingresar el insumo utilizado #1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:id="@+id/ll_1"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_farming_prod"/>
+        </LinearLayout>
+        <TextView
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show2"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para ingresar el insumo utilizado #2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_2"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_insumo"/>
+        </LinearLayout>
+        <TextView
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show3"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para ingresar el insumo utilizado #3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/ll_3"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_insumo"/>
+        </LinearLayout>
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Presentación y producción semanal"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Indícanos como es la presentación de tu producto"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:padding="12dp"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show4"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para agregar la presentación #1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:id="@+id/ll_4"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_presentacion"/>
+        </LinearLayout>
+        <TextView
+            android:padding="12dp"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show5"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para agregar la presentación #2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:id="@+id/ll_5"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_presentacion"/>
+        </LinearLayout>
+        <TextView
+            android:padding="12dp"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:background="@color/colorTextView"
+            android:id="@+id/tv_show6"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorDetails"
+            android:text="Clic aquí para agregar la presentación #3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:id="@+id/ll_6"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_presentacion"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

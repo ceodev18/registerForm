@@ -3,34 +3,6 @@
     <string name="b_next">Continuar</string>
     <string name="b_next_register">Continuar con el Registro</string>
     <string name="b_back">Volver</string>
-    <string-array name="regions_array">
-        <item>Elija</item>
-        <item>Amazonas</item>
-        <item>Ancash</item>
-        <item>Apurimac</item>
-        <item>Arequipa</item>
-        <item>Ayacucho</item>
-        <item>Cajamarca</item>
-        <item>Callao</item>
-        <item>Cusco</item>
-        <item>Huancavelica</item>
-        <item>Huanuco</item>
-        <item>Ica</item>
-        <item>Junin</item>
-        <item>La Libertad</item>
-        <item>Lambayeque</item>
-        <item>Lima</item>
-        <item>Loreto</item>
-        <item>Madre De Dios</item>
-        <item>Moquegua</item>
-        <item>Pasco</item>
-        <item>Piura</item>
-        <item>Puno</item>
-        <item>San Martin</item>
-        <item>Tacna</item>
-        <item>Tumbes</item>
-        <item>Ucayali</item>
-    </string-array>
     <string name="s_wPartner_small">A continuación se le solicitará nos indique qué actividades realiza, según esta información se le mostrarán los formularios adecuados.</string>
     <string name="s_wPartner_big">"Bienvenidos al registro de socios(as)</string>
     <string name="s_prod_agroecologica">Producción Agroecológica</string>
@@ -325,5 +297,6 @@
         <item>Yuca</item>
         <item>Pituca</item>
         <item>Sacha papa</item>
-    </string-array>>
+    </string-array>
+    >
 </resources>

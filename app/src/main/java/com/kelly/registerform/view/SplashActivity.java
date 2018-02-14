@@ -7,9 +7,23 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.kelly.registerform.R;
+import com.kelly.registerform.model.Book;
+import com.kelly.registerform.utils.SaveDataBase;
+import com.orm.SugarContext;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,6 +38,10 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+        SugarContext.init(this);
+        Book.findById(Book.class, (long) 1);
+        SaveDataBase saveDataBase = new SaveDataBase(context);
+        saveDataBase.getDepartamentos();
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
             /*numPermissions = PermissionMethods.checkPermissions(this);
             if(numPermissions == 0){

@@ -29,4 +29,7 @@ dependencies {
     implementation 'com.thomashaertel:multispinner:0.1.1@aar'
     implementation 'com.google.android.gms:play-services-maps:10.0.1'
     implementation 'com.google.android.gms:play-services-location:10.0.1'
+    implementation  'com.android.volley:volley:1.1.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation  'com.github.satyan:sugar:1.5'
 }

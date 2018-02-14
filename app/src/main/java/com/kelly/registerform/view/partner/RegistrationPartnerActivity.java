@@ -25,7 +25,11 @@ import android.widget.Toast;
 
 import com.kelly.registerform.R;
 import com.kelly.registerform.example.MapaGoogle;
+import com.kelly.registerform.model.Departamento;
 import com.kelly.registerform.view.MapsActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistrationPartnerActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
@@ -38,10 +42,12 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
     private LocationManager locationManager;
     private Uri imageUri;
     private ImageView foto_gallery;
+    private ArrayList<String>arrayListDeparment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_partner);
+        createArrays();
         setElements();
         setActions();
     }
@@ -61,10 +67,15 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         //gender_spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner));
         regions_spinner=(Spinner)findViewById(R.id.regions_spinner);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                arrayListDeparment);
+        regions_spinner.setAdapter(spinnerArrayAdapter);
+
+        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.regions_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        regions_spinner.setAdapter(adapter);
+        regions_spinner.setAdapter(adapter);*/
     }
     private void setActions(){
         b_next.setOnClickListener(new View.OnClickListener() {
@@ -121,5 +132,12 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
             }
         }
     }
+    public void createArrays(){
+      List<Departamento> departamentoList = Departamento.listAll(Departamento.class);
+        arrayListDeparment =new ArrayList<>();
+      for (int i=0;i<departamentoList.size();i++){
+          arrayListDeparment.add(departamentoList.get(i).getName());
+      }
 
+    }
 }
