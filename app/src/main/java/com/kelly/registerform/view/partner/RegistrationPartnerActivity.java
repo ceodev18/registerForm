@@ -1,21 +1,18 @@
 package com.kelly.registerform.view.partner;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,9 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kelly.registerform.R;
-import com.kelly.registerform.example.MapaGoogle;
-import com.kelly.registerform.model.Departamento;
-import com.kelly.registerform.view.MapsActivity;
+import com.kelly.registerform.dataAccess.ProvinceDA;
+import com.kelly.registerform.model.ubigeo.Departamento;
+import com.kelly.registerform.model.ubigeo.Provincia;
+import com.orm.query.Condition;
+import com.orm.query.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     private Button b_next,b_dni,b_photo;
     private Context context;
-    private Spinner gender_spinner,regions_spinner;
+    private Spinner gender_spinner,regions_spinner,province_spinner;
     private String lattitude,longitude;
     private TextView tv_dni,tv_photo;
     private LocationManager locationManager;
@@ -57,7 +56,6 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         b_dni= (Button)findViewById(R.id.b_dni);
         b_photo= (Button)findViewById(R.id.b_photo);
 
-
         tv_dni = findViewById(R.id.tv_dni);
         tv_photo = findViewById(R.id.tv_photo);
 
@@ -66,16 +64,12 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         //String[] arraySpinner = new String[] {"Elija", "Femenino", "Masculino"};
         //gender_spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraySpinner));
         regions_spinner=(Spinner)findViewById(R.id.regions_spinner);
-
+        province_spinner=findViewById(R.id.province_spinner);
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayListDeparment);
         regions_spinner.setAdapter(spinnerArrayAdapter);
 
-        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.regions_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        regions_spinner.setAdapter(adapter);*/
     }
     private void setActions(){
         b_next.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +92,33 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 startActivityForResult(gallery, PICK_IMAGE);
+            }
+        });
+        regions_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String deparment =  regions_spinner.getSelectedItem().toString();
+                //TODO make select in order to get all provionces belong to deparment
+                List<Departamento> departamentoList = Departamento.findWithQuery(Departamento.class,
+                        "Select * from Departamento where name = ?", deparment);
+                fillProvinceList(departamentoList.get(0));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        province_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String data =  regions_spinner.getSelectedItem().toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }
@@ -136,8 +157,23 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
       List<Departamento> departamentoList = Departamento.listAll(Departamento.class);
         arrayListDeparment =new ArrayList<>();
       for (int i=0;i<departamentoList.size();i++){
+          System.out.println(departamentoList.get(i).getName());
           arrayListDeparment.add(departamentoList.get(i).getName());
       }
 
+    }
+    private void fillProvinceList(Departamento departamento){
+        ProvinceDA provinceDA = new ProvinceDA();
+        ArrayList<Provincia>list=provinceDA.getDepartamentos(departamento.getId_departamento());
+        System.out.println(list.size());
+        ArrayList<String> nameList=new ArrayList<>();
+        for (Provincia provincia : list) {
+            nameList.add(provincia.getName());
+            System.out.println(provincia.getName());
+        }
+        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                nameList);
+        province_spinner.setAdapter(spinnerArrayAdapter);
     }
 }

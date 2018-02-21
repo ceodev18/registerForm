@@ -1,24 +1,10 @@
 package com.kelly.registerform.utils;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kelly.registerform.BuildConfig;
-import com.kelly.registerform.model.Book;
-import com.kelly.registerform.model.Departamento;
-import com.orm.SugarContext;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by KELLY on 13/02/2018.

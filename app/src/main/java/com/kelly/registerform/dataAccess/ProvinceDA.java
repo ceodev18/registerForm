@@ -9,36 +9,39 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kelly.registerform.model.ubigeo.Departamento;
+import com.kelly.registerform.model.ubigeo.Provincia;
 import com.kelly.registerform.utils.SaveDataBase;
 import com.kelly.registerform.utils.Urls;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import static com.kelly.registerform.BuildConfig.BASE_URL;
 
 /**
- * Created by KELLY on 20/02/2018.
+ * Created by bethzabe on 21/02/2018.
  */
 
-public class DepartmentDA {
-    public static List<Departamento> departamentoList=null;
-    public static final RequestQueue queue=SaveDataBase.queue;
-    public DepartmentDA(Context context){
-        departamentoList = Departamento.listAll(Departamento.class);
+public class ProvinceDA {
+    public   ArrayList<Provincia> provinciaList;
+    public static RequestQueue queue= SaveDataBase.queue;
+    public ProvinceDA(){
+        provinciaList=new ArrayList<>();
     }
-    public static void getDepartaments(){
-        //String url =BASE_URL+ Urls.GET_DEPARMENTS;
-        String url ="http://www.demodataexe.com/anpe/webservice/lista_ubigeo.php?tipo=DEPT&token=lpsk.21568$lsjANPIO02";
+    public  ArrayList getDepartamentos(int id){
+        //String url =BASE_URL+ Urls.GET_PROVINCES+id+Urls.TOKEN;
+        String url ="http://www.demodataexe.com/anpe/webservice/lista_ubigeo.php?tipo=PROV&idubigeosuperior=150000&token=lpsk.21568$lsjANPIO02";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObj = new JSONObject(response);
+                            System.out.println(jsonObj);
                             JSONObject jsonObj2 = (JSONObject) jsonObj.get("departamentos");
                             Iterator<?> keys = jsonObj2.keys();
                             while( keys.hasNext() ) {
@@ -48,11 +51,7 @@ public class DepartmentDA {
                                     JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
                                     int  id = (int)jsonDepartment.get("id");
                                     String name =(String)jsonDepartment.get("ubigeo");
-                                    Departamento departamento = new Departamento(id, name);
-                                    //
-                                    if (!stateDeparment(id))departamento.save();
-                                    //creamos un departamento y lo guardamos
-                                    //System.out.println(jsonObj2.get(key));
+                                    provinciaList.add(new Provincia(id,name));
                                 }
                             }
                         } catch (JSONException e) {
@@ -67,12 +66,7 @@ public class DepartmentDA {
             }
         });
         queue.add(stringRequest);
+        return provinciaList;
     }
-    public static boolean stateDeparment(int id){
-        if (departamentoList.size()==0 || departamentoList==null)return false;
-        for (int i=0;i<departamentoList.size();i++){
-            if(id==departamentoList.get(i).getId_departamento())return true;
-        }
-        return false;
-    }
+
 }

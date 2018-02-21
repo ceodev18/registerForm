@@ -1,4 +1,4 @@
-package com.kelly.registerform.model;
+package com.kelly.registerform.model.ubigeo;
 
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
