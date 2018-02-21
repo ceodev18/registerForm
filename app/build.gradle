@@ -11,7 +11,15 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        def baseUrl
+       debug{
+           baseUrl = "http://www.demodataexe.com/anpe/webservice"
+           buildConfigField "String", "BASE_URL", "\"$baseUrl\""
+           minifyEnabled false
+       }
         release {
+            baseUrl = "http://www.demodataexe.com/anpe/webservice"
+            buildConfigField "String", "BASE_URL", "\"$baseUrl\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

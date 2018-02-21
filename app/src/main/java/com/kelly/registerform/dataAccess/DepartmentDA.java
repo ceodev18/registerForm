@@ -1,4 +1,4 @@
-package com.kelly.registerform.utils;
+package com.kelly.registerform.dataAccess;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,11 +8,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.kelly.registerform.BuildConfig;
-import com.kelly.registerform.model.Book;
 import com.kelly.registerform.model.Departamento;
-import com.orm.SugarContext;
+import com.kelly.registerform.utils.SaveDataBase;
+import com.kelly.registerform.utils.Urls;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,23 +18,21 @@ import org.json.JSONObject;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.kelly.registerform.BuildConfig.BASE_URL;
+
 /**
- * Created by KELLY on 13/02/2018.
+ * Created by KELLY on 20/02/2018.
  */
 
-public class SaveDataBase {
-    private Context context;
-    public  static RequestQueue queue;
-
-    private static final String BASE_URL = BuildConfig.BASE_URL;
-    public SaveDataBase(Context context){
-        this.context=context;
-        queue = Volley.newRequestQueue(this.context);
-
+public class DepartmentDA {
+    public static List<Departamento> departamentoList;
+    public static final RequestQueue queue=SaveDataBase.queue;
+    public DepartmentDA(Context context){
+        departamentoList = Departamento.listAll(Departamento.class);
     }
-    /*public static void getDepartamentos(){
-        String url =BASE_URL+Urls.GET_DEPARMENTS;
-        //String url ="http://www.demodataexe.com/anpe/webservice/lista_ubigeo.php?tipo=DEPT";
+    public static void getDepartaments(){
+        //String url =BASE_URL+ Urls.GET_DEPARMENTS;
+        String url ="http://www.demodataexe.com/anpe/webservice/lista_ubigeo.php?tipo=DEPT";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -71,12 +67,12 @@ public class SaveDataBase {
             }
         });
         queue.add(stringRequest);
-    }*/
-    /*public static boolean stateDeparment(int id){
+    }
+    public static boolean stateDeparment(int id){
         if (departamentoList.size()==0)return true;
         for (int i=0;i<departamentoList.size();i++){
             if(id==departamentoList.get(i).getId_departamento())return true;
         }
         return false;
-    }*/
+    }
 }

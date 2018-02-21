@@ -16,6 +16,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kelly.registerform.R;
+import com.kelly.registerform.controllers.DeparmentController;
+import com.kelly.registerform.dataAccess.DepartmentDA;
 import com.kelly.registerform.model.Book;
 import com.kelly.registerform.utils.SaveDataBase;
 import com.orm.SugarContext;
@@ -39,9 +41,9 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         SugarContext.init(this);
-        Book.findById(Book.class, (long) 1);
         SaveDataBase saveDataBase = new SaveDataBase(context);
-        saveDataBase.getDepartamentos();
+        reviewDatabase();
+        //saveDataBase.getDepartamentos();
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
             /*numPermissions = PermissionMethods.checkPermissions(this);
             if(numPermissions == 0){
@@ -71,5 +73,9 @@ public class SplashActivity extends AppCompatActivity {
         // Simulate a long loading process on application startup.
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_TIME_OUT);
+    }
+    private void reviewDatabase(){
+        DeparmentController deparmentController = new DeparmentController(context);
+        deparmentController.getDepartment();
     }
 }

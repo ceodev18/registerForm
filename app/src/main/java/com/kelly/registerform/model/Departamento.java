@@ -1,12 +1,14 @@
 package com.kelly.registerform.model;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
 
 /**
  * Created by KELLY on 13/02/2018.
  */
 
 public class Departamento extends SugarRecord  {
+    @Unique
     private int id_departamento;
     private  String name;
     public String getName() {
