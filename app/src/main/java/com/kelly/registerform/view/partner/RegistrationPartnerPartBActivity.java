@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.BoringLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,17 +21,27 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.kelly.registerform.BuildConfig;
 import com.kelly.registerform.R;
 import com.kelly.registerform.model.ubigeo.Departamento;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+
+import static com.google.gson.internal.bind.TypeAdapters.URL;
 
 public class RegistrationPartnerPartBActivity extends AppCompatActivity {
     private Spinner s_number_children;
@@ -38,6 +51,16 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
     private Spinner s_marital;
     private ArrayList<String> arrayListMarital;
     private ArrayList<Integer>idMarital;
+    private int estado_civil;
+    private int tope=2;
+    private EditText et_nombre,et_ap_conyuge,et_am_conyuge;
+    private ArrayList<Boolean> checkList=new ArrayList<>();
+    private ArrayList<CheckBox> checkBoxes=new ArrayList<>();
+    private ArrayList<View>listaVista;
+    private ArrayList<EditText>listaNombres,listaCumple;
+    private ArrayList<CheckBox>listaChecks;
+    private View v1,v2,v3,v4,v5,v6,v7,v8,v9,v10;
+    //private int[]recursos=new int[]
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +75,63 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
         b_next = (Button)findViewById(R.id.b_next);
         b_back = (Button)findViewById(R.id.b_back);
         s_marital = findViewById(R.id.s_marital);
+        et_nombre= findViewById(R.id.et_nombre);
+        et_ap_conyuge= findViewById(R.id.et_ap_conyuge);
+        et_am_conyuge= findViewById(R.id.et_am_conyuge);
         fillMarital();
+        listaVista=new ArrayList<>();
+        listaNombres=new ArrayList<>();
+        listaCumple=new ArrayList<>();
+        listaChecks=new ArrayList<>();
+
+        for (int i=0;i<10;i++)checkList.add(false);
+        fillListaView();
+
+
+    }
+    private void fillListaView(){
+        View v1 =new View(context);
+        v1 =findViewById(R.id.child1);
+        listaVista.add(v1);
+        View v2 =new View(context);
+        v2 =findViewById(R.id.child2);
+        listaVista.add(v2);
+        View v3 =new View(context);
+        v3 =findViewById(R.id.child3);
+        listaVista.add(v3);
+        View v4 =new View(context);
+        v4 =findViewById(R.id.child4);
+        listaVista.add(v4);
+        View v5 =new View(context);
+        v5 =findViewById(R.id.child5);
+        listaVista.add(v5);
+        View v6 =new View(context);
+        v6 =findViewById(R.id.child6);
+        listaVista.add(v6);
+        View v7 =new View(context);
+        v7 =findViewById(R.id.child7);
+        listaVista.add(v7);
+        View v8 =new View(context);
+        v8 =findViewById(R.id.child8);
+        listaVista.add(v8);
+        View v9 =new View(context);
+        v9 =findViewById(R.id.child9);
+        listaVista.add(v9);
+        View v10 =new View(context);
+        v10 =findViewById(R.id.child10);
+        listaVista.add(v10);
+        for(int i=0;i<listaVista.size();i++){
+            EditText et_nombre_hijo=listaVista.get(i).findViewById(R.id.et_nombre_hijo);
+            et_nombre_hijo.setHint("Nombre y Apellido del hijo #"+(i+1));
+            listaNombres.add(et_nombre_hijo);
+            EditText et_birthday_hijo=listaVista.get(i).findViewById(R.id.et_birthday_hijo);
+            et_birthday_hijo.setHint("Fecha de Nacimiento del hijo #"+(i+1));
+            listaCumple.add(et_birthday_hijo);
+            CheckBox cb_hijo=listaVista.get(i).findViewById(R.id.cb_hijo);
+            listaChecks.add(cb_hijo);
+
+        }
+
     }
     private void setActions(){
         b_back.setOnClickListener(new View.OnClickListener() {
@@ -64,16 +143,30 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
         s_number_children.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(!((String)adapterView.getItemAtPosition(i)).equals("Elija")){
-                    int val = Integer.parseInt((String)adapterView.getItemAtPosition(i));
-                    if(ll_children.getChildCount()>0)ll_children.removeAllViews();
-                    for (int index=0;index<val;index++){
-                        View dynamicView = LayoutInflater.from(context).inflate(R.layout.item_child, null, false);
-                        ll_children.addView(dynamicView);
-                    }
-                }else{
-                    if(ll_children.getChildCount()>0)ll_children.removeAllViews();
-                }
+                 if(i>0){
+                     //1,2,3....
+                     int val =Integer.parseInt(s_number_children.getSelectedItem().toString());
+                     tope=val;
+                     for(int index=2;index<10;index++){
+                         listaVista.get(index).setVisibility(View.GONE);
+                     }
+                     for(int index=0;index<val;index++){
+                         listaVista.get(index).setVisibility(View.VISIBLE);
+                     }
+
+                 }
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        s_marital.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                estado_civil=idMarital.get(i);
             }
 
 
@@ -85,6 +178,55 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int counter=0;
+                JsonObject jsonObjectChildren = new JsonObject();
+                JsonArray json = new JsonArray();
+                String total="";
+                for(int i=0;i<tope;i++){
+                    String raw;
+                    if(listaChecks.get(i).isChecked()){
+                        String name =listaNombres.get(i).getText().toString();
+                        String cumple =listaCumple.get(i).getText().toString();
+                        raw="\"hijo\":{\"nombres_apellidos\":\""+name+"\",\"fecha_nacimiento\":\""+cumple+"\",\"es_dependiente\":\"Si\"}";
+                    }else{
+                        String name =listaNombres.get(i).getText().toString();
+                        String cumple =listaCumple.get(i).getText().toString();
+                        raw="\"hijo\":{\"nombres_apellidos\":\""+name+"\",\"fecha_nacimiento\":\""+cumple+"\",\"es_dependiente\":\"No\"}";
+                    }
+                    if(i==tope-1)total +=raw;
+                    else total +=raw+",";
+                }
+
+
+
+
+
+                String body =getIntent().getStringExtra("jsonBody");
+                JsonParser jsonParser = new JsonParser();
+                JsonObject jo = (JsonObject)jsonParser.parse(body);
+                jo.addProperty("id_estado_civil", estado_civil);
+
+                JsonObject jsonObjConyugue=new JsonObject();
+                jsonObjConyugue.addProperty("nombres", et_nombre.getText().toString());
+                jsonObjConyugue.addProperty("apellido_paterno", et_ap_conyuge.getText().toString());
+                jsonObjConyugue.addProperty("apellido_materno", et_am_conyuge.getText().toString());
+                jsonObjConyugue.addProperty("numero_hijos", s_number_children.getSelectedItem().toString());
+
+                JsonObject jsonObjBody=new JsonObject();
+                jsonObjBody.add("socio", jo);
+                jsonObjBody.add("conyuge", jsonObjConyugue);
+                String ending =total.replaceAll("\\\\","");
+                jsonObjBody.addProperty("hijos", "{"+ending+"}");
+
+
+
+                JsonObject jsonObjFinal=new JsonObject();
+                jsonObjFinal.add("info", jsonObjBody);
+                jsonObjFinal.addProperty("token", "lpsk.21568$lsjANPIO02");
+
+                System.out.println(jsonObjFinal.toString());
+                sendDataBase(jsonObjFinal);
+
                 Intent intent = new Intent(context,WelcomePartnerActivity.class);
                 startActivity(intent);
             }
@@ -138,5 +280,28 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
             }
         });
         queue.add(stringRequest);
+    }
+    private void sendDataBase(JsonObject body){
+        String url ="http://www.demodataexe.com/anpe/webservice/guardar_info_socio.php";
+        JSONObject object=null;
+        try {
+            object= new JSONObject(body.toString());
+            System.out.println(object.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestQueue queue = Volley.newRequestQueue(context);
+        JsonObjectRequest jr = new JsonObjectRequest(Request.Method.POST, url, object, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(jr);
     }
 }

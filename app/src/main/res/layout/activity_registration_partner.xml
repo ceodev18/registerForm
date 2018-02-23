@@ -44,6 +44,8 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:inputType="text"
+                android:id="@+id/et_name"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:layout_width="match_parent"
@@ -57,6 +59,8 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:inputType="text"
+                android:id="@+id/et_ap"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:layout_width="match_parent"
@@ -70,6 +74,8 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:inputType="text"
+                android:id="@+id/et_am"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:layout_width="match_parent"
@@ -110,6 +116,7 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:id="@+id/et_birthday"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:inputType="date"
@@ -124,6 +131,7 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:id="@+id/et_fijo"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:inputType="phone"
@@ -138,6 +146,7 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:id="@+id/et_celular"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:inputType="phone"
@@ -152,6 +161,7 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:id="@+id/et_email"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:inputType="textEmailAddress"
@@ -202,6 +212,7 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:id="@+id/et_direccion"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:inputType="text"
@@ -216,6 +227,7 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:id="@+id/et_comunidad"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:inputType="text"
@@ -230,9 +242,10 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:id="@+id/et_latitud"
                 android:padding="5dp"
                 android:background="#00000000"
-                android:inputType="text"
+                android:inputType="numberDecimal|numberSigned"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ubicación del domicilio - Coordenada de Latitud"/>
@@ -244,9 +257,10 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:id="@+id/et_longitud"
                 android:padding="5dp"
                 android:background="#00000000"
-                android:inputType="text"
+                android:inputType="numberDecimal|numberSigned"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ubicación del domicilio - Coordenada de Longitud"/>
@@ -290,15 +304,27 @@
         <TextView
             android:layout_margin="5dp"
             android:layout_marginTop="20dp"
+            android:text="Tipo de Socio (*)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:id="@+id/s_tipo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_marginTop="20dp"
             android:text="Tipo de Asociación (*)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
             android:background="@drawable/background_spinner"
-            android:entries="@array/sa_type_asoc"
             android:layout_margin="5dp"
-            android:id="@+id/type_association_spinner"
+            android:id="@+id/s_asociacion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
         <TextView
@@ -311,23 +337,23 @@
             android:background="@drawable/background_spinner"
             android:entries="@array/sa_empty"
             android:layout_margin="5dp"
-            android:id="@+id/organization_spinner"
+            android:id="@+id/s_local"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-        <android.support.design.widget.TextInputLayout
-            android:textColorHint="@color/colorPrimary"
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Organización regional a la que pertenece"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_textview"
-            android:layout_margin="5dp">
-            <EditText
-                android:padding="5dp"
-                android:background="#00000000"
-                android:inputType="text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Organización regional a la que pertenece"/>
-        </android.support.design.widget.TextInputLayout>
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:background="@drawable/background_spinner"
+            android:entries="@array/sa_empty"
+            android:layout_margin="5dp"
+            android:id="@+id/s_regional"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:layout_margin="5dp"
             android:background="@color/colorBlueLightButton"

@@ -152,7 +152,7 @@
             android:id="@+id/tv_show1"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
-            android:text="Clic aquí para completar la información sobre el producto agroecológico #1"
+            android:text="Completar la información sobre el producto agroecológico #1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
@@ -173,7 +173,7 @@
             android:id="@+id/tv_show2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorDetails"
-            android:text="Clic aquí para completar la información sobre el producto agroecológico #2"
+            android:text="Completar la información sobre el producto agroecológico #2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout

@@ -9,6 +9,17 @@
     <string name="s_prod_pecuaria">Producción Pecuaria (crianza de animales) </string>
     <string name="s_tranformation">Transformación </string>
     <string name="s_commerce">Comercialización</string>
+    <string-array name="sa_children">
+        <item>Elija</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
     <string-array name="sa_numberList">
         <item>Elija</item>
         <item>1</item>
