@@ -90,7 +90,7 @@
             android:layout_height="wrap_content" />
         <Spinner
             android:background="@drawable/background_spinner"
-            android:entries="@array/sa_type_food"
+            android:id="@+id/s_tipo"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -129,7 +129,7 @@
             android:layout_height="wrap_content" />
         <Spinner
             android:background="@drawable/background_spinner"
-            android:entries="@array/sa_grow_care"
+            android:id="@+id/s_manejo"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

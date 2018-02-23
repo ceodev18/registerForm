@@ -165,7 +165,7 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
     private void fillProvinceList(Departamento departamento){
         ProvinceDA provinceDA = new ProvinceDA();
         ArrayList<Provincia>list=provinceDA.getDepartamentos(departamento.getId_departamento());
-        System.out.println(list.size());
+        System.out.println(list.size()  );
         ArrayList<String> nameList=new ArrayList<>();
         for (Provincia provincia : list) {
             nameList.add(provincia.getName());

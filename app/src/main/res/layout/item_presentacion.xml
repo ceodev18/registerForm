@@ -11,7 +11,7 @@
         android:layout_height="wrap_content" />
     <Spinner
         android:background="@drawable/background_spinner"
-        android:entries="@array/sa_presentacion"
+        android:id="@+id/s_presentation"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

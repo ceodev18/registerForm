@@ -86,8 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:id="@+id/s_type"
             android:background="@drawable/background_spinner"
-            android:entries="@array/sa_type_house"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
@@ -112,8 +112,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:id="@+id/s_size"
             android:background="@drawable/background_spinner"
-            android:entries="@array/sa_type_size"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
@@ -163,7 +163,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <include layout="@layout/item_farming_prod"/>
+            <include layout="@layout/item_farming_prod" android:id="@+id/ll_detail1"/>
         </LinearLayout>
         <TextView
             android:padding="5dp"
@@ -183,7 +183,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <include layout="@layout/item_farming_prod"/>
+            <include layout="@layout/item_farming_prod" android:id="@+id/ll_detail2"/>
         </LinearLayout>
     </LinearLayout>
 

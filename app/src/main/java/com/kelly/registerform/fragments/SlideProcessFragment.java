@@ -7,17 +7,35 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.kelly.registerform.BuildConfig;
 import com.kelly.registerform.R;
+import com.kelly.registerform.model.ubigeo.Departamento;
+import com.kelly.registerform.model.ubigeo.Provincia;
 import com.kelly.registerform.view.MapsActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -48,7 +66,12 @@ public class SlideProcessFragment extends Fragment {
     private ArrayList<Boolean>listState;
     private ArrayList<LinearLayout>linearLayoutArrayList;
     private int VALOR_RETORNO = 1;
+    private ViewGroup rootView;
     public int indexPage=1;
+    private Spinner s_type,s_product;
+    private ArrayList<String>arrayListType,arrayListProduct,nam1,nam2,nam3;
+    private ArrayList<Integer>idType,idProduct,ll1,ll2,ll3;
+    private View v1,v2,v3;
     /**
      * Instances a new fragment with a background color and an index page.
      *
@@ -91,9 +114,11 @@ public class SlideProcessFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Button b_photo,b_photo_final,b_file;
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
+        rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_process, container, false);
-
+        setElements();
+        setActions();
+        setSpecialViews();
         // Show the current page index in the view
         tv_show1 = (TextView) rootView.findViewById(R.id.tv_show1);
         tv_show2 = (TextView) rootView.findViewById(R.id.tv_show2);
@@ -198,5 +223,182 @@ public class SlideProcessFragment extends Fragment {
             //Procesar el resultado
             Uri uri = data.getData(); //obtener el uri content
         }
+    }
+    private void setElements(){
+        s_type=rootView.findViewById(R.id.s_type);
+        s_product=rootView.findViewById(R.id.s_product);
+        arrayListType = new ArrayList<>();
+        arrayListProduct = new ArrayList<>();
+        idType= new ArrayList<>();
+        idProduct= new ArrayList<>();
+        fillTipo();
+    }
+    private void fillTipo(){
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = BuildConfig.BASE_URL+"lista_grupos_productos_derivados.php?token=lpsk.21568$lsjANPIO02";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObj = new JSONObject(response);
+                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("grupo_productos_derivados");
+                            Iterator<?> keys = jsonObj2.keys();
+                            idType=new ArrayList<>();
+                            arrayListType=new ArrayList<>();
+                            while( keys.hasNext() ) {
+                                String key = (String)keys.next();
+                                System.out.println(key);
+                                if ( jsonObj2.get(key) instanceof JSONObject ) {
+                                }else{
+                                    String name= (String)jsonObj2.get(key);
+                                    idType.add(Integer.parseInt(key));
+                                    arrayListType.add(name);
+                                }
+                            }
+                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getContext(),
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    arrayListType);
+                            s_type.setAdapter(spinnerArrayAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Fail","That didn't work!");
+
+            }
+        });
+        queue.add(stringRequest);
+
+    }
+    private void setActions(){
+        s_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                int id = idType.get(i);
+                fillProduct(id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+    private void fillProduct(int id){
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = BuildConfig.BASE_URL+"lista_productos_derivados.php?grupo="+id+"&token=lpsk.21568$lsjANPIO02";
+        System.out.println(url);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObj = new JSONObject(response);
+                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("productos_derivados");
+                            Iterator<?> keys = jsonObj2.keys();
+                            idProduct = new ArrayList<>();
+                            arrayListProduct = new ArrayList<>();
+                            while( keys.hasNext() ) {
+                                String key = (String)keys.next();
+                                System.out.println(key);
+                                if ( jsonObj2.get(key) instanceof JSONObject ) {
+                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
+                                    int  id = (int)jsonDepartment.get("id");
+                                    String name =(String)jsonDepartment.get("producto_derivado");
+                                    idProduct.add(id);
+                                    arrayListProduct.add(name);
+                                }else{
+                                    String name= (String)jsonObj2.get(key);
+                                    idProduct.add(Integer.parseInt(key));
+                                    arrayListProduct.add(name);
+                                }
+                            }
+                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getContext(),
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    arrayListProduct);
+                            s_product.setAdapter(spinnerArrayAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Fail","That didn't work!");
+
+            }
+        });
+        queue.add(stringRequest);
+
+    }
+    private void setSpecialViews(){
+        //v1,v2,v3
+        v1  = new View(getContext());
+        v2  = new View(getContext());
+        v3  = new View(getContext());
+
+        v1 = (View) rootView.findViewById(R.id.ll_pre1);
+        v2 = (View) rootView.findViewById(R.id.ll_pre2);
+        v3 = (View) rootView.findViewById(R.id.ll_pre3);
+
+        Spinner spinner1=(Spinner) v1.findViewById(R.id.s_presentation);
+        Spinner spinner2=(Spinner) v2.findViewById(R.id.s_presentation);
+        Spinner spinner3=(Spinner) v3.findViewById(R.id.s_presentation);
+        nam1=new ArrayList<>();
+        ll1=new ArrayList<>();
+        fillPresentation(spinner1,nam1,ll1);
+        nam2=new ArrayList<>();
+        ll2=new ArrayList<>();
+        fillPresentation(spinner2,nam2,ll2);
+        nam3=new ArrayList<>();
+        ll3=new ArrayList<>();
+        fillPresentation(spinner3,nam3,ll3);
+    }
+    private void fillPresentation(final Spinner spinner,final ArrayList<String>nameList,final ArrayList<Integer>idList){
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = BuildConfig.BASE_URL+"lista_tipo_presentacion.php?&token=lpsk.21568$lsjANPIO02";
+        System.out.println(url);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObj = new JSONObject(response);
+                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("tipos_presentacion");
+                            Iterator<?> keys = jsonObj2.keys();
+                            while( keys.hasNext() ) {
+                                String key = (String)keys.next();
+                                System.out.println(key);
+                                if ( jsonObj2.get(key) instanceof JSONObject ) {
+                                }else{
+                                    String name= (String)jsonObj2.get(key);
+                                    idList.add(Integer.parseInt(key));
+                                    nameList.add(name);
+                                }
+                            }
+                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getContext(),
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    nameList);
+                            spinner.setAdapter(spinnerArrayAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Fail","That didn't work!");
+
+            }
+        });
+        queue.add(stringRequest);
     }
 }
