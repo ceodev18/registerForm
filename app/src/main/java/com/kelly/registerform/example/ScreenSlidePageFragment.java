@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -75,6 +76,8 @@ public class ScreenSlidePageFragment extends Fragment {
     private ArrayList<String>nameListG1,nameListG2,nameListP1,nameListp2;
     private Spinner spinnerGroup1,spinnerGroup2,spinnerProduct1,spinnerProduct2;
     private View v1,v2;
+    private Button b_map;
+    private EditText et_latitude,et_longitude;
     /**
      * Instances a new fragment with a background color and an index page.
      *
@@ -121,6 +124,16 @@ public class ScreenSlidePageFragment extends Fragment {
         rootView = (ViewGroup) inflater.inflate(
                 R.layout.page_farm1, container, false);
         initializeArrays();
+        b_map=rootView.findViewById(R.id.b_map);
+        et_latitude=rootView.findViewById(R.id.et_latitud);
+        et_longitude=rootView.findViewById(R.id.et_longitud);
+        b_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),MapsActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
         // Show the current page index in the view
         //TextView tvIndex = (TextView) rootView.findViewById(R.id.tvIndex);
         //tvIndex.setText(String.valueOf(this.index));
@@ -181,7 +194,10 @@ public class ScreenSlidePageFragment extends Fragment {
         }
         if ((resultCode == RESULT_OK) && (requestCode == VALOR_RETORNO )) {
             //Procesar el resultado
-            Uri uri = data.getData(); //obtener el uri content
+            String result=data.getStringExtra("result");
+            String[]datos=result.split(",");
+            et_longitude.setText(datos[1]);
+            et_latitude.setText(datos[0]);
 
         }
     }

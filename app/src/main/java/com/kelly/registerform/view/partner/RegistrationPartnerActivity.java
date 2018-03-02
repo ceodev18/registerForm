@@ -34,6 +34,7 @@ import com.kelly.registerform.R;
 import com.kelly.registerform.dataAccess.ProvinceDA;
 import com.kelly.registerform.model.ubigeo.Departamento;
 import com.kelly.registerform.model.ubigeo.Provincia;
+import com.kelly.registerform.view.MapsActivity;
 import com.orm.query.Condition;
 import com.orm.query.Select;
 
@@ -47,7 +48,7 @@ import java.util.List;
 public class RegistrationPartnerActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
     private static final int PICK_IMAGE = 100;
-    private Button b_next,b_dni,b_photo;
+    private Button b_next,b_dni,b_photo,b_map;
     private Context context;
     private Spinner gender_spinner,regions_spinner,province_spinner,district_spinner,s_asoc,s_tipo,s_local,s_regional;
     private String lattitude,longitude;
@@ -76,7 +77,7 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
 
         tv_dni = findViewById(R.id.tv_dni);
         tv_photo = findViewById(R.id.tv_photo);
-
+        b_map= (Button)findViewById(R.id.b_map);
 
         //gender_spinner=(Spinner)findViewById(R.id.gender_spinner);
         //String[] arraySpinner = new String[] {"Elija", "Femenino", "Masculino"};
@@ -103,6 +104,7 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         et_direccion= findViewById(R.id.et_direccion);
         et_comunidad= findViewById(R.id.et_comunidad);
         et_latitud= findViewById(R.id.et_latitud);
+
         et_longitud= findViewById(R.id.et_longitud);
 
         s_asoc=findViewById(R.id.s_asociacion);
@@ -117,6 +119,13 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
         fillRegional();
     }
     private void setActions(){
+        b_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,MapsActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -274,9 +283,14 @@ public class RegistrationPartnerActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
+
+        //Toast.makeText(context, mmm, Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
                 String result=data.getStringExtra("result");
+                String[]datos=result.split(",");
+                et_longitud.setText(datos[1]);
+                et_latitud.setText(datos[0]);
                 //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
             }
             if (resultCode == Activity.RESULT_CANCELED) {

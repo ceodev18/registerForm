@@ -49,6 +49,7 @@ public class MapsActivity extends AppCompatActivity
         static final int PICK_CONTACT_REQUEST = 1;  // The request code
         Marker mCurrLocationMarker;
         private boolean state=false;
+        private double latitude,longitude;
         @Override
         protected void onCreate(Bundle savedInstanceState)
         {
@@ -63,7 +64,7 @@ public class MapsActivity extends AppCompatActivity
                     //pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
                     //startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
                     Intent returnIntent = new Intent();
-                    returnIntent.putExtra("result","hola");
+                    returnIntent.putExtra("result",latitude+","+longitude);
                     setResult(Activity.RESULT_OK,returnIntent);
                     finish();
                 }
@@ -94,7 +95,7 @@ public class MapsActivity extends AppCompatActivity
 
                 @Override
                 public void onMapClick(LatLng point) {
-                    //Toast.makeText(getApplicationContext(), point.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), point.toString(), Toast.LENGTH_SHORT).show();
                     mGoogleMap.clear();
                     MarkerOptions marker = new MarkerOptions().position(
                             new LatLng(point.latitude, point.longitude)).title("New Marker");
@@ -170,6 +171,8 @@ public class MapsActivity extends AppCompatActivity
                 markerOptions.title("Current Position");
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
                 mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
+                latitude=location.getLatitude();
+                longitude=location.getLongitude();
 
                 //move map camera
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));

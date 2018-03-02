@@ -13,7 +13,16 @@
             android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
+        <Button
+            android:id="@+id/b_map"
+            android:layout_margin="5dp"
+            android:background="@color/colorOrangeButton"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:text="Obtener coordenadas"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <android.support.design.widget.TextInputLayout
             android:textColorHint="@color/colorPrimary"
             android:layout_width="match_parent"
@@ -21,6 +30,8 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:enabled="false"
+                android:id="@+id/et_latitud"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:inputType="text"
@@ -35,6 +46,8 @@
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
             <EditText
+                android:enabled="false"
+                android:id="@+id/et_longitud"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:inputType="text"
