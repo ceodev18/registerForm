@@ -12,6 +12,7 @@ public class Chacra {
     private int id_produccion;
     private int id_socio;
     private String nombre;
+    private String fail;
     private int id_tipo_propiedad;
     private double latitud;
     private double longitud;
@@ -89,5 +90,13 @@ public class Chacra {
 
     public void setTipo_medida(int tipo_medida) {
         this.tipo_medida = tipo_medida;
+    }
+
+    public String getFail() {
+        return fail;
+    }
+
+    public void setFail(String fail) {
+        this.fail = fail;
     }
 }

@@ -7,6 +7,50 @@
         android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="¿Qué clase de producto comercializas?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_tipo"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_spinner"
+            android:entries="@array/s_opciones_comercio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="¿Qué tipo de producto comercializas?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_grupos"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="¿Qué producto comercializas?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_inners"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+
         <LinearLayout
             android:weightSum="4"
             android:orientation="horizontal"
@@ -44,20 +88,21 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
-            <EditText
-                android:layout_marginTop="1dp"
-                android:padding="6dp"
-                android:background="@drawable/background_textview"
+            <Spinner
+                android:id="@+id/s_cantidad1"
+                android:background="@drawable/background_spinner"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_kg1"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_frecuencia1"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
@@ -75,20 +120,21 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
-            <EditText
-                android:layout_marginTop="1dp"
-                android:padding="6dp"
-                android:background="@drawable/background_textview"
+            <Spinner
+                android:id="@+id/s_cantidad2"
+                android:background="@drawable/background_spinner"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_kg2"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_frecuencia2"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
@@ -106,20 +152,21 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
-            <EditText
-                android:layout_marginTop="1dp"
-                android:padding="6dp"
-                android:background="@drawable/background_textview"
+            <Spinner
+                android:id="@+id/s_cantidad3"
+                android:background="@drawable/background_spinner"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_kg3"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_frecuencia3"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
@@ -137,20 +184,21 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
-            <EditText
-                android:layout_marginTop="1dp"
-                android:padding="6dp"
-                android:background="@drawable/background_textview"
+            <Spinner
+                android:id="@+id/s_cantidad4"
+                android:background="@drawable/background_spinner"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_kg4"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_frecuencia4"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
@@ -168,20 +216,21 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
-            <EditText
-                android:layout_marginTop="1dp"
-                android:padding="6dp"
-                android:background="@drawable/background_textview"
+            <Spinner
+                android:id="@+id/s_cantidad5"
+                android:background="@drawable/background_spinner"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_kg5"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_frecuencia5"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
@@ -199,20 +248,21 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
-            <EditText
-                android:layout_marginTop="1dp"
-                android:padding="6dp"
-                android:background="@drawable/background_textview"
+            <Spinner
+                android:id="@+id/s_cantidad6"
+                android:background="@drawable/background_spinner"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_kg6"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_frecuencia6"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
@@ -229,26 +279,30 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
-            <EditText
-                android:layout_marginTop="1dp"
-                android:padding="6dp"
-                android:background="@drawable/background_textview"
+            <Spinner
+                android:id="@+id/s_cantidad7"
+                android:background="@drawable/background_spinner"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_kg7"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_kg_lt"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
             <Spinner
+                android:id="@+id/s_frecuencia7"
                 android:background="@drawable/background_spinner"
                 android:entries="@array/sa_frecuency"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"></Spinner>
         </LinearLayout>
+
+
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -256,23 +310,93 @@
             android:background="@drawable/background_textview"
             android:layout_marginTop="10dp">
             <EditText
+                android:inputType="text"
+                android:id="@+id/et_name"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="RUC"/>
+                android:hint="Nombre de a quién le compras"/>
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:background="@drawable/background_textview"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:inputType="text"
+                android:id="@+id/et_dni"
+                android:padding="5dp"
+                android:background="#00000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="DNI de a quién le compras"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:background="@drawable/background_textview"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:inputType="text"
+                android:id="@+id/et_codigo"
+                android:padding="5dp"
+                android:background="#00000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Código de certificación de a quién le compras"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:background="@drawable/background_textview"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:inputType="text"
+                android:id="@+id/et_lugar"
+                android:padding="5dp"
+                android:background="#00000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="¿Dónde compras?"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:background="@drawable/background_textview"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:inputType="text"
+                android:id="@+id/et_ruc_item"
+                android:padding="5dp"
+                android:background="#00000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="RUC   "/>
+        </android.support.design.widget.TextInputLayout>
+
         <TextView
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:text="¿Cuenta con Boleta/Factura?"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <Spinner
+            android:id="@+id/s_boleta"
             android:background="@drawable/background_spinner"
-            android:entries="@array/sa_tax"
+            android:entries="@array/sa_yes_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -280,6 +404,8 @@
             android:background="@drawable/background_textview"
             android:layout_marginTop="10dp">
             <EditText
+                android:inputType="text"
+                android:id="@+id/et_marca"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:layout_width="match_parent"
@@ -293,6 +419,8 @@
             android:background="@drawable/background_textview"
             android:layout_marginTop="10dp">
             <EditText
+                android:inputType="text"
+                android:id="@+id/et_marca_colectiva"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:layout_width="match_parent"

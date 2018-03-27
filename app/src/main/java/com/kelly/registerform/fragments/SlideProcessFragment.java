@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -59,18 +60,21 @@ public class SlideProcessFragment extends Fragment {
     private static final int PICK_IMAGE = 100;
     private int color;
     private int index;
+    private Button b_map;
     private Context context;
+    private EditText et_latitude,et_longitude,et_sanitario,et_ruc,et_razon,et_year,et_code;
     private ArrayList<TextView> listTextView;
-    private TextView tv_show1,tv_show2,tv_show3,tv_show4,tv_show5,tv_show6,tv_title;
+    private TextView tv_show1,tv_show2,tv_show3,tv_show4,tv_show5,tv_show6,tv_title,tv_photo,
+            tv_photo_final,tv_file;
     private LinearLayout ll_1,ll_2,ll_3,ll_4,ll_5,ll_6;
     private ArrayList<Boolean>listState;
     private ArrayList<LinearLayout>linearLayoutArrayList;
     private int VALOR_RETORNO = 1;
     private ViewGroup rootView;
     public int indexPage=1;
-    private Spinner s_type,s_product;
-    private ArrayList<String>arrayListType,arrayListProduct,nam1,nam2,nam3;
-    private ArrayList<Integer>idType,idProduct,ll1,ll2,ll3;
+    private Spinner s_type,s_product,s_month_start,s_month_end,s_tipo,s_tiene,s_company;
+    private ArrayList<String>arrayListType,arrayListProduct,nam1,nam2,nam3,arrayListCompany;
+    private ArrayList<Integer>idType,idProduct,ll1,ll2,ll3,idCompany;
     private View v1,v2,v3;
     /**
      * Instances a new fragment with a background color and an index page.
@@ -117,6 +121,7 @@ public class SlideProcessFragment extends Fragment {
         rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_process, container, false);
         setElements();
+        fillComapy();
         setActions();
         setSpecialViews();
         // Show the current page index in the view
@@ -184,29 +189,7 @@ public class SlideProcessFragment extends Fragment {
         b_photo_final=rootView.findViewById(R.id.b_photo_final);
         b_file=rootView.findViewById(R.id.b_file);
         b_photo=rootView.findViewById(R.id.b_photo);
-        b_photo_final.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(gallery, PICK_IMAGE);
-            }
-        });
 
-        b_photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(gallery, PICK_IMAGE);
-            }
-        });
-        b_file.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
-                startActivityForResult(Intent.createChooser(intent, "Choose File"), VALOR_RETORNO);
-            }
-        });
         // Change the background color
         rootView.setBackgroundColor(this.color);
 
@@ -221,28 +204,55 @@ public class SlideProcessFragment extends Fragment {
         }
         if ((resultCode == RESULT_OK) && (requestCode == VALOR_RETORNO )) {
             //Procesar el resultado
-            Uri uri = data.getData(); //obtener el uri content
+            String result=data.getStringExtra("result");
+            if(result!=null){
+                String[]datos=result.split(",");
+                et_longitude.setText(datos[1]);
+                et_latitude.setText(datos[0]);
+            }else{
+                Uri uri = data.getData(); //obtener el uri content
+            }
+
         }
+
     }
     private void setElements(){
+        et_sanitario =rootView.findViewById(R.id.et_sanitario);
+        et_ruc =rootView.findViewById(R.id.et_ruc);
+        et_razon =rootView.findViewById(R.id.et_razon);
+        et_year =rootView.findViewById(R.id.et_year);
+        et_code =rootView.findViewById(R.id.et_code);
+        s_tipo=rootView.findViewById(R.id.s_tipo);
+        s_tiene=rootView.findViewById(R.id.s_tiene);
+        s_company=rootView.findViewById(R.id.s_company);
+        s_month_start=rootView.findViewById(R.id.s_month_start);
+        s_month_end=rootView.findViewById(R.id.s_month_end);
+        et_latitude=rootView.findViewById(R.id.et_latitud);
+        et_longitude=rootView.findViewById(R.id.et_longitud);
+        tv_photo=rootView.findViewById(R.id.tv_photo);
+        tv_photo_final=rootView.findViewById(R.id.tv_photo_final);
+        tv_file=rootView.findViewById(R.id.tv_file);
+        b_map=rootView.findViewById(R.id.b_map);
         s_type=rootView.findViewById(R.id.s_type);
         s_product=rootView.findViewById(R.id.s_product);
         arrayListType = new ArrayList<>();
         arrayListProduct = new ArrayList<>();
         idType= new ArrayList<>();
         idProduct= new ArrayList<>();
+        arrayListCompany= new ArrayList<>();
+        idCompany= new ArrayList<>();
         fillTipo();
     }
     private void fillTipo(){
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = BuildConfig.BASE_URL+"lista_grupos_productos_derivados.php?token=lpsk.21568$lsjANPIO02";
+        String url = BuildConfig.BASE_URL+"lista_grupos_productos_transformados.php?token=lpsk.21568$lsjANPIO02";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("grupo_productos_derivados");
+                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("grupo_productos_transformados");
                             Iterator<?> keys = jsonObj2.keys();
                             idType=new ArrayList<>();
                             arrayListType=new ArrayList<>();
@@ -288,11 +298,19 @@ public class SlideProcessFragment extends Fragment {
 
             }
         });
+        b_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),MapsActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
 
     }
+
     private void fillProduct(int id){
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = BuildConfig.BASE_URL+"lista_productos_derivados.php?grupo="+id+"&token=lpsk.21568$lsjANPIO02";
+        String url = BuildConfig.BASE_URL+"lista_productos_transformados.php?grupo=1&token=lpsk.21568$lsjANPIO02";
         System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -300,7 +318,7 @@ public class SlideProcessFragment extends Fragment {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("productos_derivados");
+                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("productos_transformados");
                             Iterator<?> keys = jsonObj2.keys();
                             idProduct = new ArrayList<>();
                             arrayListProduct = new ArrayList<>();
@@ -390,6 +408,77 @@ public class SlideProcessFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Fail","That didn't work!");
+
+            }
+        });
+        queue.add(stringRequest);
+    }
+    public boolean validation(){
+        /*if(s_type.getSelectedItem().toString().equals("Elija")
+                ||s_type.getSelectedItem().toString().length()==0)return false;
+        if(s_product.getSelectedItem().toString().equals("Elija")
+                ||s_product.getSelectedItem().toString().length()==0)return false;
+        if(s_month_start.getSelectedItem().toString().equals("Elija")
+                ||s_month_start.getSelectedItem().toString().length()==0)return false;
+        if(s_month_end.getSelectedItem().toString().equals("Elija")
+                ||s_month_end.getSelectedItem().toString().length()==0)return false;*/
+
+        if(et_sanitario.getText().length()==0)return false;
+        if(et_ruc.getText().length()==0)return false;
+        if(et_razon.getText().length()==0)return false;
+        if(et_code.getText().length()==0)return false;
+        if(et_year.getText().length()==0)return false;
+
+        if(s_tipo.getSelectedItem().toString().equals("Elija")
+                ||s_tipo.getSelectedItem().toString().length()==0)return false;
+
+        if(s_tiene.getSelectedItem().toString().equals("Elija")
+                ||s_tiene.getSelectedItem().toString().length()==0)return false;
+        if(s_company.getSelectedItem().toString().equals("Elija")
+                ||s_company.getSelectedItem().toString().length()==0)return false;
+
+        return true;
+    }
+    private void fillComapy(){
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = BuildConfig.BASE_URL+"lista_empresas_certificadoras_sgp.php?token=lpsk.21568$lsjANPIO022";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObj = new JSONObject(response);
+                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("empresas_sgp");
+                            Iterator<?> keys = jsonObj2.keys();
+                            idCompany=new ArrayList<>();
+                            idCompany.add(0);
+                            arrayListCompany=new ArrayList<>();
+                            arrayListCompany.add("Elija");
+                            while( keys.hasNext() ) {
+                                String key = (String)keys.next();
+                                System.out.println(key);
+                                if ( jsonObj2.get(key) instanceof JSONObject ) {
+                                }else{
+                                    String name= (String)jsonObj2.get(key);
+                                    idCompany.add(Integer.parseInt(key));
+                                    System.out.println(name);
+                                    arrayListCompany.add(name);
+                                }
+                            }
+                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(getContext(),
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    arrayListCompany);
+                            s_company.setAdapter(spinnerArrayAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            s_company.setAdapter(null);
                         }
                     }
                 }, new Response.ErrorListener() {

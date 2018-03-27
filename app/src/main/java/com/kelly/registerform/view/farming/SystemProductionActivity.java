@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,8 +16,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 import com.kelly.registerform.BuildConfig;
 import com.kelly.registerform.R;
+import com.kelly.registerform.model.main.MainJson;
 import com.thomashaertel.widget.MultiSpinner;
 
 import org.json.JSONException;
@@ -32,6 +35,8 @@ public class SystemProductionActivity extends AppCompatActivity {
     private MultiSpinner spinnerMulti1,spinnerMulti2,spinnerMulti3,spinnerMulti4;
     private ArrayAdapter adapter1,adapter2,adapter3,adapter4;
     private ArrayList<String>s1,s2,s3,s4;
+    private ArrayList<Integer> i1,i2,i3,i4,selected1,selected2,selected3,selected4;
+    private StringBuilder spinnerMulti1List1,spinnerMulti1List2,spinnerMulti1List3,spinnerMulti1List4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,34 +52,46 @@ public class SystemProductionActivity extends AppCompatActivity {
         spinnerMulti2=findViewById(R.id.spinnerMulti2);
         spinnerMulti3=findViewById(R.id.spinnerMulti3);
         spinnerMulti4=findViewById(R.id.spinnerMulti4);
+        spinnerMulti1List1= new StringBuilder();
+        spinnerMulti1List2= new StringBuilder();
+        spinnerMulti1List3= new StringBuilder();
+        spinnerMulti1List4= new StringBuilder();
+
+        i1=new ArrayList<>();
         s1=new ArrayList<>();
+        selected1=new ArrayList<>();
         adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s1,"manejo_suelos",adapter1);
+        fillContent(s1,"manejo_suelos",adapter1,i1);
 
+        i2=new ArrayList<>();
         s2=new ArrayList<>();
+        selected2=new ArrayList<>();
         adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s2,"plagas",adapter2);
+        fillContent(s2,"plagas",adapter2,i2);
 
-
+        i3=new ArrayList<>();
         s3=new ArrayList<>();
+        selected3=new ArrayList<>();
         adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s3,"agricolas",adapter3);
+        fillContent(s3,"agricolas",adapter3,i3);
 
-
+        i4=new ArrayList<>();
         s4=new ArrayList<>();
+        selected4=new ArrayList<>();
         adapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s4,"biodiversidad",adapter4);
+        fillContent(s4,"biodiversidad",adapter4,i4);
 
-
-        spinnerMulti1.setAdapter(adapter1, false, onSelectedListener);
-        spinnerMulti2.setAdapter(adapter2, false, onSelectedListener);
-        spinnerMulti3.setAdapter(adapter3, false, onSelectedListener);
-        spinnerMulti4.setAdapter(adapter4, false, onSelectedListener);
+        spinnerMulti1.setAdapter(adapter1, false, onSelectedListener1);
+        spinnerMulti2.setAdapter(adapter2, false, onSelectedListener2);
+        spinnerMulti3.setAdapter(adapter3, false, onSelectedListener3);
+        spinnerMulti4.setAdapter(adapter4, false, onSelectedListener4);
     }
     private void setActions(){
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!validation())return;
+                sendMain();
                 Intent intent = new Intent(context,FarmingCertificationActivity.class);
                 intent.putExtra("list",list);
                 startActivity(intent);
@@ -87,15 +104,93 @@ public class SystemProductionActivity extends AppCompatActivity {
             }
         });
     }
-    private MultiSpinner.MultiSpinnerListener onSelectedListener = new MultiSpinner.MultiSpinnerListener() {
+    private void sendMain(){
+        JsonObject suelo = new JsonObject();
+        for (int i=0;i<selected1.size();i++){
+            suelo.addProperty(""+i,selected1.get(i));
+        }
+        MainJson.addChild("practicas_manejo_suelos",suelo);
+
+        JsonObject plagas = new JsonObject();
+        for (int i=0;i<selected2.size();i++){
+            plagas.addProperty(""+i,selected2.get(i));
+        }
+        MainJson.addChild("practicas_plagas",plagas);
+
+        JsonObject agricolas = new JsonObject();
+        for (int i=0;i<selected3.size();i++){
+            agricolas.addProperty(""+i,selected3.get(i));
+        }
+        MainJson.addChild("practicas_agricolas",agricolas);
+
+        JsonObject biodiversidad = new JsonObject();
+        for (int i=0;i<selected4.size();i++){
+            biodiversidad.addProperty(""+i,selected4.get(i));
+        }
+        MainJson.addChild("practicas_biodiversidad",biodiversidad);
+        MainJson.printBody();
+
+    }
+    private boolean validation(){
+        if(selected1.size()==0){
+            Toast.makeText(context, "Debe escoger al menos una práctica de conservación o manejo.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(selected2.size()==0){
+            Toast.makeText(context, "Debe escoger al menos una práctica manejo de plagas o enfermedades.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(selected3.size()==0){
+            Toast.makeText(context, "Debe escoger al menos una práctica agroecológica o ambiental.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(selected4.size()==0){
+            Toast.makeText(context, "Debe escoger al menos una semilla o biodiversidad.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+    private MultiSpinner.MultiSpinnerListener onSelectedListener1 = new MultiSpinner.MultiSpinnerListener() {
         public void onItemsSelected(boolean[] selected) {
-            // Do something here with the selected items
+            for (int i = 0; i < selected.length; i++) {
+                if (selected[i]) {
+                    selected1.add(i1.get(i));
+
+                }
+            }
         }
     };
-    private void fillContent(final ArrayList<String>lista,String value,final ArrayAdapter adapter){
+    private MultiSpinner.MultiSpinnerListener onSelectedListener2 = new MultiSpinner.MultiSpinnerListener() {
+        public void onItemsSelected(boolean[] selected) {
+            for (int i = 0; i < selected.length; i++) {
+                if (selected[i]) {
+                    selected2.add(i2.get(i));
+                }
+            }
+        }
+    };
+    private MultiSpinner.MultiSpinnerListener onSelectedListener3 = new MultiSpinner.MultiSpinnerListener() {
+        public void onItemsSelected(boolean[] selected) {
+            for (int i = 0; i < selected.length; i++) {
+                if (selected[i]) {
+                    selected3.add(i3.get(i));
+                }
+            }
+        }
+    };
+    private MultiSpinner.MultiSpinnerListener onSelectedListener4 = new MultiSpinner.MultiSpinnerListener() {
+        public void onItemsSelected(boolean[] selected) {
+            for (int i = 0; i < selected.length; i++) {
+                if (selected[i]) {
+                    selected4.add(i4.get(i));
+                }
+            }
+        }
+    };
+    private void fillContent(final ArrayList<String>lista,String value,final ArrayAdapter adapter,final ArrayList<Integer>lista_i){
         RequestQueue queue = Volley.newRequestQueue(this.context);
         String url = BuildConfig.BASE_URL+"lista_practicas_agroecologicas.php?tipo="+value+"&token=lpsk.21568$lsjANPIO02";
-        System.out.println(url);
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -106,13 +201,18 @@ public class SystemProductionActivity extends AppCompatActivity {
                             Iterator<?> keys = jsonObj2.keys();
                             while( keys.hasNext() ) {
                                 String key = (String)keys.next();
-                                System.out.println(key);
+
                                 if ( jsonObj2.get(key) instanceof JSONObject ) {
+                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
+                                    int  idDis = (int)jsonDepartment.get("id");
+                                    String name =(String)jsonDepartment.get("practica");
+                                    lista.add(name);
+                                    lista_i.add(idDis);
                                 }else{
 
                                     String name= (String)jsonObj2.get(key);
                                     lista.add(name);
-                                    System.out.println(lista.size());
+
                                 }
                             }
                             adapter.addAll(lista);

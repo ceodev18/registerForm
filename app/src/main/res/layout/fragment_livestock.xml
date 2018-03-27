@@ -32,6 +32,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </Spinner>
+        <Button
+            android:id="@+id/b_map"
+            android:layout_margin="10dp"
+            android:background="@color/colorOrangeButton"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:text="Clic aquí para obtener la ubicación del domicilio"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <android.support.design.widget.TextInputLayout
             android:textColorHint="@color/colorPrimary"
             android:layout_width="match_parent"
@@ -39,7 +49,8 @@
             android:background="@drawable/background_textview"
             android:layout_margin="10dp">
             <EditText
-
+                android:id="@+id/et_latitud"
+                android:enabled="false"
                 android:layout_margin="10dp"
                 android:background="#00000000"
                 android:inputType="text"
@@ -54,7 +65,8 @@
             android:background="@drawable/background_textview"
             android:layout_margin="10dp">
             <EditText
-
+                android:id="@+id/et_longitud"
+                android:enabled="false"
                 android:layout_margin="10dp"
                 android:background="#00000000"
                 android:inputType="text"
@@ -102,6 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:id="@+id/s_propio"
             android:background="@drawable/background_spinner"
             android:entries="@array/sa_percentage"
             android:layout_margin="10dp"
@@ -115,8 +128,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:id="@+id/s_venta"
             android:background="@drawable/background_spinner"
-            android:entries="@array/sa_empty"
+            android:entries="@array/sa_percentage"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -135,7 +149,7 @@
             android:layout_height="wrap_content">
         </Spinner>
         <TextView
-            android:text="Productos derivados/transformados (*)"
+            android:text="Productos derivados"
             android:layout_margin="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.BoringLayout;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kelly.registerform.BuildConfig;
 import com.kelly.registerform.R;
+import com.kelly.registerform.model.main.MainJson;
 import com.kelly.registerform.model.ubigeo.Departamento;
 
 import org.json.JSONArray;
@@ -167,6 +169,21 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 estado_civil=idMarital.get(i);
+                if(!s_marital.getSelectedItem().toString().equals("Casado") &&
+                         !s_marital.getSelectedItem().toString().equals("Conviviente") &&
+                        !s_marital.getSelectedItem().toString().equals("Elija")){
+                    et_nombre.setEnabled(false);
+                    et_ap_conyuge.setEnabled(false);
+                    et_am_conyuge.setEnabled(false);
+                    s_number_children.setEnabled(false);
+                    for (int inx=0;inx<listaVista.size();inx++){
+                        listaVista.get(inx).setEnabled(false);
+                        listaChecks.get(inx).setEnabled(false);
+                        listaNombres.get(inx).setEnabled(false);
+                        listaCumple.get(inx).setEnabled(false);
+                    }
+
+                }
             }
 
 
@@ -178,61 +195,78 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int counter=0;
-                JsonObject jsonObjectChildren = new JsonObject();
-                JsonArray json = new JsonArray();
-                String total="";
-                for(int i=0;i<tope;i++){
-                    String raw;
-                    if(listaChecks.get(i).isChecked()){
-                        String name =listaNombres.get(i).getText().toString();
-                        String cumple =listaCumple.get(i).getText().toString();
-                        raw="\"hijo\":{\"nombres_apellidos\":\""+name+"\",\"fecha_nacimiento\":\""+cumple+"\",\"es_dependiente\":\"Si\"}";
-                    }else{
-                        String name =listaNombres.get(i).getText().toString();
-                        String cumple =listaCumple.get(i).getText().toString();
-                        raw="\"hijo\":{\"nombres_apellidos\":\""+name+"\",\"fecha_nacimiento\":\""+cumple+"\",\"es_dependiente\":\"No\"}";
-                    }
-                    if(i==tope-1)total +=raw;
-                    else total +=raw+",";
-                }
-
-
-
-
-
+                if(!validation())return;
                 String body =getIntent().getStringExtra("jsonBody");
                 JsonParser jsonParser = new JsonParser();
                 JsonObject jo = (JsonObject)jsonParser.parse(body);
                 jo.addProperty("id_estado_civil", estado_civil);
 
-                JsonObject jsonObjConyugue=new JsonObject();
-                jsonObjConyugue.addProperty("nombres", et_nombre.getText().toString());
-                jsonObjConyugue.addProperty("apellido_paterno", et_ap_conyuge.getText().toString());
-                jsonObjConyugue.addProperty("apellido_materno", et_am_conyuge.getText().toString());
-                jsonObjConyugue.addProperty("numero_hijos", s_number_children.getSelectedItem().toString());
+                if(s_marital.getSelectedItem().toString().equals("Casado")
+                        || s_marital.getSelectedItem().toString().equals("Conviviente")) {
+                    JsonObject jsonObjConyugue=new JsonObject();
+                    jsonObjConyugue.addProperty("nombres", et_nombre.getText().toString());
+                    jsonObjConyugue.addProperty("apellido_paterno", et_ap_conyuge.getText().toString());
+                    jsonObjConyugue.addProperty("apellido_materno", et_am_conyuge.getText().toString());
+                    jsonObjConyugue.addProperty("numero_hijos", tope);
+                    jo.add("conyuge", jsonObjConyugue);
+
+                    JsonObject childrenList=new JsonObject();
+                    for (int i=0;i<tope;i++){
+                        JsonObject son=new JsonObject();
+                        son.addProperty("nombres_apellidos", listaNombres.get(i).getText().toString());
+                        son.addProperty("fecha_nacimiento", listaCumple.get(i).getText()+"");
+                        if(listaChecks.get(i).isChecked()){
+                            son.addProperty("es_dependiente", "on");
+                        }else {
+                            son.addProperty("es_dependiente", "off");
+                        }
+                        childrenList.add(""+(i+1),son);
+                    }
+
+                    jo.add("hijos", childrenList);
+
+                }
+
 
                 JsonObject jsonObjBody=new JsonObject();
-                jsonObjBody.add("socio", jo);
-                jsonObjBody.add("conyuge", jsonObjConyugue);
-                String ending =total.replaceAll("\\\\","");
-                jsonObjBody.addProperty("hijos", "{"+ending+"}");
+                jsonObjBody.add("info", jo);
+                jsonObjBody.addProperty("token", "lpsk.21568$lsjANPIO02");
+                //sendDataBase(jsonObjBody);
 
-
-
-                JsonObject jsonObjFinal=new JsonObject();
-                jsonObjFinal.add("info", jsonObjBody);
-                jsonObjFinal.addProperty("token", "lpsk.21568$lsjANPIO02");
-
-                System.out.println(jsonObjFinal.toString());
-                sendDataBase(jsonObjFinal);
-
+                MainJson.addChild("form1",jo);
+                System.out.println(jo);
                 Intent intent = new Intent(context,WelcomePartnerActivity.class);
                 startActivity(intent);
             }
         });
     }
+    private boolean validation(){
+        if(s_marital.getSelectedItem().toString().equals("Elija") ||s_marital.getSelectedItem().toString().length()==0 ){
+            Toast.makeText(context, "Falta elejir el estado civil.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(s_marital.getSelectedItem().toString().equals("Casado")
+                || s_marital.getSelectedItem().toString().equals("Conviviente")) {
+            if(et_nombre.getText().length()==0){
+                Toast.makeText(context, "Falta nombre de conyugue.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if(et_ap_conyuge.getText().length()==0){
+                Toast.makeText(context, "Falta apellido paterno de conyugue.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if(et_am_conyuge.getText().length()==0){
+                Toast.makeText(context, "Falta apellido materno de conyugue.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if(s_number_children.getSelectedItem().toString().equals("Elija") ||s_number_children.getSelectedItem().toString().length()==0 ){
+                Toast.makeText(context, "Falta elejir el.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
 
+        }
+        return true;
+    }
     public  void fillMarital(){
         RequestQueue queue = Volley.newRequestQueue(this.context);
         String url = BuildConfig.BASE_URL+"lista_estado_civil.php?token=lpsk.21568$lsjANPIO02";
@@ -245,7 +279,9 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
                             JSONObject jsonObj2 = (JSONObject) jsonObj.get("estados_civiles");
                             Iterator<?> keys = jsonObj2.keys();
                             idMarital=new ArrayList<>();
+                            idMarital.add(0);
                             arrayListMarital=new ArrayList<>();
+                            arrayListMarital.add("Elija");
                             while( keys.hasNext() ) {
                                 String key = (String)keys.next();
                                 System.out.println(key);
@@ -270,6 +306,7 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            s_marital.setAdapter(null);
                         }
                     }
                 }, new Response.ErrorListener() {

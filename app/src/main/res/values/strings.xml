@@ -3,14 +3,14 @@
     <string name="b_next">Continuar</string>
     <string name="b_next_register">Continuar con el Registro</string>
     <string name="b_back">Volver</string>
-    <string name="s_wPartner_small">A continuación se le solicitará nos indique qué actividades realiza, según esta información se le mostrarán los formularios adecuados.</string>
+    <string name="s_wPartner_small">A continuación haga clic en cada cuadrito según la(s) actividad(es) que realice, sólo se le mostrarán los formularios correspondientes según lo que Ud. seleccione.</string>
     <string name="s_wPartner_big">"Bienvenidos al registro de socios(as)</string>
     <string name="s_prod_agroecologica">Producción Agroecológica</string>
     <string name="s_prod_pecuaria">Producción Pecuaria (crianza de animales) </string>
     <string name="s_tranformation">Transformación </string>
     <string name="s_commerce">Comercialización</string>
     <string-array name="sa_children">
-        <item>Elija</item>
+        <item>2</item>
         <item>3</item>
         <item>4</item>
         <item>5</item>
@@ -83,9 +83,11 @@
     </string-array>
     <string-array name="sa_total_animals">
         <item>Elija</item>
-        <item>De 1 a 20</item>
-        <item>De 21 a 100</item>
-        <item>De 101 a 500</item>
+        <item>De 1 a 25</item>
+        <item>De 26 a 50</item>
+        <item>De 51 a 75</item>
+        <item>De 71 a 100</item>
+        <item>De 101 a más</item>
     </string-array>
     <string-array name="sa_percentage">
         <item>Elija</item>
@@ -117,10 +119,8 @@
     </string-array>
     <string-array name="sa_kg_lt">
         <item>Elija</item>
-        <item>1</item>
-        <item>De 2 a 5</item>
-        <item>De 6 a 10</item>
-        <item>Más de 10</item>
+        <item>Kg</item>
+        <item>Litros</item>
     </string-array>
     <string-array name="sa_frecuency">
         <item>Elija</item>
@@ -160,6 +160,14 @@
         <item>Febrero</item>
         <item>Marzo</item>
         <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Diciembre</item>
     </string-array>
     <string-array name="sa_gender">
         <item>Elija</item>
@@ -310,4 +318,11 @@
         <item>Sacha papa</item>
     </string-array>
     >
+
+    <string-array name="s_opciones_comercio">
+        <item>Elija</item>
+        <item>Producto Agroecológico</item>
+        <item>Producto Pecuario</item>
+        <item>Producto Transformado</item>
+    </string-array>
 </resources>

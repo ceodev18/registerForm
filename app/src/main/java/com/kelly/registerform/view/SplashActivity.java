@@ -19,6 +19,7 @@ import com.kelly.registerform.R;
 import com.kelly.registerform.controllers.DeparmentController;
 import com.kelly.registerform.dataAccess.DepartmentDA;
 import com.kelly.registerform.model.Book;
+import com.kelly.registerform.model.main.MainJson;
 import com.kelly.registerform.utils.SaveDataBase;
 import com.orm.SugarContext;
 
@@ -42,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         SugarContext.init(this);
         SaveDataBase saveDataBase = new SaveDataBase(context);
-        reviewDatabase();
+        //reviewDatabase();
         //saveDataBase.getDepartamentos();
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
             /*numPermissions = PermissionMethods.checkPermissions(this);
@@ -53,7 +54,7 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             runSplash();
         }
-
+        MainJson mainJson = new MainJson(context);
     }
     private void runSplash() {
 

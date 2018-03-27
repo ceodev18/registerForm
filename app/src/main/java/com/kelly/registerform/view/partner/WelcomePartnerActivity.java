@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.kelly.registerform.R;
@@ -24,6 +25,7 @@ public class WelcomePartnerActivity extends AppCompatActivity {
     private Button b_next;
     private Context context;
     private CheckBox cb_1,cb_2,cb_3,cb_4;
+    private boolean state1,state2,state3,state4;
     private ArrayList<Integer> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +42,47 @@ public class WelcomePartnerActivity extends AppCompatActivity {
         cb_2 = (CheckBox) findViewById(R.id.cb_2);
         cb_3 = (CheckBox) findViewById(R.id.cb_3);
         cb_4 = (CheckBox) findViewById(R.id.cb_4);
+        state1=false;
+        state2=false;
+        state3=false;
+        state4=false;
+
     }
     private void setActions(){
+        cb_1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                state1=true;
+            }
+        });
+        cb_2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                state2=true;
+            }
+        });
+        cb_3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                state3=true;
+            }
+        });
+        cb_4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                state4=true;
+            }
+        });
+
+
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(cb_1.isChecked())list.add(1);
-                if(cb_2.isChecked())list.add(2);
-                if(cb_3.isChecked())list.add(3);
-                if(cb_4.isChecked())list.add(4);
+                list=new ArrayList<>();
+                if(state1)list.add(1);
+                if(state2)list.add(2);
+                if(state3)list.add(3);
+                if(state4)list.add(4);
                 if(list.size()>0){
                     if(list.get(0)==1){
                         Intent i = new Intent(context,ProductionActivity.class);
@@ -90,5 +124,12 @@ public class WelcomePartnerActivity extends AppCompatActivity {
             return listCheck;
         }
         return "";
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setElements();
+        setActions();
     }
 }

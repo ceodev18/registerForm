@@ -13,61 +13,80 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <!--<application android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:name="com.orm.SugarApp">
-        android:theme="@style/AppTheme">-->
+
     <application
-        tools:replace="android:icon"
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <meta-data android:name="DATABASE" android:value="sugar_example.db" />
-        <meta-data android:name="VERSION" android:value="2" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.kelly.registerform.model" />
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
+        <meta-data
+            android:name="DATABASE"
+            android:value="sugar_example.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="2" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.kelly.registerform.model" />
+
         <activity
             android:name=".view.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.partner.RegistrationPartnerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.partner.RegistrationPartnerPartBActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".view.partner.WelcomePartnerActivity"
-            android:screenOrientation="portrait" />
-        >
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".view.farming.ProductionActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.partner.ValidationActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".view.commerce.InformationActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".view.livestock.LivestockProductionActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".view.transformation.ProcessActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".view.farming.SystemProductionActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".view.farming.FarmingCertificationActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".view.livestock.LiveStockEcoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.livestock.CertificationLiveStockActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".example.MapaGoogle"
             android:screenOrientation="portrait" />
@@ -78,21 +97,31 @@
 
         <activity
             android:name=".view.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ending.SuccessActivity" />
-        <activity android:name=".example.AnotherActivity">
-
+        <activity android:name=".view.ending.SuccessActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".example.AnotherActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.farming.DetailsFarmingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.livestock.DetailsLiveStockActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.transformation.DetailsTransformationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.commerce.ComercializacionActivity"
+            android:screenOrientation="portrait">
         </activity>
-
     </application>
 
 </manifest>

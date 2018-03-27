@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/et_insumo"
             android:padding="5dp"
             android:background="#00000000"
             android:hint="¿Cuál es el insumo usado?"
@@ -23,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Spinner
+        android:id="@+id/s_organico"
         android:background="@drawable/background_spinner"
         android:entries="@array/sa_yes_no"
         android:layout_margin="10dp"
@@ -36,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Spinner
+        android:id="@+id/s_comprado"
         android:background="@drawable/background_spinner"
         android:entries="@array/sa_bougth"
         android:layout_margin="10dp"
@@ -49,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/et_vendedor"
             android:padding="5dp"
             android:background="#00000000"
             android:hint="Si el insumo es comprado, a quién le compras?"
@@ -62,6 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/et_codigo"
             android:padding="5dp"
             android:background="#00000000"
             android:hint="Código de certificado agroecológico de quien le compras"
@@ -75,6 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/et_lugar"
             android:padding="5dp"
             android:background="#00000000"
             android:hint="Si el insumo es comprado, dónde lo compras?"

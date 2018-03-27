@@ -36,7 +36,7 @@
                     android:layout_gravity="center_horizontal"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textAlignment="center"
-                    android:text="Producción Agrícola"
+                    android:text="Producción Pecuaria"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -44,7 +44,7 @@
                     android:layout_gravity="center_horizontal"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textAlignment="center"
-                    android:text="Menciona todas las prácticas de agricultura ecológica que utilizas"
+                    android:text="Menciona todas las prácticas ecológicas pecuarias que utilizas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

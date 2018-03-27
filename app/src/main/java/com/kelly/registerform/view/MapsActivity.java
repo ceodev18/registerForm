@@ -60,9 +60,7 @@ public class MapsActivity extends AppCompatActivity
             b_back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
-                    //pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
-                    //startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
+
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("result",latitude+","+longitude);
                     setResult(Activity.RESULT_OK,returnIntent);
@@ -96,6 +94,8 @@ public class MapsActivity extends AppCompatActivity
                 @Override
                 public void onMapClick(LatLng point) {
                     Toast.makeText(getApplicationContext(), point.toString(), Toast.LENGTH_SHORT).show();
+                    latitude = point.latitude;
+                    longitude=point.longitude;
                     mGoogleMap.clear();
                     MarkerOptions marker = new MarkerOptions().position(
                             new LatLng(point.latitude, point.longitude)).title("New Marker");

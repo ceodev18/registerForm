@@ -46,6 +46,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </Spinner>
+        <Button
+            android:id="@+id/b_map"
+            android:layout_margin="10dp"
+            android:background="@color/colorOrangeButton"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:text="Clic aquí para obtener la ubicación de la planta"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <android.support.design.widget.TextInputLayout
             android:textColorHint="@color/colorPrimary"
             android:layout_width="match_parent"
@@ -53,7 +63,8 @@
             android:background="@drawable/background_textview"
             android:layout_margin="10dp">
             <EditText
-
+                android:enabled="false"
+                android:id="@+id/et_latitud"
                 android:layout_margin="10dp"
                 android:background="#00000000"
                 android:inputType="text"
@@ -68,7 +79,8 @@
             android:background="@drawable/background_textview"
             android:layout_margin="10dp">
             <EditText
-
+                android:enabled="false"
+                android:id="@+id/et_longitud"
                 android:layout_margin="10dp"
                 android:background="#00000000"
                 android:inputType="text"
@@ -87,11 +99,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tv_photo"
             android:padding="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:text="Se ha registrado la foto correctamente!"
+            android:text="No hay imagen o archivo seleccionado o ingresado"
             android:textStyle="italic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -260,6 +273,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:id="@+id/s_month_start"
             android:background="@drawable/background_spinner"
             android:padding="5dp"
             android:entries="@array/sa_month"
@@ -274,6 +288,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:id="@+id/s_month_end"
             android:background="@drawable/background_spinner"
             android:padding="5dp"
             android:entries="@array/sa_month"
@@ -288,6 +303,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:id="@+id/et_sanitario"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:hint="Registro Sanitario"
@@ -302,6 +318,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:inputType="text"
+                android:id="@+id/et_ruc"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:hint="RUC"
@@ -316,6 +334,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:id="@+id/et_razon"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:hint="Razón Social/Nombre de la micro empresa"
@@ -346,10 +365,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tv_photo_final"
             android:padding="5dp"
             android:layout_margin="10dp"
             android:textStyle="italic"
-            android:text="Se ha registrado la foto correctamente!"
+            android:text="No hay imagen o archivo seleccionado o ingresado"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -368,6 +388,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:id="@+id/s_tiene"
             android:background="@drawable/background_spinner"
             android:padding="5dp"
             android:entries="@array/sa_yes_no"
@@ -382,6 +403,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:id="@+id/s_tipo"
             android:background="@drawable/background_spinner"
             android:padding="5dp"
             android:entries="@array/sa_type_cert_live"
@@ -396,6 +418,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
+            android:id="@+id/s_company"
             android:background="@drawable/background_spinner"
             android:padding="5dp"
             android:entries="@array/sa_empty"
@@ -410,6 +433,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:id="@+id/et_code"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:hint="Código de Certificación"
@@ -424,6 +448,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:id="@+id/et_year"
                 android:padding="5dp"
                 android:background="#00000000"
                 android:hint="Año Caducidad de la Certificación"
@@ -440,10 +465,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tv_file"
             android:padding="5dp"
             android:layout_margin="10dp"
             android:textStyle="italic"
-            android:text="Se ha registrado el documento correctamente!"
+            android:text="No hay imagen o archivo seleccionado o ingresado"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
