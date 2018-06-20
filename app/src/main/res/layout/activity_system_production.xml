@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.kelly.registerform.view.farming.SystemProductionActivity">
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:padding="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -74,7 +76,7 @@
         <TextView
             android:layout_margin="10dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:text="Otras prácticas agroecológicas y ambientales (*)"
+            android:text="Otras prácticas agroecológicas y ambientales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <com.thomashaertel.widget.MultiSpinner

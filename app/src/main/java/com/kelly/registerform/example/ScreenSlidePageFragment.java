@@ -66,8 +66,8 @@ public class ScreenSlidePageFragment extends Fragment {
     private int color;
     private int index,globalType,idTipoProducto1,idTipoProducto2,idProd1,idProd2;
     public int indexPage=1;
-    private LinearLayout ll_1,ll_2;
-    private TextView tv_show1,tv_show2,tv_metros,tv_hectareas,tv_yugadas;
+    private LinearLayout ll_1,ll_2,anual_option1;
+    private TextView tv_show1,tv_show2;
     private ArrayList<TextView> textViewArrayList;
     private ArrayList<LinearLayout>linearLayoutArrayList;
     private ArrayList<String>arrayListType,arrayListSize;
@@ -187,11 +187,7 @@ public class ScreenSlidePageFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 globalType=idType.get(i);
                 if(!(et_medida.getText().length()==0) && !(s_type.getSelectedItem().toString().equals("Elija"))){
-                    //if(s_type.getSelectedItem().toString().equals("Yugadas"))
                     float val = Float.parseFloat(et_medida.getText()+"");
-                    tv_metros.setText("La chacra mide en metros "+val);
-                    tv_hectareas.setText("La chacra mide en hectáreas "+(val/100));
-                    tv_yugadas.setText("La chacra mide en yugadas "+(val/33));
                 }
             }
 
@@ -221,10 +217,9 @@ public class ScreenSlidePageFragment extends Fragment {
         }
     }
     private void setElements(ViewGroup rootView){
-        tv_metros=rootView.findViewById(R.id.tv_metros);
-        tv_hectareas=rootView.findViewById(R.id.tv_hectareas);
-        tv_yugadas=rootView.findViewById(R.id.tv_yugadas);
+
         et_parcela_name = rootView.findViewById(R.id.et_parcela_name);
+
         et_parcela_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -244,6 +239,7 @@ public class ScreenSlidePageFragment extends Fragment {
                 // TODO Auto-generated method stub
             }
         });
+
         s_type=rootView.findViewById(R.id.s_type);
         et_medida=rootView.findViewById(R.id.et_medida);
         fillType();
@@ -356,6 +352,8 @@ public class ScreenSlidePageFragment extends Fragment {
         spinnerGroup2=(Spinner) v2.findViewById(R.id.s_group_farming);
         spinnerProduct1=(Spinner) v1.findViewById(R.id.s_production);
         spinnerProduct2=(Spinner) v2.findViewById(R.id.s_production);
+
+        //anual_option1 = (LinearLayout)v1.findViewById(R.id.anual_option1);
 
         g1=new ArrayList<>();
         nameListG1=new ArrayList<>();
@@ -673,7 +671,7 @@ public class ScreenSlidePageFragment extends Fragment {
             Toast.makeText(getContext(), "Seleccione producto / Vista #"+index, Toast.LENGTH_SHORT).show();
             return false;
         }
-        RadioButton rb_anual1 = viewKid1.findViewById(R.id.rb_anual);
+        /*RadioButton rb_anual1 = viewKid1.findViewById(R.id.rb_anual);
 
         RadioButton rb_permanente1 = viewKid1.findViewById(R.id.rb_permanente);
 
@@ -682,7 +680,7 @@ public class ScreenSlidePageFragment extends Fragment {
         Spinner s_group_farming2= viewKid2.findViewById(R.id.s_group_farming);
         Spinner s_production2 =viewKid2.findViewById(R.id.s_production);
         RadioButton rb_anual2 = viewKid2.findViewById(R.id.rb_anual);
-        RadioButton rb_permanente2 = viewKid2.findViewById(R.id.rb_permanente);
+        RadioButton rb_permanente2 = viewKid2.findViewById(R.id.rb_permanente);*/
 
         //send to database
         return true;

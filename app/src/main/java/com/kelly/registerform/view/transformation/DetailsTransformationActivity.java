@@ -1,18 +1,24 @@
 package com.kelly.registerform.view.transformation;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -28,29 +34,50 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 import com.kelly.registerform.BuildConfig;
 import com.kelly.registerform.R;
+import com.kelly.registerform.adapters.modelsAdapter.EmpresaCertificadoraAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.GrupoProductoTransformadoAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.PresentacionAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.ProductoTransformadoAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.ProvinceAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.TipoPropiedadAdapter;
+import com.kelly.registerform.model.GrupoProductoTransformado;
+import com.kelly.registerform.model.ManejoCrianza;
+import com.kelly.registerform.model.Presentacion;
+import com.kelly.registerform.model.ProductoTransformado;
+import com.kelly.registerform.model.TipoPropiedad;
+import com.kelly.registerform.model.certifications.EmpresaCertificadora;
+import com.kelly.registerform.model.certifications.TipoCertificadora;
+import com.kelly.registerform.model.ubigeo.Provincia;
 import com.kelly.registerform.view.MapsActivity;
 import com.kelly.registerform.view.farming.ProductionActivity;
 import com.kelly.registerform.view.livestock.LivestockProductionActivity;
+import com.kelly.registerform.view.partner.RegistrationPartnerActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.List;
 
-public class DetailsTransformationActivity extends AppCompatActivity {
+public class DetailsTransformationActivity extends AppCompatActivity implements  DatePickerDialog.OnDateSetListener{
     private Button b_photo,b_photo_final,b_file,b_save;
     private Context context=this;
     private String position;
+    public static String dateString="";
+    private String stringBirthday="";
+    public static boolean stateDate=false;
     private static final String INDEX = "index";
     private static final int PICK_IMAGE = 100;
     private int color;
     private int index;
     private Button b_map;
-    private EditText et_latitude,et_longitude,et_sanitario,et_ruc,et_razon,et_year,et_code;
+    private EditText et_latitude,et_longitude,et_sanitario,et_ruc,et_razon,et_code;
     private ArrayList<TextView> listTextView;
     private TextView tv_show1,tv_show2,tv_show3,tv_show4,tv_show5,tv_show6,tv_title,tv_photo,
-            tv_photo_final,tv_file;
+            tv_photo_final,tv_file,et_year;
     private LinearLayout ll_1,ll_2,ll_3,ll_4,ll_5,ll_6;
     private ArrayList<Boolean>listState;
     private ArrayList<LinearLayout>linearLayoutArrayList;
@@ -69,7 +96,10 @@ public class DetailsTransformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_transformation);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         position=getIntent().getStringExtra("index");
         int aux = Integer.parseInt(position);
@@ -141,6 +171,76 @@ public class DetailsTransformationActivity extends AppCompatActivity {
         arrayInsumoList =new ArrayList<>();
         arrayPresentationList=new ArrayList<>();
         innerViews();
+        refillData();
+    }
+    private void refillData(){
+        JsonObject main =ProcessActivity.jsonObjectArrayList.get(Integer.parseInt(position));
+        if(main.size()==0)return;
+        et_latitude.setText(main.get("ubicacion_latitud_gps").getAsString());
+        et_longitude.setText(main.get("ubicacion_longitud_gps").getAsString());
+        s_type.setSelection(getIndexType(s_type, main.get("id_tipo_producto").getAsString()));
+        s_product.setSelection(getIndexProducto(s_product, main.get("id_producto_transformado").getAsString()));
+        s_month_start.setSelection(getIndex(s_month_start, main.get("produccion_mes_desde").getAsString()));
+        s_month_end.setSelection(getIndex(s_month_end, main.get("produccion_mes_hasta").getAsString()));
+
+        et_sanitario.setText(main.get("registro_sanitario").getAsString());
+        et_ruc.setText(main.get("ruc").getAsString());
+        et_razon.setText(main.get("razon_social").getAsString());
+        et_code.setText(main.get("codigo_certificado").getAsString());
+
+        if(main.get("tiene_certificado").getAsString().equals("Sí"))s_tiene.setSelection(1);
+        else s_tiene.setSelection(2);
+        s_tipo.setSelection(getIndex(s_tipo, main.get("id_tipo_certificadora").getAsString()));
+        s_company.setSelection(getIndexCompany(s_company, main.get("id_empresa_certificadora").getAsString()));
+        //Date
+        stateDate= true;
+        dateString= main.get("fecha_caducidad").getAsString();
+        et_year.setText(dateString);
+    }
+
+    //private method of your class
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    private int getIndexCompany(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            EmpresaCertificadora empresaCertificadora = (EmpresaCertificadora)spinner.getAdapter().getItem(i);
+            if (empresaCertificadora.getId_main().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    //private method of your class
+    private int getIndexType(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            GrupoProductoTransformado grupoProductoTransformado = (GrupoProductoTransformado)spinner.getAdapter().getItem(i);
+            if (grupoProductoTransformado.getId_main().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    //private method of your class
+    private int getIndexProducto(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            ProductoTransformado productoTransformado = (ProductoTransformado)spinner.getAdapter().getItem(i);
+            if (productoTransformado.getId_main().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+
+        return 0;
     }
     private void innerViews(){
         View insumo_v1= new View(context);
@@ -229,58 +329,41 @@ public class DetailsTransformationActivity extends AppCompatActivity {
         fillComapy();
     }
     private void fillTipo(){
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String url = BuildConfig.BASE_URL+"lista_grupos_productos_transformados.php?token=lpsk.21568$lsjANPIO02";
-        System.out.println(url);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("grupo_productos_transformados");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idType=new ArrayList<>();
-                            idType.add(0);
-                            arrayListType=new ArrayList<>();
-                            arrayListType.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    int  id = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("grupo");
 
-                                    idType.add(id);
-                                    arrayListType.add(name);
-                                }else{
-                                    String name= (String)jsonObj2.get(key);
-                                    idType.add(Integer.parseInt(key));
-                                    arrayListType.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    arrayListType);
-                            s_type.setAdapter(spinnerArrayAdapter);
+        final GrupoProductoTransformadoAdapter adapter = new GrupoProductoTransformadoAdapter(context,
+                R.layout.owner_spinner_item,
+                GrupoProductoTransformado.listAll(GrupoProductoTransformado.class));
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        s_type.setAdapter(adapter);
+        s_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                GrupoProductoTransformado grupoProductoTransformado= adapter.getItem(i);
+                int id = Integer.parseInt(grupoProductoTransformado.getId_main());
+                idtype_se =id;
+                fillProduct(id);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
+
+
 
     }
 
     private void setActions(){
+        et_year.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DatePickerFragment fragment = new DatePickerFragment();
+                fragment.show(getSupportFragmentManager(),"doit");
+            }
+        });
         b_photo_final.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -307,37 +390,14 @@ public class DetailsTransformationActivity extends AppCompatActivity {
                 tv_file.setText("Se ha registrado la imagen correctamente");
             }
         });
-        s_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                int id = idType.get(i);
-                idtype_se =id;
-                fillProduct(id);
 
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
-
-        s_product.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                idprod_se= idType.get(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         s_company.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                idcomp_se= idCompany.get(i);
+                //idcomp_se= s_company.get(i);
             }
 
             @Override
@@ -360,7 +420,8 @@ public class DetailsTransformationActivity extends AppCompatActivity {
                 JsonObject transformationJson = recoverData();
                 ProcessActivity.jsonObjectArrayList.set(Integer.parseInt(position),transformationJson);
                 Intent returnIntent = new Intent();
-                //returnIntent.putExtra("result",et_parcela_name.getText().toString()+","+position)
+                ProductoTransformado p =(ProductoTransformado)s_product.getSelectedItem();
+                returnIntent.putExtra("result",p.getName()+","+position);
                 setResult(Activity.RESULT_OK,returnIntent);
                 finish();
             }
@@ -400,42 +461,45 @@ public class DetailsTransformationActivity extends AppCompatActivity {
     private JsonObject getPresentaciones(){
         //arrayInsumoList
         JsonObject response = new JsonObject();
-        if(spinner1.getSelectedItem().toString().length()!=0
-                && !spinner1.getSelectedItem().toString().equals("")){
+        Presentacion p1 = (Presentacion)spinner1.getSelectedItem();
+        if(p1.getName().length()!=0
+                && !p1.getName().equals("")){
             JsonObject aux = new JsonObject();
-            if(spinner1.getSelectedItem().toString().equals("Botella de 1 litro"))
+            if(p1.getName().equals("Botella de 1 litro"))
                 aux.addProperty("id_tipo_presentacion",1);
-            if(spinner1.getSelectedItem().toString().equals("Botella de medio litro"))
+            if(p1.getName().equals("Botella de medio litro"))
                 aux.addProperty("id_tipo_presentacion",2);
-            if(spinner1.getSelectedItem().toString().equals("caja"))
+            if(p1.getName().equals("caja"))
                 aux.addProperty("id_tipo_presentacion",3);
             EditText et_cantidad = arrayPresentationList.get(0).findViewById(R.id.et_cantidad);
             aux.addProperty("cantidad",et_cantidad.getText().toString());
             response.add("1",aux);
         }
 
-        if(spinner2.getSelectedItem().toString().length()!=0
-                && !spinner2.getSelectedItem().toString().equals("")){
+        Presentacion p2 = (Presentacion)spinner2.getSelectedItem();
+        if(p2.getName().length()!=0
+                && !p2.getName().equals("")){
             JsonObject aux = new JsonObject();
-            if(spinner2.getSelectedItem().toString().equals("Botella de 1 litro"))
+            if(p2.getName().equals("Botella de 1 litro"))
                 aux.addProperty("id_tipo_presentacion",1);
-            if(spinner2.getSelectedItem().toString().equals("Botella de medio litro"))
+            if(p2.getName().equals("Botella de medio litro"))
                 aux.addProperty("id_tipo_presentacion",2);
-            if(spinner2.getSelectedItem().toString().equals("caja"))
+            if(p2.getName().equals("caja"))
                 aux.addProperty("id_tipo_presentacion",3);
             EditText et_cantidad = arrayPresentationList.get(1).findViewById(R.id.et_cantidad);
             aux.addProperty("cantidad",et_cantidad.getText().toString());
             response.add("2",aux);
         }
 
-        if(spinner3.getSelectedItem().toString().length()!=0
-                && !spinner3.getSelectedItem().toString().equals("")){
+        Presentacion p3 = (Presentacion)spinner3.getSelectedItem();
+        if(p3.getName().length()!=0
+                && !p3.getName().equals("")){
             JsonObject aux = new JsonObject();
-            if(spinner3.getSelectedItem().toString().equals("Botella de 1 litro"))
+            if(p3.getName().equals("Botella de 1 litro"))
                 aux.addProperty("id_tipo_presentacion",1);
-            if(spinner3.getSelectedItem().toString().equals("Botella de medio litro"))
+            if(p3.getName().equals("Botella de medio litro"))
                 aux.addProperty("id_tipo_presentacion",2);
-            if(spinner3.getSelectedItem().toString().equals("caja"))
+            if(p3.getName().equals("caja"))
                 aux.addProperty("id_tipo_presentacion",3);
             EditText et_cantidad = arrayPresentationList.get(2).findViewById(R.id.et_cantidad);
             aux.addProperty("cantidad",et_cantidad.getText().toString());
@@ -459,22 +523,31 @@ public class DetailsTransformationActivity extends AppCompatActivity {
         response.addProperty("razon_social",et_razon.getText().toString());
         response.addProperty("etiqueta","");
         response.addProperty("tiene_certificado",s_tiene.getSelectedItem().toString());
+
         response.addProperty("id_tipo_certificadora",s_tipo.getSelectedItem().toString());
-        response.addProperty("id_empresa_certificadora",idcomp_se);
+
+        EmpresaCertificadora e = (EmpresaCertificadora)s_company.getSelectedItem();
+        response.addProperty("id_empresa_certificadora",e.getName());
+
         response.addProperty("codigo_certificado",idcomp_se);
-        response.addProperty("fecha_caducidad",et_year.getText()+"");
+        response.addProperty("fecha_caducidad",stringBirthday);
         response.addProperty("tipo_certificacion","transformacion");
 
         return response;
     }
     public boolean validation(){
-        if(s_type.getSelectedItem().toString().equals("Elija")
-                ||s_type.getSelectedItem().toString().length()==0){
+        GrupoProductoTransformado g =(GrupoProductoTransformado)s_type.getSelectedItem();
+        if(g.getName().equals("Elije")
+                ||g.getName().length()==0){
             Toast.makeText(context, "Debe escoger tipo de producto", Toast.LENGTH_SHORT).show();
             return false;
         }
-        /*if(s_product.getSelectedItem().toString().equals("Elija")
-                ||s_product.getSelectedItem().toString().length()==0)return false;*/
+        ProductoTransformado p =(ProductoTransformado)s_product.getSelectedItem();
+        if(p.getName().equals("Elija")
+                ||p.getName().length()==0){
+            Toast.makeText(context, "Debe escoger un producto", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if(s_month_start.getSelectedItem().toString().equals("Elija")
                 ||s_month_start.getSelectedItem().toString().length()==0){
             Toast.makeText(context, "Debe escoger mes de inicio", Toast.LENGTH_SHORT).show();
@@ -498,83 +571,71 @@ public class DetailsTransformationActivity extends AppCompatActivity {
             Toast.makeText(context, "Debe ingresar la razón social", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(et_code.getText().length()==0){
-            Toast.makeText(context, "Debe ingresar código de Certificación", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if(et_year.getText().length()==0){
-            Toast.makeText(context, "Debe escoger año de caducidad", Toast.LENGTH_SHORT).show();
-            return false;
-        }
 
-        if(s_tipo.getSelectedItem().toString().equals("Elija")
-                ||s_tipo.getSelectedItem().toString().length()==0){
-            Toast.makeText(context, "Debe escoger el tipo de certificado", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+
+
+
 
         if(s_tiene.getSelectedItem().toString().equals("Elija")
                 ||s_tiene.getSelectedItem().toString().length()==0){
             Toast.makeText(context, "Debe escoger si tiene certificado", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(s_company.getSelectedItem().toString().equals("Elija")
-                ||s_company.getSelectedItem().toString().length()==0){
-            Toast.makeText(context, "Debe escoger la empresa", Toast.LENGTH_SHORT).show();
-            return false;
+        if(!s_tiene.getSelectedItem().toString().equals("No")){
+
+            if(s_tipo.getSelectedItem().toString().equals("Elija")
+                    ||s_tipo.getSelectedItem().toString().length()==0){
+                Toast.makeText(context, "Debe escoger el tipo de certificado", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            EmpresaCertificadora e = (EmpresaCertificadora)s_company.getSelectedItem();
+            if(e.getName().equals("Elije")
+                    ||e.getName().length()==0){
+                Toast.makeText(context, "Debe escoger la empresa", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            if(et_code.getText().length()==0){
+                Toast.makeText(context, "Ingrese código", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            if(et_year.getText().length()==0){
+                Toast.makeText(context, "Debe escoger año de caducidad", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
         }
 
         return true;
 
     }
     private void fillProduct(int id){
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String url = BuildConfig.BASE_URL+"lista_productos_transformados.php?grupo="+id+"&token=lpsk.21568$lsjANPIO02";
-        System.out.println(url);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("productos_transformados");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idProduct = new ArrayList<>();
-                            idProduct.add(0);
-                            arrayListProduct = new ArrayList<>();
-                            arrayListProduct.add("Elije");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    int  id = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("producto_transformado");
-                                    idProduct.add(id);
-                                    arrayListProduct.add(name);
-                                }else{
-                                    String name= (String)jsonObj2.get(key);
-                                    idProduct.add(Integer.parseInt(key));
-                                    arrayListProduct.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    arrayListProduct);
-                            s_product.setAdapter(spinnerArrayAdapter);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            s_product.setAdapter(null);
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        Iterator<?> keys = ProductoTransformado.findAll(ProductoTransformado.class);
+        List<ProductoTransformado> currentList= new ArrayList<>();
+        while(keys.hasNext()){
+            ProductoTransformado p = (ProductoTransformado)keys.next();
+            System.out.println("p.getId_parent "+p.getId_parent() +"\t"+id+"");
+            if (p.getId_parent().equals(id+""))currentList.add(p);
+        }
+
+        final ProductoTransformadoAdapter adapter = new ProductoTransformadoAdapter(context,R.layout.owner_spinner_item,
+                currentList);
+
+        s_product.setAdapter(adapter);
+        s_product.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ProductoTransformado productoTransformado =adapter.getItem(i);
+                idprod_se= Integer.parseInt(productoTransformado.getId_main());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
 
     }
 
@@ -603,7 +664,13 @@ public class DetailsTransformationActivity extends AppCompatActivity {
     }
 
     private void fillPresentation(final Spinner spinner,final ArrayList<String>nameList,final ArrayList<Integer>idList){
-        RequestQueue queue = Volley.newRequestQueue(context);
+        final PresentacionAdapter adapter = new PresentacionAdapter(context,
+                R.layout.owner_spinner_item,
+                Presentacion.listAll(Presentacion.class));
+
+        spinner.setAdapter(adapter);
+
+        /*RequestQueue queue = Volley.newRequestQueue(context);
         String url = BuildConfig.BASE_URL+"lista_tipo_presentacion.php?&token=lpsk.21568$lsjANPIO02";
         System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -647,58 +714,77 @@ public class DetailsTransformationActivity extends AppCompatActivity {
 
             }
         });
-        queue.add(stringRequest);
+        queue.add(stringRequest);*/
     }
 
 
     private void fillComapy(){
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String url = BuildConfig.BASE_URL+"lista_empresas_certificadoras_sgp.php?token=lpsk.21568$lsjANPIO022";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("empresas_sgp");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idCompany=new ArrayList<>();
-                            idCompany.add(0);
-                            arrayListCompany=new ArrayList<>();
-                            arrayListCompany.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    int  id = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("empresa_sgp");
-                                    idCompany.add(id);
-                                    arrayListCompany.add(name);
-                                }else{
-                                    String name= (String)jsonObj2.get(key);
-                                    idCompany.add(Integer.parseInt(key));
-                                    System.out.println(name);
-                                    arrayListCompany.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    arrayListCompany);
-                            s_company.setAdapter(spinnerArrayAdapter);
+        final EmpresaCertificadoraAdapter adapter = new EmpresaCertificadoraAdapter(context,
+                R.layout.owner_spinner_item,
+                EmpresaCertificadora.listAll(EmpresaCertificadora.class));
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            s_company.setAdapter(null);
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        s_company.setAdapter(adapter);
+
+        s_company.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        Calendar cal = new GregorianCalendar(i, i1, i2);
+        setDate(cal);
+    }
+    private void setDate(final Calendar calendar) {
+        stringBirthday = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+        dateString = stringBirthday;
+        et_year.setText(stringBirthday);
+        //b_birthday.setKeyListener(null);
+        stateDate =true;
+    }
+
+    public static class DatePickerFragment extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            if(!DetailsTransformationActivity.stateDate){
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+
+                return new DatePickerDialog(getActivity(),
+                        (DatePickerDialog.OnDateSetListener)
+                                getActivity(), year, month, day);
+            }else{
+                String[] dateOwn=DetailsTransformationActivity.dateString.split("-");
+                return new DatePickerDialog(getActivity(),
+                        (DatePickerDialog.OnDateSetListener)
+                                getActivity(), Integer.parseInt(dateOwn[0]), Integer.parseInt(dateOwn[1])-1, Integer.parseInt(dateOwn[2]));
+            }
+
+        }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            getSupportFragmentManager().popBackStack();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }

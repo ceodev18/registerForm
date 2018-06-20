@@ -1,24 +1,40 @@
 package com.kelly.registerform.model.ubigeo;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
+
 /**
  * Created by bethzabe on 21/02/2018.
  */
 
-public class Distrito {
-    private int id;
+public class Distrito extends SugarRecord{
+    @Unique
+    private String id_ditrito;
+    private String id_parent;
     private String name;
-    public Distrito(int id,String name){
-        this.id=id;
-        this.name=name;
+    public Distrito(){
+
+    }
+    public Distrito(String id_ditrito,String id_parent,String name){
+        this.setId_ditrito(id_ditrito);
+        this.setName(name);
+        this.id_parent=id_parent;
     }
 
-
-    public int getId() {
-        return id;
+    public String getId_ditrito() {
+        return id_ditrito;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_ditrito(String id_ditrito) {
+        this.id_ditrito = id_ditrito;
+    }
+
+    public String getId_parent() {
+        return id_parent;
+    }
+
+    public void setId_parent(String id_parent) {
+        this.id_parent = id_parent;
     }
 
     public String getName() {

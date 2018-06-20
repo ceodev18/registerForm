@@ -2,9 +2,11 @@ package com.kelly.registerform.view.farming;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,7 +21,14 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 import com.kelly.registerform.BuildConfig;
 import com.kelly.registerform.R;
+import com.kelly.registerform.adapters.modelsAdapter.MedidaChacraAdapter;
+import com.kelly.registerform.dataAccess.practicas.AgricolaDA;
+import com.kelly.registerform.dataAccess.practicas.BiodiversidadDA;
+import com.kelly.registerform.dataAccess.practicas.ManejoSueloDA;
+import com.kelly.registerform.dataAccess.practicas.PlagaDA;
+import com.kelly.registerform.model.MedidaChacra;
 import com.kelly.registerform.model.main.MainJson;
+import com.kelly.registerform.model.practicas.ManejoSuelo;
 import com.thomashaertel.widget.MultiSpinner;
 
 import org.json.JSONException;
@@ -27,6 +36,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class SystemProductionActivity extends AppCompatActivity {
     private Button b_next,b_back;
@@ -34,13 +44,17 @@ public class SystemProductionActivity extends AppCompatActivity {
     private String list;
     private MultiSpinner spinnerMulti1,spinnerMulti2,spinnerMulti3,spinnerMulti4;
     private ArrayAdapter adapter1,adapter2,adapter3,adapter4;
-    private ArrayList<String>s1,s2,s3,s4;
+    private List<String>s1,s2,s3,s4;
     private ArrayList<Integer> i1,i2,i3,i4,selected1,selected2,selected3,selected4;
     private StringBuilder spinnerMulti1List1,spinnerMulti1List2,spinnerMulti1List3,spinnerMulti1List4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_production);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setElements();
         setActions();
     }
@@ -58,28 +72,32 @@ public class SystemProductionActivity extends AppCompatActivity {
         spinnerMulti1List4= new StringBuilder();
 
         i1=new ArrayList<>();
-        s1=new ArrayList<>();
         selected1=new ArrayList<>();
         adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s1,"manejo_suelos",adapter1,i1);
+        s1=ManejoSueloDA.getListName();
+        adapter1.addAll(s1);
+
 
         i2=new ArrayList<>();
-        s2=new ArrayList<>();
         selected2=new ArrayList<>();
         adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s2,"plagas",adapter2,i2);
+        s2= PlagaDA.getListName();
+        adapter2.addAll(s2);
 
         i3=new ArrayList<>();
         s3=new ArrayList<>();
         selected3=new ArrayList<>();
         adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s3,"agricolas",adapter3,i3);
+        s3= AgricolaDA.getListName();
+        adapter3.addAll(s3);
 
         i4=new ArrayList<>();
         s4=new ArrayList<>();
         selected4=new ArrayList<>();
         adapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s4,"biodiversidad",adapter4,i4);
+        s4= BiodiversidadDA.getListName();
+        adapter4.addAll(s4);
+
 
         spinnerMulti1.setAdapter(adapter1, false, onSelectedListener1);
         spinnerMulti2.setAdapter(adapter2, false, onSelectedListener2);
@@ -140,10 +158,6 @@ public class SystemProductionActivity extends AppCompatActivity {
             Toast.makeText(context, "Debe escoger al menos una práctica manejo de plagas o enfermedades.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(selected3.size()==0){
-            Toast.makeText(context, "Debe escoger al menos una práctica agroecológica o ambiental.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
         if(selected4.size()==0){
             Toast.makeText(context, "Debe escoger al menos una semilla o biodiversidad.", Toast.LENGTH_SHORT).show();
             return false;
@@ -152,19 +166,21 @@ public class SystemProductionActivity extends AppCompatActivity {
     }
     private MultiSpinner.MultiSpinnerListener onSelectedListener1 = new MultiSpinner.MultiSpinnerListener() {
         public void onItemsSelected(boolean[] selected) {
+
             for (int i = 0; i < selected.length; i++) {
                 if (selected[i]) {
-                    selected1.add(i1.get(i));
+                    selected1.add(Integer.parseInt(ManejoSueloDA.getIdByName(s1.get(i))));
 
                 }
             }
+
         }
     };
     private MultiSpinner.MultiSpinnerListener onSelectedListener2 = new MultiSpinner.MultiSpinnerListener() {
         public void onItemsSelected(boolean[] selected) {
             for (int i = 0; i < selected.length; i++) {
                 if (selected[i]) {
-                    selected2.add(i2.get(i));
+                    selected2.add(Integer.parseInt(PlagaDA.getIdByName(s2.get(i))));
                 }
             }
         }
@@ -173,7 +189,7 @@ public class SystemProductionActivity extends AppCompatActivity {
         public void onItemsSelected(boolean[] selected) {
             for (int i = 0; i < selected.length; i++) {
                 if (selected[i]) {
-                    selected3.add(i3.get(i));
+                    selected3.add(Integer.parseInt(AgricolaDA.getIdByName(s3.get(i))));
                 }
             }
         }
@@ -182,7 +198,7 @@ public class SystemProductionActivity extends AppCompatActivity {
         public void onItemsSelected(boolean[] selected) {
             for (int i = 0; i < selected.length; i++) {
                 if (selected[i]) {
-                    selected4.add(i4.get(i));
+                    selected4.add(Integer.parseInt(BiodiversidadDA.getIdByName(s4.get(i))));
                 }
             }
         }
@@ -190,7 +206,7 @@ public class SystemProductionActivity extends AppCompatActivity {
     private void fillContent(final ArrayList<String>lista,String value,final ArrayAdapter adapter,final ArrayList<Integer>lista_i){
         RequestQueue queue = Volley.newRequestQueue(this.context);
         String url = BuildConfig.BASE_URL+"lista_practicas_agroecologicas.php?tipo="+value+"&token=lpsk.21568$lsjANPIO02";
-
+        System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -229,6 +245,18 @@ public class SystemProductionActivity extends AppCompatActivity {
             }
         });
         queue.add(stringRequest);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            getSupportFragmentManager().popBackStack();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 }

@@ -9,8 +9,8 @@ import com.orm.dsl.Unique;
 
 public class Departamento extends SugarRecord  {
     @Unique
-    private int id_departamento;
-    private  String name;
+    private String id_departamento;
+    private String name;
     public String getName() {
         return name;
     }
@@ -19,16 +19,16 @@ public class Departamento extends SugarRecord  {
     }
     public Departamento(){
     }
-    public Departamento(int id_departamento,String name){
+    public Departamento(String id_departamento,String name){
         this.setId_departamento(id_departamento);
         this.setName(name);
     }
 
-    public int getId_departamento() {
+    public String getId_departamento() {
         return id_departamento;
     }
 
-    public void setId_departamento(int id_departamento) {
+    public void setId_departamento(String id_departamento) {
         this.id_departamento = id_departamento;
     }
 }

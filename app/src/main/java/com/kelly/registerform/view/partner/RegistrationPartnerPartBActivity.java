@@ -1,21 +1,28 @@
 package com.kelly.registerform.view.partner;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.BoringLayout;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,6 +38,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kelly.registerform.BuildConfig;
 import com.kelly.registerform.R;
+import com.kelly.registerform.adapters.modelsAdapter.EstadoCivilAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.OrganizacionRegionalAdapter;
+import com.kelly.registerform.model.EstadoCivil;
+import com.kelly.registerform.model.OrganizacionRegional;
 import com.kelly.registerform.model.main.MainJson;
 import com.kelly.registerform.model.ubigeo.Departamento;
 
@@ -39,13 +50,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import static com.google.gson.internal.bind.TypeAdapters.URL;
 
-public class RegistrationPartnerPartBActivity extends AppCompatActivity {
+public class RegistrationPartnerPartBActivity extends AppCompatActivity implements  DatePickerDialog.OnDateSetListener{
     private Spinner s_number_children;
     private LinearLayout ll_children;
     private Context context;
@@ -54,21 +67,43 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
     private ArrayList<String> arrayListMarital;
     private ArrayList<Integer>idMarital;
     private int estado_civil;
-    private int tope=2;
+    private int tope=0;// number of children
+    public static int indexDate;
     private EditText et_nombre,et_ap_conyuge,et_am_conyuge;
     private ArrayList<Boolean> checkList=new ArrayList<>();
     private ArrayList<CheckBox> checkBoxes=new ArrayList<>();
     private ArrayList<View>listaVista;
-    private ArrayList<EditText>listaNombres,listaCumple;
+    private ArrayList<EditText>listaNombres;
+    private ArrayList<TextView>listaCumple;
+
     private ArrayList<CheckBox>listaChecks;
     private View v1,v2,v3,v4,v5,v6,v7,v8,v9,v10;
-    //private int[]recursos=new int[]
+    public static String dateString;
+
+    /////////Arry Helpers/////////
+    public static ArrayList<Boolean> listStateDate;
+    public static ArrayList<String> listTextDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_partner_part_b);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        setArrays();
         setElements();
         setActions();
+    }
+    private void setArrays(){
+        listStateDate = new ArrayList<>();
+        listTextDate = new ArrayList<>();
+        for(int i=0;i<9;i++){
+            listStateDate.add(false);
+            listTextDate.add("-");
+        }
+
     }
     private void setElements(){
         context =this;
@@ -123,10 +158,22 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
         v10 =findViewById(R.id.child10);
         listaVista.add(v10);
         for(int i=0;i<listaVista.size();i++){
+            final int index = i;
             EditText et_nombre_hijo=listaVista.get(i).findViewById(R.id.et_nombre_hijo);
             et_nombre_hijo.setHint("Nombre y Apellido del hijo #"+(i+1));
             listaNombres.add(et_nombre_hijo);
-            EditText et_birthday_hijo=listaVista.get(i).findViewById(R.id.et_birthday_hijo);
+            TextView et_birthday_hijo=listaVista.get(i).findViewById(R.id.et_birthday_hijo);
+            et_birthday_hijo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle args = new Bundle();
+                    args.putInt("index",index);
+                    DatePickerFragment fragment = new DatePickerFragment();
+                    fragment.setArguments(args);
+                    fragment.show(getSupportFragmentManager(),"doit");
+
+                }
+            });
             et_birthday_hijo.setHint("Fecha de Nacimiento del hijo #"+(i+1));
             listaCumple.add(et_birthday_hijo);
             CheckBox cb_hijo=listaVista.get(i).findViewById(R.id.cb_hijo);
@@ -149,7 +196,7 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
                      //1,2,3....
                      int val =Integer.parseInt(s_number_children.getSelectedItem().toString());
                      tope=val;
-                     for(int index=2;index<10;index++){
+                     for(int index=0;index<10;index++){
                          listaVista.get(index).setVisibility(View.GONE);
                      }
                      for(int index=0;index<val;index++){
@@ -165,33 +212,7 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
 
             }
         });
-        s_marital.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                estado_civil=idMarital.get(i);
-                if(!s_marital.getSelectedItem().toString().equals("Casado") &&
-                         !s_marital.getSelectedItem().toString().equals("Conviviente") &&
-                        !s_marital.getSelectedItem().toString().equals("Elija")){
-                    et_nombre.setEnabled(false);
-                    et_ap_conyuge.setEnabled(false);
-                    et_am_conyuge.setEnabled(false);
-                    s_number_children.setEnabled(false);
-                    for (int inx=0;inx<listaVista.size();inx++){
-                        listaVista.get(inx).setEnabled(false);
-                        listaChecks.get(inx).setEnabled(false);
-                        listaNombres.get(inx).setEnabled(false);
-                        listaCumple.get(inx).setEnabled(false);
-                    }
 
-                }
-            }
-
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,31 +222,29 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
                 JsonObject jo = (JsonObject)jsonParser.parse(body);
                 jo.addProperty("id_estado_civil", estado_civil);
 
-                if(s_marital.getSelectedItem().toString().equals("Casado")
-                        || s_marital.getSelectedItem().toString().equals("Conviviente")) {
-                    JsonObject jsonObjConyugue=new JsonObject();
-                    jsonObjConyugue.addProperty("nombres", et_nombre.getText().toString());
-                    jsonObjConyugue.addProperty("apellido_paterno", et_ap_conyuge.getText().toString());
-                    jsonObjConyugue.addProperty("apellido_materno", et_am_conyuge.getText().toString());
-                    jsonObjConyugue.addProperty("numero_hijos", tope);
-                    jo.add("conyuge", jsonObjConyugue);
+                JsonObject jsonObjConyugue=new JsonObject();
+                jsonObjConyugue.addProperty("nombres", et_nombre.getText().toString());
+                jsonObjConyugue.addProperty("apellido_paterno", et_ap_conyuge.getText().toString());
+                jsonObjConyugue.addProperty("apellido_materno", et_am_conyuge.getText().toString());
+                jsonObjConyugue.addProperty("numero_hijos", tope);
+                jo.add("conyuge", jsonObjConyugue);
 
-                    JsonObject childrenList=new JsonObject();
-                    for (int i=0;i<tope;i++){
-                        JsonObject son=new JsonObject();
-                        son.addProperty("nombres_apellidos", listaNombres.get(i).getText().toString());
-                        son.addProperty("fecha_nacimiento", listaCumple.get(i).getText()+"");
-                        if(listaChecks.get(i).isChecked()){
-                            son.addProperty("es_dependiente", "on");
-                        }else {
-                            son.addProperty("es_dependiente", "off");
-                        }
-                        childrenList.add(""+(i+1),son);
+                JsonObject childrenList=new JsonObject();
+                for (int i=0;i<tope;i++){
+                    JsonObject son=new JsonObject();
+                    son.addProperty("nombres_apellidos", listaNombres.get(i).getText().toString());
+                    son.addProperty("fecha_nacimiento", listaCumple.get(i).getText()+"");
+                    if(listaChecks.get(i).isChecked()){
+                        son.addProperty("es_dependiente", "on");
+                    }else {
+                        son.addProperty("es_dependiente", "off");
                     }
-
-                    jo.add("hijos", childrenList);
-
+                    childrenList.add(""+(i+1),son);
                 }
+
+                jo.add("hijos", childrenList);
+
+
 
 
                 JsonObject jsonObjBody=new JsonObject();
@@ -241,26 +260,24 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
         });
     }
     private boolean validation(){
-        if(s_marital.getSelectedItem().toString().equals("Elija") ||s_marital.getSelectedItem().toString().length()==0 ){
+        EstadoCivil estadoCivil = (EstadoCivil)s_marital.getSelectedItem();
+
+        if(estadoCivil.getName().equals("Elija") ||estadoCivil.getName().length()==0 ){
             Toast.makeText(context, "Falta elejir el estado civil.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(s_marital.getSelectedItem().toString().equals("Casado")
-                || s_marital.getSelectedItem().toString().equals("Conviviente")) {
+        if(estadoCivil.getName().equals("Casado")
+                || estadoCivil.getName().equals("Conviviente")) {
             if(et_nombre.getText().length()==0){
-                Toast.makeText(context, "Falta nombre de conyugue.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Falta nombre de cónyuge.", Toast.LENGTH_SHORT).show();
                 return false;
             }
             if(et_ap_conyuge.getText().length()==0){
-                Toast.makeText(context, "Falta apellido paterno de conyugue.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Falta apellido paterno de cónyuge.", Toast.LENGTH_SHORT).show();
                 return false;
             }
             if(et_am_conyuge.getText().length()==0){
-                Toast.makeText(context, "Falta apellido materno de conyugue.", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-            if(s_number_children.getSelectedItem().toString().equals("Elija") ||s_number_children.getSelectedItem().toString().length()==0 ){
-                Toast.makeText(context, "Falta elejir el.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Falta apellido materno de cónyuge.", Toast.LENGTH_SHORT).show();
                 return false;
             }
 
@@ -268,55 +285,37 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
         return true;
     }
     public  void fillMarital(){
-        RequestQueue queue = Volley.newRequestQueue(this.context);
-        String url = BuildConfig.BASE_URL+"lista_estado_civil.php?token=lpsk.21568$lsjANPIO02";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("estados_civiles");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idMarital=new ArrayList<>();
-                            idMarital.add(0);
-                            arrayListMarital=new ArrayList<>();
-                            arrayListMarital.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    int  id = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("estado_civil");
-                                    System.out.println(name);
-                                    idMarital.add(id);
-                                    arrayListMarital.add(name);
-                                }else{
-                                    String name= (String)jsonObj2.get(key);
-                                    idMarital.add(Integer.parseInt(key));
-                                    System.out.println(name);
-                                    arrayListMarital.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    arrayListMarital);
-                            s_marital.setAdapter(spinnerArrayAdapter);
+        final EstadoCivilAdapter adapter = new EstadoCivilAdapter(context,
+                R.layout.owner_spinner_item,
+                EstadoCivil.listAll(EstadoCivil.class));
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            s_marital.setAdapter(null);
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        s_marital.setAdapter(adapter);
+
+        s_marital.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                EstadoCivil estadoCivil = adapter.getItem(i);
+                estado_civil=Integer.parseInt(estadoCivil.getId_main());
+                if(!estadoCivil.getName().equals("Casado") &&
+                        !estadoCivil.getName().equals("Conviviente") &&
+                        !estadoCivil.getName().equals("Elija")){
+                    et_nombre.setEnabled(false);
+                    et_ap_conyuge.setEnabled(false);
+                    et_am_conyuge.setEnabled(false);
+                }else{
+                    et_nombre.setEnabled(true);
+                    et_ap_conyuge.setEnabled(true);
+                    et_am_conyuge.setEnabled(true);
+                }
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
+
     }
     private void sendDataBase(JsonObject body){
         String url ="http://www.demodataexe.com/anpe/webservice/guardar_info_socio.php";
@@ -340,5 +339,66 @@ public class RegistrationPartnerPartBActivity extends AppCompatActivity {
             }
         });
         queue.add(jr);
+    }
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        Calendar cal = new GregorianCalendar(i, i1, i2);
+        setDate(cal);
+    }
+    private void setDate(final Calendar calendar) {
+
+        String stringBirthday = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+        int position =getIndexDate();
+        TextView tv =listaVista.get(position).findViewById(R.id.et_birthday_hijo);
+        tv.setText(stringBirthday);
+        listTextDate.set(position,stringBirthday);
+    }
+    public int getIndexDate(){
+        for(int i=0;i<9;i++)
+            if(listStateDate.get(i))return i;
+        return 0;
+    }
+    public static void  setStateUnique(int index){
+        for(int i=0;i<9;i++)listStateDate.set(i,false);
+        listStateDate.set(index,true);
+    }
+    public static class DatePickerFragment extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Bundle b = getArguments();
+            int position = b.getInt("index");
+            setStateUnique(position);
+            System.out.println(RegistrationPartnerPartBActivity.indexDate+"");
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            if(!listTextDate.get(position).equals("-")){
+                String[] dateOwn=listTextDate.get(position).split("-");
+                return new DatePickerDialog(getActivity(),
+                        (DatePickerDialog.OnDateSetListener)
+                                getActivity(), Integer.parseInt(dateOwn[0]), Integer.parseInt(dateOwn[1])-1, Integer.parseInt(dateOwn[2]));
+            }else{
+                return new DatePickerDialog(getActivity(),
+                        (DatePickerDialog.OnDateSetListener)
+                                getActivity(), year, month, day);
+            }
+
+        }
+
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            getSupportFragmentManager().popBackStack();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }

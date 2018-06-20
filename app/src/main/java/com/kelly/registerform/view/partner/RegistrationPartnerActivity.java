@@ -11,10 +11,12 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -36,8 +38,21 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 import com.kelly.registerform.BuildConfig;
 import com.kelly.registerform.R;
+import com.kelly.registerform.adapters.modelsAdapter.AsociacionAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.DistrictAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.OrganizacionRegionalAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.ProvinceAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.SpinAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.TipoSocioAdapter;
+import com.kelly.registerform.controllers.DeparmentController;
+import com.kelly.registerform.dataAccess.DepartmentDA;
 import com.kelly.registerform.dataAccess.ProvinceDA;
+import com.kelly.registerform.model.Asociacion;
+import com.kelly.registerform.model.OrganizacionRegional;
+import com.kelly.registerform.model.TipoSocio;
 import com.kelly.registerform.model.ubigeo.Departamento;
+import com.kelly.registerform.model.ubigeo.Distrito;
+import com.kelly.registerform.model.ubigeo.Principal;
 import com.kelly.registerform.model.ubigeo.Provincia;
 import com.kelly.registerform.view.MapsActivity;
 import com.orm.query.Condition;
@@ -62,29 +77,37 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
     private int VALOR_RETORNO = 1;
     private Button b_next,b_dni,b_photo,b_map;
 
-    //////////////DATEPICKER
+    //////////////DATEPICKER////////////
+
     public static boolean stateDate=false;
     public static String dateString="";
     private Button b_birthday;
     private String stringBirthday="";
     private Context context;
     private Spinner gender_spinner,regions_spinner,province_spinner,district_spinner,s_asoc,s_tipo,
-            s_local,s_regional;
+    s_regional;
     private String lattitude,longitude,id_dep,id_prov,id_dist;
-    private TextView tv_dni,tv_photo;
+    private TextView tv_dni,tv_photo,et_text_birthday;
     private LocationManager locationManager;
     private Uri imageUri;
     private ImageView foto_gallery;
     private ArrayList<String>arrayListDeparment,nameDeparment,nameProvince,nameDistrict,nameAsoc,
-            nameTipo,nameLocal,nameRegional,idDeparment,idProvince,idDistrict;
-    private ArrayList<Integer>idAsoc,idTipo,idLocal,idRegional;
+            nameTipo,nameRegional,idDeparment,idProvince,idDistrict;
+    private ArrayList<Integer>idAsoc,idTipo,idRegional;
     private EditText et_name,et_ap,et_am,et_fijo,et_celular,et_email,et_direccion,
-            et_comunidad,et_longitud,et_latitud,et_dni,et_text_birthday;
-    int idTipoSocio=0,idAsociacion=0,idOrgLocal=0,idOrgRegional=0;
+            et_comunidad,et_longitud,et_latitud,et_dni,s_local;
+    int idTipoSocio=0,idAsociacion=0,idOrgRegional=0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_partner);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setElements();
         setActions();
     }
@@ -93,7 +116,7 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
         b_next =findViewById(R.id.b_next);
         b_dni= findViewById(R.id.b_dni);
         b_photo= findViewById(R.id.b_photo);
-        b_birthday=findViewById(R.id.b_birthday);
+
         et_text_birthday=findViewById(R.id.et_text_birthday);
 
         tv_dni = findViewById(R.id.tv_dni);
@@ -134,15 +157,12 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
 
         nameAsoc=new ArrayList<>();
         nameTipo=new ArrayList<>();
-        nameLocal=new ArrayList<>();
         nameRegional=new ArrayList<>();
 
         idAsoc=new ArrayList<>();
         idTipo=new ArrayList<>();
-        idLocal=new ArrayList<>();
         idRegional=new ArrayList<>();
 
-        fillLocal();
         fillRegional();
         fillDeparment();
         fillTipo();
@@ -180,31 +200,20 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
             Toast.makeText(context, "Falta ingresar fecha de cumpleaños.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        /*if(et_fijo.getText().length()==0){
-            Toast.makeText(context, "Falta ingresar teléfono.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if(et_celular.getText().length()==0){
-            Toast.makeText(context, "Falta ingresar celular.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if(et_email.getText().length()==0){
-            Toast.makeText(context, "Falta ingresar celular.", Toast.LENGTH_SHORT).show();
-            return false;
-        }*/
 
-
-        if(regions_spinner.getSelectedItem().toString().equals("Elija") ||regions_spinner.getSelectedItem().toString().length()==0 ){
+        Departamento d = (Departamento)regions_spinner.getSelectedItem();
+        if(d.getName().equals("Elije") ||d.getName().length()==0 ){
             Toast.makeText(context, "Falta elejir Departamento.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (!regions_spinner.getSelectedItem().toString().equals("Elija") && regions_spinner.getSelectedItem().toString().length()>0){
-
-            if(province_spinner.getSelectedItem().toString().equals("Elija") ||province_spinner.getSelectedItem().toString().length()==0){
+        if (!d.getName().equals("Elije") && d.getName().length()>0){
+            Provincia p = (Provincia) province_spinner.getSelectedItem();
+            if(p.getName().equals("Elija") ||p.getName().length()==0){
                 Toast.makeText(context, "Falta elejir Provincia.", Toast.LENGTH_SHORT).show();
                 return false;
             }
-            if(district_spinner.getSelectedItem().toString().equals("Elija") ||district_spinner.getSelectedItem().toString().length()==0 ){
+            Distrito dist = (Distrito) district_spinner.getSelectedItem();
+            if(dist.getName().equals("Elija") ||dist.getName().length()==0 ){
                 Toast.makeText(context, "Falta elejir Distrito.", Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -220,30 +229,22 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
             Toast.makeText(context, "Debe ingresar una dirección válida.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        /*if(et_comunidad.getText().length()<5|| et_comunidad.getText().length()==0){
-            Toast.makeText(context, "Falta comunidad.", Toast.LENGTH_SHORT).show();
-            return false;
-        }*/
-        if(s_tipo.getSelectedItem().toString().equals("Elija") ||s_tipo.getSelectedItem().toString().length()==0 ){
+        TipoSocio t =(TipoSocio)s_tipo.getSelectedItem();
+        if(t.getName().equals("Elije") ||t.getName().length()==0 ){
             Toast.makeText(context, "Falta elejir el tipo de socio.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(s_asoc.getSelectedItem().toString().equals("Elija") ||s_asoc.getSelectedItem().toString().length()==0 ){
+
+        Asociacion a =(Asociacion)s_asoc.getSelectedItem();
+        if(a.getName().equals("Elije") ||a.getName().length()==0 ){
             Toast.makeText(context, "Falta elejir el tipo de asociación.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        /*if(s_local.getSelectedItem().toString().equals("Elija") ||s_local.getSelectedItem().toString().length()==0 ){
-            Toast.makeText(context, "Falta elejir la organización local.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if(s_regional.getSelectedItem().toString().equals("Elija") ||s_regional.getSelectedItem().toString().length()==0 ){
-            Toast.makeText(context, "Falta elejir la organización regional.", Toast.LENGTH_SHORT).show();
-            return false;
-        }*/
+
         return true;
     }
     private void setActions(){
-        b_birthday.setOnClickListener(new View.OnClickListener() {
+        et_text_birthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerFragment fragment = new DatePickerFragment();
@@ -280,9 +281,10 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
                 jsonObject.addProperty("ubicacion_longitud_gps", et_longitud.getText().toString());
                 jsonObject.addProperty("id_tipo_socio", idTipoSocio);
                 jsonObject.addProperty("id_tipo_asociacion", idAsociacion);
-                jsonObject.addProperty("id_organizacion_local",1);//TODO change
-                jsonObject.addProperty("id_organizacion_regional", 1);//TODO change
+                jsonObject.addProperty("id_organizacion_local",s_local.getText().toString());
+                jsonObject.addProperty("id_organizacion_regional", idOrgRegional);//TODO change
 
+                System.out.println("jsonBody \t"+jsonObject.toString());
                 Intent intent= new Intent(context,RegistrationPartnerPartBActivity.class);
                 intent.putExtra("jsonBody",jsonObject.toString());
                 startActivity(intent);
@@ -305,88 +307,10 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
                 tv_photo.setText("Se ha registrado la imagen correctamente!");
             }
         });
-        regions_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                fillProvinceList(idDeparment.get(i));
-                id_dep=idDeparment.get(i);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
-        province_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String data =  regions_spinner.getSelectedItem().toString();
-                fillDistrict(idProvince.get(i));
-                id_prov=idProvince.get(i);
 
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        district_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                id_dist=idDistrict.get(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        s_asoc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                idAsociacion=idAsoc.get(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        s_local.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //idOrgLocal=idLocal.get(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        s_regional.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //idOrgRegional=idRegional.get(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        s_tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                idTipoSocio=idTipo.get(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
     }
     protected void buildAlertMessageNoGps() {
@@ -409,256 +333,127 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
     }
 
     private void fillProvinceList(String idDeparment){
+        Iterator<?> keys = Provincia.findAll(Provincia.class);
+        List<Provincia> currentList= new ArrayList<>();
+        while(keys.hasNext()){
+          Provincia p = (Provincia)keys.next();
+            if (p.getId_parent().equals(idDeparment))currentList.add(p);
+        }
 
-        String id=idDeparment;
+        final ProvinceAdapter adapter = new ProvinceAdapter(context,R.layout.owner_spinner_item,
+                currentList);
 
-        RequestQueue queue = Volley.newRequestQueue(this.context);
+        province_spinner.setAdapter(adapter);
 
-        String url = BuildConfig.BASE_URL+"lista_ubigeo.php?tipo=PROV&idubigeosuperior="+id+"&token=lpsk.21568$lsjANPIO02";
-        System.out.println(url);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("ubigeos");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idProvince=new ArrayList<>();
-                            idProvince.add("0");
-                            nameProvince=new ArrayList<>();
-                            nameProvince.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    //int  idDis = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("ubigeo");
-                                    idProvince.add((jsonDepartment.get("id")).toString());
-                                    nameProvince.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    nameProvince);
-                            province_spinner.setAdapter(spinnerArrayAdapter);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            province_spinner.setAdapter(null);
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        province_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Provincia provincia = adapter.getItem(i);
+                fillDistrict(provincia.getId_provincia());
+                id_prov=provincia.getId_provincia();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
 
     }
 
     private void fillDistrict(String idProvince){
-        RequestQueue queue = Volley.newRequestQueue(this.context);
-        String url = BuildConfig.BASE_URL+"lista_ubigeo.php?tipo=DIST&idubigeosuperior="+idProvince+"&token=lpsk.21568$lsjANPIO02";
-        System.out.println(url);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("ubigeos");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idDistrict=new ArrayList<>();
-                            idDistrict.add("0");
-                            nameDistrict=new ArrayList<>();
-                            nameDistrict.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    //int  idDis = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("ubigeo");
-                                    idDistrict.add((jsonDepartment.get("id")).toString());
-                                    nameDistrict.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    nameDistrict);
-                            district_spinner.setAdapter(spinnerArrayAdapter);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            district_spinner.setAdapter(null);
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        Iterator<?> keys = Distrito.findAll(Distrito.class);
+        List<Distrito> currentList= new ArrayList<>();
+        while(keys.hasNext()){
+            Distrito p = (Distrito)keys.next();
+            if (p.getId_parent().equals(idProvince))currentList.add(p);
+        }
+
+        final DistrictAdapter adapter = new DistrictAdapter(context,R.layout.owner_spinner_item,
+                currentList);
+
+        district_spinner.setAdapter(adapter);
+
+        district_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Distrito distrito = adapter.getItem(i);
+                id_dist=distrito.getId_ditrito();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
-
     }
     private void fillTipo(){
-        RequestQueue queue = Volley.newRequestQueue(this.context);
-        String url = BuildConfig.BASE_URL+"lista_tipo_socio.php?token=lpsk.21568$lsjANPIO02";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("tipos_socio");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idTipo=new ArrayList<>();
-                            idTipo.add(0);
-                            nameTipo=new ArrayList<>();
-                            nameTipo.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    int  id = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("tipo_socio");
-                                    idTipo.add(id);
-                                    //idRegional.get(id);
-                                    nameTipo.add(name);
-                                }else{
-                                    String name= (String)jsonObj2.get(key);
-                                    idTipo.add(Integer.parseInt(key));
-                                    nameTipo.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    nameTipo);
-                            s_tipo.setAdapter(spinnerArrayAdapter);
+        final TipoSocioAdapter adapter = new TipoSocioAdapter(context,
+                R.layout.owner_spinner_item,
+                TipoSocio.listAll(TipoSocio.class));
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            s_tipo.setAdapter(null);
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        s_tipo.setAdapter(adapter);
+
+        s_tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                TipoSocio tipoSocio = adapter.getItem(i);
+                idTipoSocio=Integer.parseInt(tipoSocio.getId_main());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
+
+
 
     }
     private void fillAsoc(){
-        RequestQueue queue = Volley.newRequestQueue(this.context);
-        String url = BuildConfig.BASE_URL+"lista_tipo_asociacion.php?token=lpsk.21568$lsjANPIO02";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("asociaciones");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idAsoc=new ArrayList<>();
-                            idAsoc.add(0);
-                            nameAsoc=new ArrayList<>();
-                            nameAsoc.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    int  id = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("asociacion");
-                                    idAsoc.add(id);
-                                    nameAsoc.add(name);
-                                }else{
-                                    String name= (String)jsonObj2.get(key);
-                                    idAsoc.add(Integer.parseInt(key));
-                                    nameAsoc.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    nameAsoc);
-                            s_asoc.setAdapter(spinnerArrayAdapter);
+        final AsociacionAdapter adapter = new AsociacionAdapter(context,
+                R.layout.owner_spinner_item,
+                Asociacion.listAll(Asociacion.class));
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            s_asoc.setAdapter(null);
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        s_asoc.setAdapter(adapter);
+
+        s_asoc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Asociacion asociacion = adapter.getItem(i);
+                idAsociacion=Integer.parseInt(asociacion.getId_main());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
 
-    }
-    private void fillLocal(){
-        RequestQueue queue = Volley.newRequestQueue(this.context);
-        String url = BuildConfig.BASE_URL+"lista_tipo_organizacion.php?token=lpsk.21568$lsjANPIO02";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("organizaciones_locales");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idLocal=new ArrayList<>();
-                            idLocal.add(0);
-                            nameLocal=new ArrayList<>();
-                            nameLocal.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    int  id = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("organizacion");
-                                    idLocal.add(id);
-                                    nameLocal.add(name);
-                                }else{
-                                    String name= (String)jsonObj2.get(key);
-                                    idLocal.add(Integer.parseInt(key));
-                                    nameLocal.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    nameLocal);
-                            s_local.setAdapter(spinnerArrayAdapter);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            s_local.setAdapter(null);
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
-
-            }
-        });
-        queue.add(stringRequest);
 
     }
     private void fillRegional(){
+        final OrganizacionRegionalAdapter adapter = new OrganizacionRegionalAdapter(context,
+                R.layout.owner_spinner_item,
+                OrganizacionRegional.listAll(OrganizacionRegional.class));
+
+        s_regional.setAdapter(adapter);
+
+        s_regional.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                OrganizacionRegional organizacionRegional = adapter.getItem(i);
+                idOrgRegional=Integer.parseInt(organizacionRegional.getId_main());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        /*
         RequestQueue queue = Volley.newRequestQueue(this.context);
         String url = BuildConfig.BASE_URL+"lista_tipo_organizacion_regional.php?token=lpsk.21568$lsjANPIO02";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -705,52 +500,29 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
 
             }
         });
-        queue.add(stringRequest);
+        queue.add(stringRequest);*/
 
     }
     public void fillDeparment(){
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String url ="http://www.demodataexe.com/anpe/webservice/lista_ubigeo.php?tipo=DEPT&token=lpsk.21568$lsjANPIO02";
-        System.out.println(url);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("ubigeos");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idDeparment=new ArrayList<>();
-                            idDeparment.add("0");
-                            nameDeparment=new ArrayList<>();
-                            nameDeparment.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    String name =(String)jsonDepartment.get("ubigeo");
-                                    idDeparment.add(jsonDepartment.get("id").toString());
-                                    nameDeparment.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    nameDeparment);
-                            regions_spinner.setAdapter(spinnerArrayAdapter);
-                        } catch (JSONException e) {
-                            regions_spinner.setAdapter(null);
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        final SpinAdapter adapter = new SpinAdapter(context,
+                R.layout.owner_spinner_item,
+                Departamento.listAll(Departamento.class));
+
+        regions_spinner.setAdapter(adapter);
+
+        regions_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Departamento departamento = adapter.getItem(i);
+                fillProvinceList(departamento.getId_departamento());
+                id_dep=departamento.getId_departamento();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
     }
 
     @Override
@@ -762,7 +534,6 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
         stringBirthday = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
         dateString = stringBirthday;
         et_text_birthday.setText(stringBirthday);
-        //b_birthday.setKeyListener(null);
         stateDate =true;
     }
     public static class DatePickerFragment extends DialogFragment {
@@ -780,7 +551,7 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
                         (DatePickerDialog.OnDateSetListener)
                                 getActivity(), year, month, day);
             }else{
-                String[] dateOwn=RegistrationPartnerActivity.dateString.split("-");
+                String[] dateOwn=dateString.split("-");
                 return new DatePickerDialog(getActivity(),
                         (DatePickerDialog.OnDateSetListener)
                                 getActivity(), Integer.parseInt(dateOwn[0]), Integer.parseInt(dateOwn[1])-1, Integer.parseInt(dateOwn[2]));
@@ -814,6 +585,17 @@ public class RegistrationPartnerActivity extends AppCompatActivity implements Da
                 //Write your code if there's no result
             }
         }
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            getSupportFragmentManager().popBackStack();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 }

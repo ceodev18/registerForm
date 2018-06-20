@@ -6,7 +6,7 @@ package com.kelly.registerform.model;
 
 public class AnimalCrianza   {
     public AnimalCrianza(){
-
+        this.nombre="";
     }
     private int id_animal_crianza;
     private int id_produccion_pecuaria;
@@ -14,6 +14,7 @@ public class AnimalCrianza   {
     private int id_socio;
     private int id_tipo_animal;
     private int id_animal;
+    private String nombre;
 
     public int getId_animal_crianza() {
         return id_animal_crianza;
@@ -61,5 +62,13 @@ public class AnimalCrianza   {
 
     public void setId_animal(int id_animal) {
         this.id_animal = id_animal;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:layout_margin="5dp"
+            android:text="Cultivo Permanente"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Fecha de instalación/plantación (mes)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_instalacion_mes"
+            android:entries="@array/sa_month"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Fecha de instalación/plantación (año)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:entries="@array/s_year_selection"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Primera Cosecha - Desde (mes)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_from_1c"
+            android:entries="@array/sa_month"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Primera Cosecha - Hasta (mes)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_to_1c"
+            android:entries="@array/sa_month"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Segunda cosecha - Desde (mes)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_from_2c"
+            android:entries="@array/sa_month"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Segunda cosecha - Hasta (mes)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_to_2c"
+            android:entries="@array/sa_month"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Tercera cosecha - Desde (mes)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_from_3c"
+            android:entries="@array/sa_month"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Tercera cosecha - Hasta (mes)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_to_3c"
+            android:entries="@array/sa_month"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Principal sistema de riego usado"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_riego"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_textview"
+            android:layout_margin="5dp">
+
+            <EditText
+                android:inputType="number"
+                android:id="@+id/et_estimado"
+                android:padding="5dp"
+                android:background="#00000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Produccion estimada (cantidad)"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Producción Estimada (medida)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_medida_produccion"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+
+            android:layout_margin="5dp"
+            android:text="Porcentaje de consumo propio (%)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_propio_p"
+            android:entries="@array/sa_percentage"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Porcentaje para Semilla (%) (*)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_semilla_p"
+
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Porcentaje para de venta (%)"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/s_venta_p"
+            android:entries="@array/sa_percentage"
+            android:background="@drawable/background_spinner"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+    </LinearLayout>
+
+
+
+</ScrollView>

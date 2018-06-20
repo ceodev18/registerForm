@@ -5,8 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.kelly.registerform.view.partner.ValidationActivity"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
     <LinearLayout
+
         android:id="@+id/ll_title"
         android:layout_alignParentTop="true"
         android:layout_margin="5dp"
@@ -101,10 +104,12 @@
                 android:textColor="#000000"
                 android:layout_gravity="center"
                 android:id="@+id/b_back"
-                android:text="@string/b_back"
+                android:text="Ir al inicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+
 
         </LinearLayout>
 

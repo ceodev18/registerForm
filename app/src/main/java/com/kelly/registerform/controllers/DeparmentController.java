@@ -11,9 +11,11 @@ import com.kelly.registerform.utils.SaveDataBase;
 
 public class DeparmentController {
     private DepartmentDA departmentDA;
+
     public DeparmentController(Context context){
         departmentDA= new DepartmentDA(context);
     }
+
     public void getDepartment(){
         departmentDA.getDepartaments();
     }

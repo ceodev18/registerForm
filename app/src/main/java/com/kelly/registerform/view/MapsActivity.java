@@ -1,23 +1,29 @@
 package com.kelly.registerform.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -35,6 +41,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kelly.registerform.R;
 
+import java.util.List;
+
 public class MapsActivity extends AppCompatActivity
             implements OnMapReadyCallback,
             GoogleApiClient.ConnectionCallbacks,
@@ -50,27 +58,50 @@ public class MapsActivity extends AppCompatActivity
         Marker mCurrLocationMarker;
         private boolean state=false;
         private double latitude,longitude;
+        private RelativeLayout rl_connection;
+        private LinearLayout ll_map;
         @Override
         protected void onCreate(Bundle savedInstanceState)
         {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_maps);
 
-            b_back = findViewById(R.id.b_back);
-            b_back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            if(isNetworkConnected()){
+                setContentView(R.layout.activity_maps);
+                b_back = findViewById(R.id.b_back);
+                b_back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("result",latitude+","+longitude);
-                    setResult(Activity.RESULT_OK,returnIntent);
-                    finish();
-                }
-            });
-            getSupportActionBar().setTitle("Map Location Activity");
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("result",latitude+","+longitude);
+                        setResult(Activity.RESULT_OK,returnIntent);
+                        finish();
+                    }
+                });
+                getSupportActionBar().setTitle("Map Location Activity");
 
-            mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-            mapFrag.getMapAsync(this);
+                mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+                mapFrag.getMapAsync(this);
+            }else {
+                setContentView(R.layout.activity_no_connection);
+                b_back = findViewById(R.id.b_back);
+                b_back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        double[]list=getGPS();
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("result",list[0]+","+list[1]);
+                        setResult(Activity.RESULT_OK,returnIntent);
+                        finish();
+                    }
+                });
+            }
+
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
+            android.support.v7.app.ActionBar ab = getSupportActionBar();
 
         }
 
@@ -93,7 +124,7 @@ public class MapsActivity extends AppCompatActivity
 
                 @Override
                 public void onMapClick(LatLng point) {
-                    Toast.makeText(getApplicationContext(), point.toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), point.toString(), Toast.LENGTH_SHORT).show();
                     latitude = point.latitude;
                     longitude=point.longitude;
                     mGoogleMap.clear();
@@ -256,5 +287,42 @@ public class MapsActivity extends AppCompatActivity
                 // permissions this app might request
             }
         }
+        private boolean isNetworkConnected() {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            return cm.getActiveNetworkInfo() != null;
+        }
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+            if (id == android.R.id.home) {
+                getSupportFragmentManager().popBackStack();
+                finish();
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+
+        }
+
+    @SuppressLint("MissingPermission")
+    private double[] getGPS() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        List<String> providers = lm.getProviders(false);
+
+        /* Loop over the array backwards, and if you get an accurate location, then break out the loop*/
+        Location l = null;
+
+        for (int i=providers.size()-1; i>=0; i--) {
+            l = lm.getLastKnownLocation(providers.get(i));
+            if (l != null) break;
+        }
+
+        double[] gps = new double[2];
+        if (l != null) {
+            gps[0] = l.getLatitude();
+            gps[1] = l.getLongitude();
+        }
+        return gps;
+    }
 
     }

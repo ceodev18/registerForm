@@ -36,7 +36,13 @@ public class LiveStockAdapter extends RecyclerView.Adapter<LiveStockAdapter.Obje
 
     @Override
     public void onBindViewHolder(ObjectViewHolder holder, int position) {
-        holder.tv_chacra.setText("Espcie #"+(position+1));
+        if(chacraArrayList.get(position).getNombre().length()==0){
+            holder.tv_chacra.setText("Especie Animal # "+(position+1));
+        }else{
+            holder.tv_chacra.setText(chacraArrayList.get(position).getNombre());
+        }
+
+
     }
 
     @Override

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ErrorView">
+        <attr name="error_message" format="string" />
+        <attr name="error_image" format="integer" />
+        <attr name="android:ems" />
+    </declare-styleable>
+
+    <declare-styleable name="ToolbarView">
+        <attr name="toolbar_title" format="string" />
+        <attr name="toolbar_support_image" format="integer" />
+        <attr name="android:ems" />
+    </declare-styleable>
+</resources>

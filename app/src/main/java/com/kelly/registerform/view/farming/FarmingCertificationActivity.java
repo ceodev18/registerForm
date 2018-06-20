@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,7 +31,15 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 import com.kelly.registerform.BuildConfig;
 import com.kelly.registerform.R;
+import com.kelly.registerform.adapters.modelsAdapter.EmpresaCertificadoraAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.MedidaChacraAdapter;
+import com.kelly.registerform.adapters.modelsAdapter.TipoCertificadoraAdapter;
+import com.kelly.registerform.model.MedidaChacra;
+import com.kelly.registerform.model.TipoPropiedad;
+import com.kelly.registerform.model.certifications.EmpresaCertificadora;
+import com.kelly.registerform.model.certifications.TipoCertificadora;
 import com.kelly.registerform.model.main.MainJson;
+import com.kelly.registerform.view.commerce.ComercializacionActivity;
 import com.kelly.registerform.view.commerce.InformationActivity;
 import com.kelly.registerform.view.livestock.LivestockProductionActivity;
 import com.kelly.registerform.view.partner.RegistrationPartnerActivity;
@@ -48,11 +59,12 @@ public class FarmingCertificationActivity extends AppCompatActivity implements D
     private Context context;
     public static boolean stateDate=false;
     private Button b_next,b_back,b_file,b_date_certification;
-    private EditText et_code,et_caducidad;
+    private EditText et_code;
     private int VALOR_RETORNO = 1;
     private Spinner s_tipo,s_company,s_tipo_certificado;
     private String dateCertification="";
     public static String dateString="";
+    private TextView et_caducidad;
     private ArrayList<String> arrayListTipo,arrayListCompany;
     private ArrayList<Integer>idTipo,idCompany;
     private TextView tv_file;
@@ -60,16 +72,55 @@ public class FarmingCertificationActivity extends AppCompatActivity implements D
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farming_certification);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setElements();
         setActions();
+        refillData();
     }
+    private void refillData(){/*
+        JsonObject main = MainJson.getByKey("certificado_produccion_agricola");
+        if(main ==null)return;
+        et_code.setText(main.get("codigo_certificado").getAsString());
+        stateDate=true;
+        dateString=main.get("fecha_caducidad").getAsString();
+        if(main.get("tiene_certificado").getAsString().equals("Sí"))
+            s_tipo_certificado.setSelection(1);
+        else s_tipo_certificado.setSelection(2);
+
+        s_tipo.setSelection(getIndexCertificadora(s_tipo, main.get("id_tipo_certificadora").getAsString()));
+
+
+        s_company.setSelection(getIndexCompany(s_company, main.get("id_empresa_certificadora").getAsString()));*/
+    }
+    private int getIndexCertificadora(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            EmpresaCertificadora empresaCertificadora = (EmpresaCertificadora)spinner.getAdapter().getItem(i);
+            if (empresaCertificadora.getId_main().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+        return 0;
+    }
+    private int getIndexCompany(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            TipoCertificadora tipoCertificadora = (TipoCertificadora)spinner.getAdapter().getItem(i);
+            if (tipoCertificadora.getId_main().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
     private void setElements(){
         context=this;
         b_next = findViewById(R.id.b_next);
         list= getIntent().getStringExtra("list");
         b_back = findViewById(R.id.b_back);
 
-        b_date_certification=findViewById(R.id.b_date_certification);
+
         et_caducidad=findViewById(R.id.et_caducidad);
         b_file= findViewById(R.id.b_file);
         tv_file = findViewById(R.id.tv_file);
@@ -87,7 +138,7 @@ public class FarmingCertificationActivity extends AppCompatActivity implements D
 
     private void setActions(){
 
-        b_date_certification.setOnClickListener(new View.OnClickListener() {
+        et_caducidad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerFragment fragment = new DatePickerFragment();
@@ -98,8 +149,7 @@ public class FarmingCertificationActivity extends AppCompatActivity implements D
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if(!validation())return;
-                boolean estate= validation();
+                if(!validation())return;
                 sendMain();
                 if(list.equals("")){
                     Intent intent = new Intent(context, ValidationActivity.class);
@@ -120,7 +170,7 @@ public class FarmingCertificationActivity extends AppCompatActivity implements D
                         startActivity(i);
                     }
                     if(ini==4){
-                        Intent i = new Intent(context,InformationActivity.class);
+                        Intent i = new Intent(context,ComercializacionActivity.class);
                         i.putExtra("list",newList);
                         startActivity(i);
                     }
@@ -145,39 +195,55 @@ public class FarmingCertificationActivity extends AppCompatActivity implements D
     }
     private void sendMain(){
         JsonObject certificado = new JsonObject();
+
         certificado.addProperty("tiene_certificado",s_tipo_certificado.getSelectedItem().toString());
-        certificado.addProperty("id_tipo_certificadora",s_tipo.getSelectedItem().toString());
-        certificado.addProperty("id_empresa_certificadora",s_company.getSelectedItem().toString());
+
+        TipoCertificadora t = (TipoCertificadora)s_tipo.getSelectedItem();
+        certificado.addProperty("id_tipo_certificadora",t.getName());
+
+        EmpresaCertificadora e = (EmpresaCertificadora)s_company.getSelectedItem();
+        certificado.addProperty("id_empresa_certificadora",e.getName());
+
         certificado.addProperty("codigo_certificado",et_code.getText().toString());
         certificado.addProperty("fecha_caducidad",dateCertification);
-        MainJson.addChild("certificado_produccion_pecuaria",certificado);
+        MainJson.addChild("certificado_produccion_agricola",certificado);
         MainJson.printBody();
 
     }
     private boolean validation(){
+
         if(s_tipo_certificado.getSelectedItem().toString().equals("Elija")
                 ||s_tipo_certificado.getSelectedItem().toString().length()==0){
             Toast.makeText(context, "Indique si tiene certificado.", Toast.LENGTH_SHORT).show();
-            return false;}
-        if(s_tipo.getSelectedItem().toString().equals("Elija")
-                ||s_tipo.getSelectedItem().toString().length()==0 && !s_tipo_certificado.getSelectedItem().toString().equals("No")){
-            Toast.makeText(context, "Seleccione tipo de certificado.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(s_company.getSelectedItem().toString().equals("Elija")
-                ||s_company.getSelectedItem().toString().length()==0){
-            Toast.makeText(context, "Debe escoger empresa.", Toast.LENGTH_SHORT).show();
-            return false;
+
+        if(s_tipo_certificado.getSelectedItem().toString().equals("Sí")){
+            TipoCertificadora t = (TipoCertificadora)s_tipo.getSelectedItem();
+            if(t.getName().equals("Elije")
+                    ||t.getName().length()==0 && !t.getName().equals("No")){
+                Toast.makeText(context, "Seleccione tipo de certificado.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            EmpresaCertificadora e = (EmpresaCertificadora)s_company.getSelectedItem();
+            if(e.getName().equals("Elije")
+                    ||e.getName().length()==0){
+                Toast.makeText(context, "Debe escoger empresa.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            if(et_code.getText().length()==0){
+                Toast.makeText(context, "Ingrese código", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            if(dateCertification.length()==0){
+                Toast.makeText(context, "Ingrese código", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
         }
-        if(et_code.getText().length()==0){
-            Toast.makeText(context, "Ingrese código", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if(dateCertification.length()==0){
-            Toast.makeText(context, "Ingrese código", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        //dateCertification
+
         return true;
     }
     private String reList(String listSplit){
@@ -205,104 +271,42 @@ public class FarmingCertificationActivity extends AppCompatActivity implements D
         }
     }
     private void fillTipo(){
-        RequestQueue queue = Volley.newRequestQueue(this.context);
-        String url = BuildConfig.BASE_URL+"lista_empresas_certificadoras.php?token=lpsk.21568$lsjANPIO02";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("empresas_certificadoras");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idTipo=new ArrayList<>();
-                            idTipo.add(0);
-                            arrayListTipo=new ArrayList<>();
-                            arrayListTipo.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    int  idDis = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("empresa");
-                                    idTipo.add(idDis);
-                                    arrayListTipo.add(name);
-                                }else{
-                                    String name= (String)jsonObj2.get(key);
-                                    idTipo.add(Integer.parseInt(key));
+        final TipoCertificadoraAdapter adapter = new TipoCertificadoraAdapter(context,
+                R.layout.owner_spinner_item,
+                TipoCertificadora.listAll(TipoCertificadora.class));
 
-                                    arrayListTipo.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    arrayListTipo);
-                            s_tipo.setAdapter(spinnerArrayAdapter);
+        s_tipo.setAdapter(adapter);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            s_tipo.setAdapter(null);
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        s_tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
     }
     private void fillComapy(){
-        RequestQueue queue = Volley.newRequestQueue(this.context);
-        String url = BuildConfig.BASE_URL+"lista_empresas_certificadoras_sgp.php?token=lpsk.21568$lsjANPIO022";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("empresas_sgp");
-                            Iterator<?> keys = jsonObj2.keys();
-                            idCompany=new ArrayList<>();
-                            idCompany.add(0);
-                            arrayListCompany=new ArrayList<>();
-                            arrayListCompany.add("Elija");
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    int  idDis = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("empresa_sgp");
-                                    idCompany.add(idDis);
-                                    arrayListCompany.add(name);
-                                }else{
-                                    String name= (String)jsonObj2.get(key);
-                                    idCompany.add(Integer.parseInt(key));
-                                    System.out.println(name);
-                                    arrayListCompany.add(name);
-                                }
-                            }
-                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    arrayListCompany);
-                            s_company.setAdapter(spinnerArrayAdapter);
+        final EmpresaCertificadoraAdapter adapter = new EmpresaCertificadoraAdapter(context,
+                R.layout.owner_spinner_item,
+                EmpresaCertificadora.listAll(EmpresaCertificadora.class));
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            s_company.setAdapter(null);
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        s_company.setAdapter(adapter);
+
+        s_company.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-        queue.add(stringRequest);
     }
 
     @Override
@@ -339,6 +343,17 @@ public class FarmingCertificationActivity extends AppCompatActivity implements D
             }
 
         }
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            getSupportFragmentManager().popBackStack();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 }

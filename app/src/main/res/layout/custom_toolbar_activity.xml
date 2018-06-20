@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:minHeight="?attr/actionBarSize"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorGreenBar"
+        android:id="@+id/ll_inner_toolbar"
+        android:weightSum="1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:visibility="invisible"
+            android:padding="5dp"
+            android:src="@drawable/ic_arrow_back_white_18px"
+            android:layout_weight="0.1"
+            android:id="@+id/iv_toolbar_back"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="start|center_vertical" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:textColor="@color/colorAccent"
+            tools:text="Texto Texto"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_weight="0.1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"></View>
+
+        <TextView
+            android:gravity="center"
+            android:text="Registro de Socios"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorWhite"
+            android:layout_weight="0.6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end|center_vertical" />
+
+        <View
+            android:layout_weight="0.05"
+            android:layout_width="0dp"
+            android:layout_height="1dp"></View>
+
+        <ImageView
+            android:id="@+id/iv_out"
+            android:src="@drawable/salida"
+            android:layout_weight="0.15"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

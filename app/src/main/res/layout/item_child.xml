@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,21 +29,18 @@
                     android:layout_height="wrap_content"
                     />
             </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:textColorHint="@color/colorPrimary"
+
+            <TextView
+                android:id="@+id/et_birthday_hijo"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_margin="5dp"
+                android:background="@drawable/background_textview"
+                android:inputType="text"
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_textview"
-                android:layout_margin="5dp">
-                <EditText
-                    android:id="@+id/et_birthday_hijo"
-                    android:padding="5dp"
-                    android:background="#00000000"
-                    android:inputType="date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </android.support.design.widget.TextInputLayout>
+                android:hint="Presione para seleccionar fecha" />
+
 
         </LinearLayout>
         <CheckBox

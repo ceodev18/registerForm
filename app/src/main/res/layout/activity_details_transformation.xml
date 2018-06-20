@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_margin="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -62,7 +64,7 @@
                 android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ubicación del domicilio - Coordenada de Latitud"/>
+                android:hint="Ubicación - Coordenada de Latitud"/>
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:textColorHint="@color/colorPrimary"
@@ -78,7 +80,7 @@
                 android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ubicación del domicilio - Coordenada de Longitud"/>
+                android:hint="Ubicación - Coordenada de Longitud"/>
         </android.support.design.widget.TextInputLayout>
         <Button
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -310,7 +312,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:inputType="text"
+                android:maxLength="11"
+                android:inputType="number"
                 android:id="@+id/et_ruc"
                 android:padding="5dp"
                 android:background="#00000000"
@@ -333,20 +336,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:textColorHint="@color/colorPrimary"
-            android:background="@drawable/background_textview"
-            android:padding="5dp"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:padding="5dp"
-                android:background="#00000000"
-                android:hint="Foto de la etiqueta del producto transformado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
+
         <Button
             android:padding="5dp"
             android:id="@+id/b_photo_final"
@@ -402,6 +392,7 @@
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></Spinner>
+
         <TextView
             android:padding="5dp"
             android:layout_margin="10dp"
@@ -409,6 +400,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <Spinner
             android:id="@+id/s_company"
             android:background="@drawable/background_spinner"
@@ -432,21 +424,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:textColorHint="@color/colorPrimary"
-            android:background="@drawable/background_textview"
+
+        <TextView
             android:padding="5dp"
             android:layout_margin="10dp"
+            android:text="Año Caducidad de la Certificación"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/et_year"
-                android:padding="5dp"
-                android:background="#00000000"
-                android:hint="Año Caducidad de la Certificación"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:background="@drawable/background_textview"
+            android:id="@+id/et_year"
+            android:paddingTop="8dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:paddingBottom="8dp"
+            android:layout_margin="10dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:hint="Presione para seleccionar fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:padding="5dp"
             android:id="@+id/b_file"

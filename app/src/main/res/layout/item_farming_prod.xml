@@ -1,64 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <TextView
-        android:layout_margin="5dp"
-        android:text="Grupo de productos agrícolas"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Spinner
-        android:background="@drawable/background_spinner"
-        android:id="@+id/s_group_farming"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Spinner>
-    <TextView
-        android:layout_margin="5dp"
-        android:text="¿Qué produces?"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Spinner
-        android:background="@drawable/background_spinner"
-        android:id="@+id/s_production"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Spinner>
-    <RadioButton
-        android:id="@+id/rb_anual"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:layout_margin="5dp"
-        android:text="Cultivo Anual"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="(Si elije esta opción es necesario que complete toda la información solicitada)"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <RadioButton
-        android:id="@+id/rb_permanente"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:layout_margin="10dp"
-        android:text=" Cultivo Permanente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="(Si elije esta opción es necesario que complete toda la información solicitada)"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Grupo de productos agrícolas"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:background="@drawable/background_spinner"
+            android:id="@+id/s_group_farming"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+        <TextView
+            android:layout_margin="5dp"
+            android:text="¿Qué produces?"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:background="@drawable/background_spinner"
+            android:id="@+id/s_production"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+        <LinearLayout
+            android:id="@+id/anual_option"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                layout="@layout/anual_form"  android:id="@+id/l_anual"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/permanente_option"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                layout="@layout/permanent_form" android:id="@+id/l_permanente"/>
+
+        </LinearLayout>
 
 
-</LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

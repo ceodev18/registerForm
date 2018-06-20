@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.kelly.registerform.view.partner.RegistrationPartnerActivity">
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -85,7 +87,7 @@
         <TextView
             android:layout_margin="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:text="Sexo (*)"
+            android:text="Género (*)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Spinner
@@ -112,20 +114,16 @@
                 android:hint="Número de Documento de Identidad (DNI) (*)"/>
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/b_birthday"
-            android:layout_margin="5dp"
-            android:background="@color/colorOrangeButton"
-            android:layout_gravity="center"
-            android:textColor="@color/colorWhite"
-            android:text="Seleccione Fecha de Nacimiento"
+        <TextView
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_margin="5dp"
+            android:text="Fecha de Nacimiento *"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_text_birthday"
-            android:enabled="false"
+
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_margin="5dp"
             android:background="@drawable/background_textview"
@@ -133,7 +131,7 @@
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Fecha de Nacimiento" />
+            android:hint="Presione para seleccionar fecha" />
 
         <android.support.design.widget.TextInputLayout
             android:textColorHint="@color/colorPrimary"
@@ -351,19 +349,25 @@
             android:id="@+id/s_asociacion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-        <TextView
-            android:layout_margin="5dp"
-            android:text="Organización local a la que pertenece"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+
+        <android.support.design.widget.TextInputLayout
+            android:textColorHint="@color/colorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Spinner
-            android:background="@drawable/background_spinner"
-            android:entries="@array/sa_empty"
-            android:layout_margin="5dp"
-            android:id="@+id/s_local"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_textview"
+            android:layout_margin="5dp">
+
+            <EditText
+                android:id="@+id/s_local"
+                android:padding="5dp"
+                android:background="#00000000"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Organización local a la que pertenece"/>
+
+        </android.support.design.widget.TextInputLayout>
+
         <TextView
             android:layout_margin="5dp"
             android:text="Organización regional a la que pertenece"

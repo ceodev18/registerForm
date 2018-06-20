@@ -3,10 +3,12 @@ package com.kelly.registerform.view.transformation;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -26,6 +28,7 @@ import com.kelly.registerform.model.Comercializacion;
 import com.kelly.registerform.model.TransformationOb;
 import com.kelly.registerform.model.main.MainJson;
 import com.kelly.registerform.utils.recyclerview.RecyclerTouchListener;
+import com.kelly.registerform.view.commerce.ComercializacionActivity;
 import com.kelly.registerform.view.commerce.InformationActivity;
 import com.kelly.registerform.view.farming.DetailsFarmingActivity;
 import com.kelly.registerform.view.farming.SystemProductionActivity;
@@ -52,18 +55,13 @@ public class ProcessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_process);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setElements();
         setActions();
-        //MainJson mainJson = new MainJson(context);
-        // Instantiate a ViewPager
         pager = (ViewPager) this.findViewById(R.id.pager);
-
-        // Create an adapter with the fragments we show on the ViewPager
-        /*adapter = new FragmentProcessPageAdapter(
-                getSupportFragmentManager());
-        adapter.addFragment(SlideProcessFragment.newInstance(getResources()
-                .getColor(R.color.colorWhite)));
-        this.pager.setAdapter(adapter);*/
     }
     private  void setElements(){
 
@@ -129,7 +127,7 @@ public class ProcessActivity extends AppCompatActivity {
                     Intent intent =new Intent(context,ValidationActivity.class);
                     startActivity(intent);
                 }else{
-                    Intent intent =new Intent(context,Comercializacion.class);
+                    Intent intent =new Intent(context,ComercializacionActivity.class);
                     intent.putExtra("list",listAcvities);
                     startActivity(intent);
                 }
@@ -141,6 +139,11 @@ public class ProcessActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!((String)adapterView.getItemAtPosition(i)).equals("Elija")){
                     int val = Integer.parseInt((String)adapterView.getItemAtPosition(i));
+                    //Verify data inside
+
+
+
+
 
                     if(val==1){
                         transformationObArrayList.clear();
@@ -206,42 +209,7 @@ public class ProcessActivity extends AppCompatActivity {
             }
         }));
     }
-    /*private boolean validation(){
-        for(int i=0;i<adapter.getCount();i++){
-            SlideProcessFragment slideProcessFragment = (SlideProcessFragment) adapter.getItem(i);
-            System.out.println("frag "+slideProcessFragment.indexPage);
-            if(!slideProcessFragment.validation()){
-                Toast.makeText(context, "Revisar los datos de la pantalla #"+(i+1), Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        }
-        return true;
-    }*/
-    //-----------------------------------------------------------------------------
-    // Here's what the app should do to remove a view from the ViewPager.
-    /*public void removeView (View defunctPage)
-    {
-        int pageIndex = pagerAdapter.removeView (pager, defunctPage);
-        // You might want to choose what page to display, if the current page was "defunctPage".
-        if (pageIndex == pagerAdapter.getCount())
-            pageIndex--;
-        pager.setCurrentItem (pageIndex);
-    }
 
-    //-----------------------------------------------------------------------------
-    // Here's what the app should do to get the currently displayed page.
-    public View getCurrentPage ()
-    {
-        return pagerAdapter.getView (pager.getCurrentItem());
-    }
-
-    //-----------------------------------------------------------------------------
-    // Here's what the app should do to set the currently displayed page.  "pageToShow" must
-    // currently be in the adapter, or this will crash.
-    public void setCurrentPage (View pageToShow)
-    {
-        pager.setCurrentItem (pagerAdapter.getItemPosition (pageToShow), true);
-    }*/
     @Override
     public void onBackPressed() {
 
@@ -253,23 +221,8 @@ public class ProcessActivity extends AppCompatActivity {
 
     }
     public void updateViews(int val){
-       /* System.out.println(adapter.getCount()+"");
-
-        for (int i=0;i<val-1;i++){
-            slideProcessFragment = SlideProcessFragment.newInstance(getResources()
-                    .getColor(R.color.colorWhite));
-            slideProcessFragment.indexPage=i+2;
-            adapter.addFragment(slideProcessFragment);
-            System.out.println("Agregado");
-        }
-        System.out.println(adapter.getCount()+"");
-        this.pager.setAdapter(adapter);*/
     }
     public void beforeOne(){
-        /*adapter.beforeOne();
-        adapter.addFragment(SlideProcessFragment.newInstance(getResources()
-                .getColor(R.color.colorWhite)));
-        this.pager.setAdapter(adapter);*/
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -279,17 +232,30 @@ public class ProcessActivity extends AppCompatActivity {
         }
         if ((resultCode == RESULT_OK)) {
             //Procesar el resultado
-            /*String result=data.getStringExtra("result");
+            String result=data.getStringExtra("result");
             String[]arr = result.split(",");
-            chacraArrayList.get(Integer.parseInt(arr[1])).setNombre(arr[0]);
-            farmingAdapter.notifyDataSetChanged();
+            transformationObArrayList.get(Integer.parseInt(arr[1])).setName(arr[0]);
+            transformationAdapter.notifyDataSetChanged();
 
             if(result!=null){
 
             }else{
 
-            }*/
+            }
 
         }
+
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            getSupportFragmentManager().popBackStack();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }

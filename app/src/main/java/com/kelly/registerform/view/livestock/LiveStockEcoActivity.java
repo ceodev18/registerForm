@@ -2,9 +2,11 @@ package com.kelly.registerform.view.livestock;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,7 +21,12 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 import com.kelly.registerform.BuildConfig;
 import com.kelly.registerform.R;
+import com.kelly.registerform.dataAccess.practicas.AlimentacionDA;
+import com.kelly.registerform.dataAccess.practicas.AmbientalDA;
+import com.kelly.registerform.dataAccess.practicas.ManejoSueloDA;
+import com.kelly.registerform.dataAccess.practicas.SanitariaDA;
 import com.kelly.registerform.model.main.MainJson;
+import com.kelly.registerform.model.practicas.Alimentacion;
 import com.kelly.registerform.view.farming.FarmingCertificationActivity;
 import com.thomashaertel.widget.MultiSpinner;
 
@@ -28,6 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class LiveStockEcoActivity extends AppCompatActivity {
     private Button b_next,b_back;
@@ -35,13 +43,17 @@ public class LiveStockEcoActivity extends AppCompatActivity {
     private String list;
     private MultiSpinner spinnerMulti1,spinnerMulti2,spinnerMulti3;
     private ArrayAdapter adapter1,adapter2,adapter3;
-    private ArrayList<String> s1,s2,s3;
+    private List<String> s1,s2,s3;
     private StringBuilder spinnerMulti1List1,spinnerMulti1List2,spinnerMulti1List3;
     private ArrayList<Integer> i1,i2,i3,selected1,selected2,selected3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_stock_eco);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setElements();
         setActions();
     }
@@ -56,23 +68,25 @@ public class LiveStockEcoActivity extends AppCompatActivity {
         spinnerMulti1List2= new StringBuilder();
         spinnerMulti1List3= new StringBuilder();
 
+
+
         i1=new ArrayList<>();
-        s1=new ArrayList<>();
         selected1=new ArrayList<>();
         adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s1,"ambientales",adapter1,i1);
+        s1= AmbientalDA.getListName();
+        adapter1.addAll(s1);
 
         i2=new ArrayList<>();
-        s2=new ArrayList<>();
         selected2=new ArrayList<>();
         adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s2,"alimentacion",adapter2,i2);
+        s2= AlimentacionDA.getListName();
+        adapter2.addAll(s2);
 
         i3=new ArrayList<>();
-        s3=new ArrayList<>();
         selected3=new ArrayList<>();
         adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        fillContent(s3,"sanitario",adapter3,i3);
+        s3= SanitariaDA.getListName();
+        adapter3.addAll(s3);
 
         spinnerMulti1.setAdapter(adapter1, false, onSelectedListener1);
         spinnerMulti2.setAdapter(adapter2, false, onSelectedListener2);
@@ -137,7 +151,7 @@ public class LiveStockEcoActivity extends AppCompatActivity {
         public void onItemsSelected(boolean[] selected) {
             for (int i = 0; i < selected.length; i++) {
                 if (selected[i]) {
-                    selected1.add(i1.get(i));
+                    selected1.add(Integer.parseInt(AmbientalDA.getIdByName(s1.get(i))));
 
                 }
             }
@@ -147,7 +161,7 @@ public class LiveStockEcoActivity extends AppCompatActivity {
         public void onItemsSelected(boolean[] selected) {
             for (int i = 0; i < selected.length; i++) {
                 if (selected[i]) {
-                    selected2.add(i2.get(i));
+                    selected2.add(Integer.parseInt(AlimentacionDA.getIdByName(s2.get(i))));
 
                 }
             }
@@ -157,53 +171,21 @@ public class LiveStockEcoActivity extends AppCompatActivity {
         public void onItemsSelected(boolean[] selected) {
             for (int i = 0; i < selected.length; i++) {
                 if (selected[i]) {
-                    selected3.add(i3.get(i));
+                    selected3.add(Integer.parseInt(SanitariaDA.getIdByName(s3.get(i))));
                 }
             }
         }
     };
-    private void fillContent(final ArrayList<String>lista,String value,final ArrayAdapter adapter,final ArrayList<Integer>lista_i){
-        RequestQueue queue = Volley.newRequestQueue(this.context);
-        String url = BuildConfig.BASE_URL+"lista_practicas_agroecologicas.php?tipo="+value+"&token=lpsk.21568$lsjANPIO02";
-        System.out.println(url);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(response);
-                            JSONObject jsonObj2 = (JSONObject) jsonObj.get("practicas");
-                            Iterator<?> keys = jsonObj2.keys();
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                System.out.println(key);
-                                if ( jsonObj2.get(key) instanceof JSONObject ) {
-                                    JSONObject jsonDepartment = (JSONObject) jsonObj2.get(key);
-                                    int  idDis = (int)jsonDepartment.get("id");
-                                    String name =(String)jsonDepartment.get("practica");
-                                    lista.add(name);
-                                    lista_i.add(idDis);
-                                }else{
-
-                                    String name= (String)jsonObj2.get(key);
-                                    lista.add(name);
-                                    System.out.println(lista.size());
-                                }
-                            }
-                            adapter.addAll(lista);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Fail","That didn't work!");
-
-            }
-        });
-        queue.add(stringRequest);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            getSupportFragmentManager().popBackStack();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
 
     }
+
 }

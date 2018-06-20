@@ -3,10 +3,12 @@ package com.kelly.registerform.view.livestock;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -49,6 +51,10 @@ public class LivestockProductionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livestock_production);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setElements();
         setActions();
     }
@@ -89,7 +95,7 @@ public class LivestockProductionActivity extends AppCompatActivity {
                 JsonObject granjasBody = new JsonObject();
                 for(int i=0;i<jsonObjectArrayList.size();i++){
                     if(stateRV.get(i)==false){
-                        Toast.makeText(context, "No se ha presionado la chacra #"+(i+1), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No se ha presionado la especie #"+(i+1), Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -210,6 +216,21 @@ public class LivestockProductionActivity extends AppCompatActivity {
         }
         if ((resultCode == RESULT_OK)) {
             //Procesar el resultado
+            String result=data.getStringExtra("result");
+            String[]arr = result.split(",");
+            arrayList.get(Integer.parseInt(arr[1])).setNombre(arr[0]);
+            liveStockAdapter.notifyDataSetChanged();
+
+            if(result!=null){
+
+            }else{
+
+            }
+
+        }
+
+        if ((resultCode == RESULT_OK)) {
+            //Procesar el resultado
             //String result=data.getStringExtra("result");
             //String[]arr = result.split(",");
             // notify changes to rv afeter comeback from form
@@ -223,5 +244,16 @@ public class LivestockProductionActivity extends AppCompatActivity {
             }*/
 
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            getSupportFragmentManager().popBackStack();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }

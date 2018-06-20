@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,7 +17,6 @@
         <Spinner
             android:id="@+id/spinner_especie_animal"
             android:background="@drawable/background_spinner"
-            android:entries="@array/sa_type_animal"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -29,7 +30,6 @@
         <Spinner
             android:id="@+id/s_animal"
             android:background="@drawable/background_spinner"
-            android:entries="@array/sa_animal"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -58,7 +58,7 @@
                 android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ubicación del domicilio - Coordenada de Latitud"/>
+                android:hint="Ubicación - Coordenada de Latitud"/>
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:textColorHint="@color/colorPrimary"
@@ -74,7 +74,7 @@
                 android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ubicación del domicilio - Coordenada de Longitud"/>
+                android:hint="Ubicación - Coordenada de Longitud"/>
         </android.support.design.widget.TextInputLayout>
         <TextView
             android:layout_margin="10dp"

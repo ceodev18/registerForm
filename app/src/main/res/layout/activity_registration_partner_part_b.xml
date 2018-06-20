@@ -5,16 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.kelly.registerform.view.partner.RegistrationPartnerPartBActivity">
+
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:padding="16dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="6">
+
             <TextView
                 android:layout_margin="5dp"
                 android:gravity="center"
@@ -25,6 +30,7 @@
                 android:layout_weight="0.6"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
             <TextView
                 android:textStyle="bold"
                 android:layout_margin="5dp"
@@ -35,25 +41,30 @@
                 android:layout_weight="3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
+
         <TextView
             android:layout_margin="5dp"
             android:text="Estado Civil (*)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <Spinner
             android:background="@drawable/background_spinner"
             android:layout_margin="5dp"
             android:id="@+id/s_marital"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+
         <android.support.design.widget.TextInputLayout
             android:textColorHint="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
+
             <EditText
                 android:inputType="text"
                 android:id="@+id/et_nombre"
@@ -62,13 +73,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombres de la esposa(o)/cónyuge (*)"/>
+
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:textColorHint="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
+
             <EditText
                 android:inputType="text"
                 android:id="@+id/et_ap_conyuge"
@@ -77,13 +91,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Apellido Paterno de la esposa(o)/cónyuge (*)"/>
+
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:textColorHint="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_textview"
             android:layout_margin="5dp">
+
             <EditText
                 android:inputType="text"
                 android:id="@+id/et_am_conyuge"
@@ -92,13 +109,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Apellido Materno de la esposa(o)/cónyuge (*)"/>
+
         </android.support.design.widget.TextInputLayout>
+
         <TextView
             android:layout_margin="5dp"
             android:text="Número de Hijos (*)"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <Spinner
             android:background="@drawable/background_spinner"
             android:layout_margin="5dp"
@@ -106,21 +126,22 @@
             android:id="@+id/s_number_children"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+
         <TextView
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_margin="5dp"
-            android:text="Marque el checkbox si el hijo de dependiente o no"
+            android:text="Haz click en el cuadrito al lado derecho de cada hijo para indicar si es hijo dependiente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <include layout="@layout/item_child" android:id="@+id/child1"/>
-        <include
-            android:id="@+id/child2"
-            layout="@layout/item_child" />
+
         <LinearLayout
             android:orientation="vertical"
             android:id="@+id/ll_children"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <include layout="@layout/item_child" android:id="@+id/child1" android:visibility="gone"/>
+            <include layout="@layout/item_child" android:id="@+id/child2" android:visibility="gone"/>
             <include layout="@layout/item_child" android:id="@+id/child3" android:visibility="gone"/>
             <include layout="@layout/item_child" android:id="@+id/child4" android:visibility="gone"/>
             <include layout="@layout/item_child" android:id="@+id/child5" android:visibility="gone"/>
@@ -129,44 +150,9 @@
             <include layout="@layout/item_child" android:id="@+id/child8" android:visibility="gone"/>
             <include layout="@layout/item_child" android:id="@+id/child9" android:visibility="gone"/>
             <include layout="@layout/item_child" android:id="@+id/child10" android:visibility="gone"/>
+
         </LinearLayout>
 
-        <!--<LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="6">
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Nombres y Apellidos del hijo #1"/>
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
-                        android:inputType="date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Fecha de Nacimiento del hijo #1"/>
-                </android.support.design.widget.TextInputLayout>
-
-            </LinearLayout>
-            <CheckBox
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-        </LinearLayout>-->
         <TextView
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
@@ -176,11 +162,13 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2">
+
             <Button
                 android:layout_margin="5dp"
                 android:background="@color/colorBlueLightButton"
@@ -192,6 +180,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
             <Button
                 android:layout_margin="5dp"
                 android:background="@color/colorWhite"
@@ -203,6 +192,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
         </LinearLayout>
+
     </LinearLayout>
+
 </ScrollView>

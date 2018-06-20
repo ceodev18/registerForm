@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.kelly.registerform.R;
 import com.kelly.registerform.view.MainActivity;
+import com.kelly.registerform.view.commerce.ComercializacionActivity;
 import com.kelly.registerform.view.commerce.InformationActivity;
 import com.kelly.registerform.view.farming.ProductionActivity;
 import com.kelly.registerform.view.livestock.LivestockProductionActivity;
@@ -83,32 +84,38 @@ public class WelcomePartnerActivity extends AppCompatActivity {
                 if(state2)list.add(2);
                 if(state3)list.add(3);
                 if(state4)list.add(4);
+
                 if(list.size()>0){
                     if(list.get(0)==1){
                         Intent i = new Intent(context,ProductionActivity.class);
                         i.putExtra("list",listChecks());
                         startActivity(i);
+
                     }
                     if(list.get(0)==2){
                         Intent i = new Intent(context,LivestockProductionActivity.class);
                         i.putExtra("list",listChecks());
                         startActivity(i);
+
                     }
                     if(list.get(0)==3){
                         Intent i = new Intent(context,ProcessActivity.class);
                         i.putExtra("list",listChecks());
                         startActivity(i);
+
                     }
                     if(list.get(0)==4){
-                        Intent i = new Intent(context,InformationActivity.class);
+                        Intent i = new Intent(context,ComercializacionActivity.class);
                         i.putExtra("list",listChecks());
                         startActivity(i);
+
                     }
 
                 }else{
                     //Toast.makeText(context, "Debe seleccionar al menos un opción", Toast.LENGTH_SHORT).show();
                     //open last form
                     Intent i = new Intent(context,ValidationActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                 }
 
